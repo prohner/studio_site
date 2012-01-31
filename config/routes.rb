@@ -1,8 +1,11 @@
 StudioSite::Application.routes.draw do
+  get "studios/new"
+
   get "pages/home"
   get "pages/contact"
   get "pages/about"
 
+  match '/signup',  :to => 'studios#new'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
