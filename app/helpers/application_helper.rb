@@ -3,11 +3,11 @@ module ApplicationHelper
     "Studio Site Support"
   end
   
-  def page_name(page_name)
-    if  page_name.empty?
+  def page_name
+    if @title.empty?
       site_name
     else
-      site_name + " | " + page_name
+      "#{site_name} | #{@title}"
     end
       
   end
