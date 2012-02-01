@@ -2,6 +2,42 @@ require 'spec_helper'
 
 describe StudiosController do
   render_views
+  
+  describe "authentication of edit/update pages" do
+    before(:each) do
+      @studio = Factory(:studio)
+    end
+    
+    describe "for non-signed-in users" do
+      it "should deny access to 'edit'" do
+        get :edit, :id => @studio
+        response.should redirect_to(signin_path)
+      end
+      
+      it "should deny access to 'update'" do
+        put :update, :id => @studio, :studio => {}
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "for signed-in users" do
+      before(:each) do
+        wrong_studio = Factory(:studio, :email => "bad@email.com")
+        test_sign_in(wrong_studio)
+      end
+      
+      it "should require matching studio for 'edit'" do
+        get :edit, :id => @studio
+        response.should redirect_to(root_path)
+      end
+      
+      it "should require matching studio for 'update'" do
+        put :update, :id => @studio, :studio => {}
+        response.should redirect_to(root_path)
+      end
+    end
+  end
+  
   describe "GET 'edit'" do
     before(:each) do
       @studio = Factory(:studio)
@@ -23,6 +59,42 @@ describe StudiosController do
       gravatar_url = "http://gravatar.com/emails"
       response.should have_selector("a", :href => gravatar_url,
                                           :content => "change")
+    end
+  end
+  
+  describe "PUT 'update'" do
+    before(:each) do
+      @studio = Factory(:studio)
+      test_sign_in(@studio)
+    end
+    
+    describe "failure" do
+      before(:each) do
+        @attr = { :email => "", :name => "", :password => "", :password_confirmation => "" }
+      end
+      
+      it "should render the 'edit' page" do
+        put :update, :id => @studio, :studio => @attr
+        response.should render_template('edit')
+      end
+      
+      it "should have the right title" do
+        put :update, :id => @studio, :studio => @attr
+        response.should have_selector("title", :content => "Edit")
+      end
+    end
+    
+    describe "success" do
+      before(:each) do
+        @attr = { :email => "abc@def.com", :name => "ali baba", :password => "foobar", :password_confirmation => "foobar" }
+      end
+      
+      it "should change the user's attributes" do
+        put :update, :id => @studio, :studio => @attr
+        @studio.reload
+        @studio.name.should   == @attr[:name]
+        @studio.email.should  == @attr[:email]
+      end
     end
   end
   

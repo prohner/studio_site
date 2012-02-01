@@ -1,4 +1,7 @@
 class StudiosController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :correct_user, :only => [:edit, :update]
+
   def new
     @studio = Studio.new
     @title = signup_form_name
@@ -22,13 +25,32 @@ class StudiosController < ApplicationController
   end
   
   def edit
-    @studio = Studio.find(params[:id])
     @title = "Edit Studio"
+  end
+  
+  def update
+    @studio = Studio.find(params[:id])
+    if @studio.update_attributes(params[:studio])
+      flash[:success] = "Profile updated."
+      redirect_to @studio
+    else
+      @title = "Edit studio"
+      render 'edit'
+    end
   end
   
   private
   
     def signup_form_name
       "Sign Up"
+    end
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def correct_user
+      @studio = Studio.find(params[:id])
+      redirect_to(root_path) unless current_studio?(@studio)
     end
 end
