@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       render :new
     else
       sign_in studio
-      redirect_to studio
+      redirect_back_or studio
     end
   end
   
