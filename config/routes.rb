@@ -1,4 +1,6 @@
 StudioSite::Application.routes.draw do
+  get "sessions/new"
+
   get "pages/home"
   get "pages/contact"
   get "pages/about"
