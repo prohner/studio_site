@@ -1,10 +1,15 @@
 class StudiosController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
 
   def new
     @studio = Studio.new
     @title = signup_form_name
+  end
+  
+  def index
+    @studios = Studio.all
+    @title = "All Studios"
   end
   
   def show

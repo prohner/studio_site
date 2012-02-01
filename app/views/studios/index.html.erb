@@ -1,0 +1,10 @@
+<h1>All Studios</h1>
+
+<ul class="studios">
+  <% @studios.each do |studio| %>
+    <li>
+      <%= gravatar_for studio, :size => 30 %>
+      <%= link_to studio.name, studio %>
+    </li>
+  <% end %>
+</ul>

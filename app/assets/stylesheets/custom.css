@@ -179,3 +179,11 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+ul.studios {
+  margin-top: 1em;
+}
+
+.studios li {
+  list-style: none;
+}
