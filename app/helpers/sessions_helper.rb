@@ -1,9 +1,16 @@
 module SessionsHelper
+  def deny_access
+    redirect_to signin_path, :notice => "Please sign in to access this page."
+  end
+  
   def sign_in(studio)
     cookies.permanent.signed[:remember_token] = [studio.id, studio.salt]
     self.current_studio = studio
   end
   
+  def current_studio?(studio)
+    studio == @current_studio
+  end
   def current_studio=(studio)
     @current_studio = studio
   end
