@@ -2,6 +2,29 @@ require 'spec_helper'
 
 describe StudiosController do
   render_views
+  describe "GET 'edit'" do
+    before(:each) do
+      @studio = Factory(:studio)
+      test_sign_in(@studio)
+    end
+    
+    it "should be successful" do
+      get :edit, :id => @studio
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :edit, :id => @studio
+      response.should have_selector("title", :content => "Edit")
+    end
+    
+    it "should have a link to change the Gravatar" do
+      get :edit, :id => @studio
+      gravatar_url = "http://gravatar.com/emails"
+      response.should have_selector("a", :href => gravatar_url,
+                                          :content => "change")
+    end
+  end
   
   describe "GET 'show'" do
     before(:each) do
