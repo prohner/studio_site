@@ -1,2 +1,14 @@
-<h1>Studios#new</h1>
-<p>Find me in app/views/studios/new.html.erb</p>
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+      <h1>
+         <%= gravatar_for @studio, :size => 30 %>
+         <%= @studio.name %>
+       </h1>
+    </td>
+    <td class="sidebar round">
+      <strong>Name</strong> <%= @studio.name %><br />
+      <strong>URL</strong>  <%= link_to studio_path(@studio.name), @studio %>
+    </td>
+  </tr>
+</table>

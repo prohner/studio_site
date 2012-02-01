@@ -5,5 +5,6 @@ class StudiosController < ApplicationController
   
   def show
     @studio = Studio.find(params[:id])
+    @title = @studio.name
   end
 end
