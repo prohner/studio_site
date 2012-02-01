@@ -9,6 +9,9 @@ module ApplicationHelper
     else
       "#{site_name} | #{@title}"
     end
-      
+  end
+  
+  def logo
+    image_tag("http://www.ifk-germany.de/kyokushin/images/kogakushin.gif", :alt => "Sample App", :class => "round") 
   end
 end
