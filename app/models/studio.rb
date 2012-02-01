@@ -32,6 +32,11 @@ class Studio < ActiveRecord::Base
      return nil   if user.nil?
      return user  if user.has_password?(submitted_password)
    end
+   
+   def self.authenticate_with_salt(id, cookie_salt)
+    studio = find_by_id(id)
+    (studio && studio.salt == cookie_salt) ? studio : nil
+   end
 
    private
 
