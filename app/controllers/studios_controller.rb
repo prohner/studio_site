@@ -21,6 +21,11 @@ class StudiosController < ApplicationController
     end
   end
   
+  def edit
+    @studio = Studio.find(params[:id])
+    @title = "Edit Studio"
+  end
+  
   private
   
     def signup_form_name
