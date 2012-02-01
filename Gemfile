@@ -15,7 +15,8 @@ end
 group :test do
    gem 'sqlite3', '1.3.5'
    gem 'rspec-rails', '2.8.1'
-  gem 'webrat', '0.7.1'
+   gem 'webrat', '0.7.1'
+   gem 'factory_girl_rails', '1.0'
 end
 
 group :production do
