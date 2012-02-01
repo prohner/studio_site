@@ -4,7 +4,7 @@ module ApplicationHelper
   end
   
   def page_name
-    if @title.empty?
+    if @title.nil? or @title.empty?
       site_name
     else
       "#{site_name} | #{@title}"
