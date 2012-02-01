@@ -12,6 +12,7 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(params[:studio])
     if @studio.save
+      sign_in @studio
       flash[:success] = "Welcome and thanks for signing up!"
       redirect_to @studio
     else

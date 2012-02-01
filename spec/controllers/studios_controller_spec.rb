@@ -67,6 +67,11 @@ describe StudiosController do
         post :create, :studio => @attr
         flash[:success].should =~ /welcome/i
       end
+      
+      it "should sign the studio in" do
+        post :create, :studio => @attr
+        controller.should be_signed_in
+      end
     end
     
     describe "failure" do

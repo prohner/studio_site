@@ -14,5 +14,55 @@ describe SessionsController do
       response.should have_selector("title", :content => "Sign In")
     end
   end
+  
+  describe "DELETE 'destroy'" do
+    it "should sign a user out" do
+      test_sign_in(Factory(:studio))
+      delete :destroy
+      controller.should_not be_signed_in
+      response.should redirect_to(root_path)
+    end
+  end
+  
+  describe "POST 'create'" do
+    describe "with valid email and password" do
+      before(:each) do
+        @studio = Factory(:studio)
+        @attr = { :email => @studio.email, :password => @studio.password }
+      end
+      
+      it "should sign the studio in" do
+        post :create, :session => @attr
+        controller.current_studio.should == @studio
+        #controller.should be_signed_in
+      end
+      
+      it "should redirect to the studio show page" do
+        post :create, :session => @attr
+        response.should redirect_to(studio_path(@studio))
+      end
+    end
+    
+    describe "invalid signin" do
+      before(:each) do
+        @attr = { :email => "email@example.com", :password => "invalid"}
+      end
+      
+      it "should re-render the new page" do
+        post :create, :session => @attr
+        response.should render_template('new')
+      end
+      
+      it "should have the right title" do
+        post :create, :session => @attr
+        response.should have_selector('title', :content => "Sign In")
+      end
+      
+      it "should have a flash.now message" do
+        post :create, :session => @attr
+        flash.now[:error].should =~ /invalid/i
+      end
+    end
+  end
 
 end
