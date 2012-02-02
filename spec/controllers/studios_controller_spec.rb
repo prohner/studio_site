@@ -185,6 +185,24 @@ describe StudiosController do
       response.should have_selector("span.style", :content => style1.name)
       response.should have_selector("span.style", :content => style2.name)
     end
+    
+    it "should show the current style" do
+      style1 = Factory(:style, :studio => @studio, :name => "tang soo")
+      style2 = Factory(:style, :studio => @studio, :name => "judo")
+      get :show, :id => @studio, :style_id => style1.id
+      response.should have_selector("span.current_style", :content => style1.name)
+    end
+    
+    it "should not be able to show someone else's style" do
+      other_studio = Factory(:studio, :email => "other@wherever.com")
+      
+      style1 = Factory(:style, :studio => other_studio, :name => "tang soo")
+      style2 = Factory(:style, :studio => @studio, :name => "judo")
+      get :show, :id => @studio, :style_id => style1.id
+      response.should_not have_selector("span.current_style", :content => style1.name)
+
+
+    end
   end
   
   describe "GET 'new'" do
