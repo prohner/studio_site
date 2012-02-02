@@ -8,7 +8,7 @@ describe StudiosController do
       @studio = Factory(:studio)
     end
     
-    describe "for non-signed-in users" do
+    describe "for non-signed-in studios" do
       it "should deny access to 'edit'" do
         get :edit, :id => @studio
         response.should redirect_to(signin_path)
@@ -20,7 +20,7 @@ describe StudiosController do
       end
     end
     
-    describe "for signed-in users" do
+    describe "for signed-in studios" do
       before(:each) do
         wrong_studio = Factory(:studio, :email => "bad@email.com")
         test_sign_in(wrong_studio)
@@ -53,6 +53,10 @@ describe StudiosController do
         second    = Factory(:studio, :name => "Bill", :email => "lmno@pqrs.com")
         third     = Factory(:studio, :name => "Tom",  :email => "asdf@pqrs.com")
         @studios  = [@studio, second, third]
+        
+        30.times do
+          @studios << Factory(:studio, :name => Factory.next(:name), :email => Factory.next(:email))
+        end
       end
       
       it "should be successful" do
@@ -67,9 +71,19 @@ describe StudiosController do
       
       it "should have an element for each studio" do
         get :index
-        @studios.each do |studio|
+        @studios[0..2].each do |studio|
           response.should have_selector("li", :content => studio.name)
         end
+      end
+      
+      it "should paginate studios"do
+        get :index
+        response.should have_selector("div.pagination")
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a", :href => "/studios?page=2",
+                                           :content => "2")
+        response.should have_selector("a", :href => "/studios?page=2",
+                                           :content => "Next")      
       end
     end
   end
@@ -125,7 +139,7 @@ describe StudiosController do
         @attr = { :email => "abc@def.com", :name => "ali baba", :password => "foobar", :password_confirmation => "foobar" }
       end
       
-      it "should change the user's attributes" do
+      it "should change the studio's attributes" do
         put :update, :id => @studio, :studio => @attr
         @studio.reload
         @studio.name.should   == @attr[:name]
@@ -217,13 +231,52 @@ describe StudiosController do
       end
       
       it "should have the right title" do
-        post :create, :user => @attr
+        post :create, :studio => @attr
         response.should have_selector("title", :content => "Sign Up")
       end
       
       it "should render the 'new' page" do
-        post :create, :user => @attr
+        post :create, :studio => @attr
         response.should render_template('new')
+      end
+    end
+  end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @studio = Factory(:studio)
+    end
+    
+    describe "as a non-signed-in studio" do
+      it "should deny access" do
+        delete :destroy, :id => @studio
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "as a non-admin studio" do
+      it "should protect the page" do
+        test_sign_in(@studio)
+        delete :destroy, :id => @studio
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "as an admin studio" do
+      before(:each) do
+        admin = Factory(:studio, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+      end
+      
+      it "should destroy the studio" do
+        lambda do
+          delete :destroy, :id => @studio
+        end.should change(Studio, :count).by(-1)
+      end
+      
+      it "should redirect to the studios page" do
+        delete :destroy, :id => @studio
+        response.should redirect_to(studios_path)
       end
     end
   end
