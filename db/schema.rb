@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202050703) do
+ActiveRecord::Schema.define(:version => 20120202220019) do
 
   create_table "studios", :force => true do |t|
     t.string   "name"
@@ -39,5 +39,24 @@ ActiveRecord::Schema.define(:version => 20120202050703) do
   end
 
   add_index "styles", ["studio_id", "created_at"], :name => "index_styles_on_studio_id_and_created_at"
+
+  create_table "term_groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "style_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "phonetic_spelling"
+    t.string   "name_translated"
+  end
+
+  create_table "terms", :force => true do |t|
+    t.string   "term"
+    t.string   "term_translated"
+    t.text     "description"
+    t.string   "phonetic_spelling"
+    t.integer  "term_group_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
 end
