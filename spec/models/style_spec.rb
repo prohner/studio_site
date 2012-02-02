@@ -38,6 +38,22 @@ describe Style do
       @style.studio.should == @studio
     end
   end
+  
+  describe "term group associations" do
+    before(:each) do
+      @style = @studio.styles.create(@attr)
+      @tg2 = Factory(:term_group, :style => @style, :name => "2 term group")
+      @tg1 = Factory(:term_group, :style => @style, :name => "1 term group")
+    end
+    
+    it "should have a term group attribute" do
+      @style.should respond_to(:term_groups)
+    end
+    
+    it "should have the right term groups in the right order" do
+      @style.term_groups.should == [@tg1, @tg2]
+    end
+  end
 end
 # == Schema Information
 #

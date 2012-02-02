@@ -1,7 +1,45 @@
 require 'spec_helper'
 
 describe Term do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @studio = Factory(:studio)
+    @style = @studio.styles.create!( :name => "tang soo do" )
+    @term_group = @style.term_groups.create!( :name => "blocking techniques" )
+    @attr = { :term => "blocking techniques" }
+  end
+  
+  it "should create a new instrance given valid attributes" do
+    @term_group.terms.create!(@attr)
+  end
+  
+  describe "validations" do
+    it "should require a term group id" do
+      Term.new(@attr).should_not be_valid
+    end
+    
+    it "should require nonblank content" do
+      @term_group.terms.build(:term => "   ").should_not be_valid
+    end
+    
+    it "should reject long content" do
+      @term_group.terms.build(:term => "a" * 251).should_not be_valid
+    end
+  end    
+
+  describe "term group associations" do
+    before(:each) do
+      @term = @term_group.terms.create(@attr)
+    end
+    
+    it "should have a term group attribute" do
+      @term.should respond_to(:term_group)
+    end
+    
+    it "should have the right associated term group" do
+      @term.term_group_id.should == @term_group.id
+      @term.term_group.should == @term_group
+    end
+  end
 end
 # == Schema Information
 #

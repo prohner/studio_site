@@ -7,6 +7,7 @@ class TermGroup < ActiveRecord::Base
   validates :name,      :presence => true, :length => { :maximum => 250 }
   validates :style_id,  :presence => true
 
+  default_scope :order => 'term_groups.name'
 end
 # == Schema Information
 #
@@ -18,5 +19,6 @@ end
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
 #  phonetic_spelling :string(255)
+#  name_translated   :string(255)
 #
 
