@@ -1,4 +1,8 @@
 StudioSite::Application.routes.draw do
+  #get "styles/create"
+
+  #get "styles/destroy"
+
   get "sessions/new"
 
   get "pages/home"
@@ -15,6 +19,7 @@ StudioSite::Application.routes.draw do
   
   resources :studios
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :styles, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -195,10 +195,19 @@ h1.style {
 
 table.styles {
   margin-top: 1em;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+table.styles th {
+  font-weight: bold;
+  text-align: center;
 }
 
 table.styles tr {
-  height: 70px;
+  ##height: 70px;
 }
 
 table.styles tr td.gravatar {
