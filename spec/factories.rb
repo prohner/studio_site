@@ -12,3 +12,8 @@ end
 Factory.sequence :email do |n|
   "Person-#{n}@example.com"
 end
+
+Factory.define :style do |style|
+  style.name "style name"
+  style.association :studio
+end

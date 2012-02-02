@@ -177,6 +177,14 @@ describe StudiosController do
       get :show, :id => @studio
       response.should have_selector("h1>img", :class => "gravatar")
     end
+    
+    it "should show the studio's styles" do
+      style1 = Factory(:style, :studio => @studio, :name => "tang soo")
+      style2 = Factory(:style, :studio => @studio, :name => "judo")
+      get :show, :id => @studio
+      response.should have_selector("span.style", :content => style1.name)
+      response.should have_selector("span.style", :content => style2.name)
+    end
   end
   
   describe "GET 'new'" do

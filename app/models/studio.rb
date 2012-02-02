@@ -4,6 +4,8 @@ class Studio < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :password, :password_confirmation
   attr_accessible :name, :email, :address, :address2, :city, :state, :postal_code, :telephone, :fax
+  
+  has_many :styles, :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

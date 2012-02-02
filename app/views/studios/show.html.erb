@@ -5,6 +5,12 @@
          <%= gravatar_for @studio, :size => 30 %>
          <%= @studio.name %>
        </h1>
+       
+       <% unless @studio.styles.empty? %>
+         <table class="styles" summary="Studio styles">
+            <%= render @studio.styles %>
+         </table>
+       <% end %>
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= @studio.name %><br />

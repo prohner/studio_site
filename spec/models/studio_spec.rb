@@ -122,6 +122,30 @@ describe Studio do
     end
   end
   
+  describe "style associations" do
+    before(:each) do
+      @studio = Studio.create(@attr)
+      @style_a = Factory(:style, :studio => @studio, :name => "A style")
+      @style_b = Factory(:style, :studio => @studio, :name => "B style")
+    end
+    
+    it "should have a styles attribute" do
+      @studio.should respond_to(:styles)
+    end
+    
+    it "should have the right styles in the right order" do
+      @studio.styles.should == [@style_a, @style_b]
+    end
+    
+    it "should destroy associated styles" do
+      @studio.destroy
+      [@style_a, @style_b].each do |style|
+        Style.find_by_id(style.id).should be_nil
+      end
+    end
+  end
+  
+  
   describe "admin attribute" do
     before(:each) do
       @studio = Studio.create!(@attr)
