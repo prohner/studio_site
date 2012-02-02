@@ -61,17 +61,19 @@ end
 #
 # Table name: studios
 #
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  email       :string(255)
-#  address     :string(255)
-#  address2    :string(255)
-#  city        :string(255)
-#  state       :string(255)
-#  postal_code :string(255)
-#  telephone   :string(255)
-#  fax         :string(255)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  address            :string(255)
+#  address2           :string(255)
+#  city               :string(255)
+#  state              :string(255)
+#  postal_code        :string(255)
+#  telephone          :string(255)
+#  fax                :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  encrypted_password :string(255)
+#  salt               :string(255)
 #
 

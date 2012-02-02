@@ -121,22 +121,43 @@ describe Studio do
       end
     end
   end
+  
+  describe "admin attribute" do
+    before(:each) do
+      @studio = Studio.create!(@attr)
+    end
+    
+    it "should respond to admin" do
+      @studio.should respond_to(:admin)
+    end
+    
+    it "should not be an admin by default" do
+      @studio.should_not be_admin
+    end
+    
+    it "should be convertible to an admin" do
+      @studio.toggle!(:admin)
+      @studio.should be_admin
+    end 
+  end
 end
 # == Schema Information
 #
 # Table name: studios
 #
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  email       :string(255)
-#  address     :string(255)
-#  address2    :string(255)
-#  city        :string(255)
-#  state       :string(255)
-#  postal_code :string(255)
-#  telephone   :string(255)
-#  fax         :string(255)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  address            :string(255)
+#  address2           :string(255)
+#  city               :string(255)
+#  state              :string(255)
+#  postal_code        :string(255)
+#  telephone          :string(255)
+#  fax                :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  encrypted_password :string(255)
+#  salt               :string(255)
 #
 

@@ -1,0 +1,10 @@
+    <li>
+      <%= gravatar_for studio, :size => 30 %>
+      <%= link_to studio.name, studio %>
+
+      <% if current_studio.admin? %>
+      | <%= link_to "delete", studio, :method => :delete, :confirm => "You sure?",
+                                    :title => "Delete #{studio.name}" %>
+      <% end %>
+
+    </li>

@@ -1,10 +1,9 @@
 <h1>All Studios</h1>
 
+<%= will_paginate %>
+
 <ul class="studios">
-  <% @studios.each do |studio| %>
-    <li>
-      <%= gravatar_for studio, :size => 30 %>
-      <%= link_to studio.name, studio %>
-    </li>
-  <% end %>
+   <%= render @studios %>
 </ul>
+
+<%= will_paginate %>

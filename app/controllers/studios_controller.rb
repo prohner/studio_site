@@ -1,6 +1,7 @@
 class StudiosController < ApplicationController
-  before_filter :authenticate, :only => [:index, :edit, :update]
-  before_filter :correct_user, :only => [:edit, :update]
+  before_filter :authenticate,  :only => [:index, :edit, :update]
+  before_filter :correct_user,  :only => [:edit, :update]
+  before_filter :admin_user,    :only => :destroy
 
   def new
     @studio = Studio.new
@@ -8,7 +9,7 @@ class StudiosController < ApplicationController
   end
   
   def index
-    @studios = Studio.all
+    @studios = Studio.paginate(:page => params[:page])
     @title = "All Studios"
   end
   
@@ -44,6 +45,12 @@ class StudiosController < ApplicationController
     end
   end
   
+  def destroy
+    Studio.find(params[:id]).destroy
+    flash[:success] = "Studio destroyed."
+    redirect_to studios_path
+  end
+  
   private
   
     def signup_form_name
@@ -57,5 +64,11 @@ class StudiosController < ApplicationController
     def correct_user
       @studio = Studio.find(params[:id])
       redirect_to(root_path) unless current_studio?(@studio)
+    end
+    
+    def admin_user
+      if current_studio.nil? or not current_studio.admin?
+        redirect_to(signin_path) 
+      end
     end
 end
