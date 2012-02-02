@@ -5,13 +5,6 @@ Factory.define :studio do |studio|
   studio.password_confirmation "foobar123"
 end
 
-#Factory.define :studio2 do |studio|
-#  studio.name                  "Family Karate"
-#  studio.email                 "tk@blah.com"
-#  studio.password              "whatever"
-#  studio.password_confirmation "whatever"
-#end
-
 Factory.sequence :name do |n|
   "Person #{n}"
 end
@@ -23,4 +16,10 @@ end
 Factory.define :style do |style|
   style.name "style name"
   style.association :studio
+end
+
+
+Factory.define :term_group do |term_group|
+  term_group.name "style name"
+  term_group.association :style
 end

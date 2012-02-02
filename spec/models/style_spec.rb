@@ -39,3 +39,14 @@ describe Style do
     end
   end
 end
+# == Schema Information
+#
+# Table name: styles
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  studio_id  :integer
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
