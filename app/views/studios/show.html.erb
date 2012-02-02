@@ -6,15 +6,22 @@
          <%= @studio.name %>
        </h1>
        
-       <% unless @studio.styles.empty? %>
-         <table class="styles" summary="Studio styles">
-            <%= render @studio.styles %>
-         </table>
-       <% end %>
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= @studio.name %><br />
       <strong>URL</strong>  <%= link_to studio_path(@studio.name), @studio %>
+
+      <% if not @studio.styles.nil? %>
+         <table class="styles" summary="Studio styles">
+            <tr><th>Styles</th></tr>
+              <%= render @studio.styles %>
+            <tr>
+               <td>
+                  <%= render 'shared/style_form' %>
+               </td>
+            </tr>
+         </table>
+      <% end %>
     </td>
   </tr>
 </table>

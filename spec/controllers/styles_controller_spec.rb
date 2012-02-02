@@ -14,4 +14,49 @@ describe StylesController do
       response.should redirect_to(signin_path)
     end
   end
+  
+  describe "POST 'create'" do
+    before(:each) do
+      @studio = test_sign_in(Factory(:studio))
+    end
+    
+    describe "failure" do
+      before(:each) do
+        @attr = { :name => "" }
+      end
+      
+      it "should not create a style" do
+        lambda do
+          post :create, :style => @attr
+        end.should_not change(Style, :count)
+      end
+      
+      it "should render the home page" do
+        post :create, :style => @attr
+        response.should render_template('pages/home')
+      end
+    end
+    
+    describe "success" do
+      before(:each) do
+        @attr = { :name => "tang soo" }
+      end
+    
+      it "should create a style" do
+        lambda do
+          post :create, :style => @attr
+        end.should change(Style, :count).by(1)
+      end
+    
+      it "should redirect to the home page" do
+        post :create, :style => @attr
+        response.should redirect_to(@studio)
+      end
+    
+      it "should have a flash message" do
+        post :create, :style => @attr
+        flash[:success].should =~ /style created/i
+      end
+    end
+  end
 end

@@ -1,0 +1,11 @@
+<div class="studio_info">
+  <a href="<%= studio_path(current_studio) %>">
+    <%= gravatar_for current_studio, :size => 30 %>
+    <span class="user_name">
+      <%= current_studio.name %>
+    </span>
+    <span class="studios">
+      <%= pluralize(current_studio.styles.count, "style") %>
+    </span>
+  </a>
+</div>

@@ -10,7 +10,7 @@ namespace :db do
     make_studios
     
     3.times do
-      Studio.all(:limit => 6).each do |user|
+      Studio.all(:limit => 6).each do |studio|
         studio.styles.create!(:name => Faker::Lorem.words(1).first)
       end
     end

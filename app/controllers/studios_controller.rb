@@ -16,6 +16,7 @@ class StudiosController < ApplicationController
   def show
     @studio = Studio.find(params[:id])
     @title = @studio.name
+    @style = Style.new
   end
   
   def create
@@ -55,10 +56,6 @@ class StudiosController < ApplicationController
   
     def signup_form_name
       "Sign Up"
-    end
-    
-    def authenticate
-      deny_access unless signed_in?
     end
     
     def correct_user
