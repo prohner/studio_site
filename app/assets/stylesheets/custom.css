@@ -187,3 +187,59 @@ ul.studios {
 .studios li {
   list-style: none;
 }
+
+## Styles
+h1.style {
+  margin-bottom: 0.3em;
+}
+
+table.styles {
+  margin-top: 1em;
+}
+
+table.styles tr {
+  height: 70px;
+}
+
+table.styles tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.styles tr td.style {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.styles tr td.style span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.studio_info img {
+  padding-right: 0.1em;
+}
+
+div.studio_info a {
+  text-decoration: none;
+}
+
+div.studio_info span.studio_name {
+  position: absolute;
+}
+
+div.studio_info span.styles {
+  font-size: 80%;
+}
+
+form.new_style {
+  margin-bottom: 2em;
+}
+
+form.new_style textarea {
+  height: 4em;
+  margin-bottom: 0;
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202004509) do
+ActiveRecord::Schema.define(:version => 20120202050703) do
 
   create_table "studios", :force => true do |t|
     t.string   "name"
@@ -30,5 +30,14 @@ ActiveRecord::Schema.define(:version => 20120202004509) do
   end
 
   add_index "studios", ["email"], :name => "index_studios_on_email", :unique => true
+
+  create_table "styles", :force => true do |t|
+    t.string   "name"
+    t.integer  "studio_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "styles", ["studio_id", "created_at"], :name => "index_styles_on_studio_id_and_created_at"
 
 end
