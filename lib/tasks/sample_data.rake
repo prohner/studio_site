@@ -4,14 +4,19 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
 
-    studio = Studio.create!( :name => "Admin Stud", :password => "123456", :email => "abc@def.com")
-    studio.toggle!(:admin)
+    admin_studio = Studio.create!( :name => "Admin Stud", :password => "123456", :email => "abc@def.com")
+    admin_studio.toggle!(:admin)
+    tsd     = admin_studio.styles.create!(:name => "Tang soo do")
+    karate  = admin_studio.styles.create!(:name => "Shotokan")
+    jj      = admin_studio.styles.create!(:name => "Jiu Jitsu")
     
     make_studios
     
     3.times do
-      Studio.all(:limit => 6).each do |studio|
-        studio.styles.create!(:name => Faker::Lorem.words(1).first)
+      Studio.all(:limit => 10).each do |studio|
+        if admin_studio != studio 
+          studio.styles.create!(:name => Faker::Lorem.words(1).first)
+        end
       end
     end
   end
