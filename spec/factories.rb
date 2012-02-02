@@ -5,6 +5,13 @@ Factory.define :studio do |studio|
   studio.password_confirmation "foobar123"
 end
 
+#Factory.define :studio2 do |studio|
+#  studio.name                  "Family Karate"
+#  studio.email                 "tk@blah.com"
+#  studio.password              "whatever"
+#  studio.password_confirmation "whatever"
+#end
+
 Factory.sequence :name do |n|
   "Person #{n}"
 end

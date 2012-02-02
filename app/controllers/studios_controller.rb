@@ -16,7 +16,9 @@ class StudiosController < ApplicationController
   def show
     @studio = Studio.find(params[:id])
     @title = @studio.name
-    @style = Style.new
+    @new_style = Style.new
+
+    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", params[:style_id], params[:id]])
   end
   
   def create

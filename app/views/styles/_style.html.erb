@@ -1,6 +1,10 @@
 <tr>
   <td class="style">
-    <span class="style"><%= style.name %></span>
+    <span class="style">
+      <%= style.name %>
+      <br />
+      <%= link_to style.name, :controller => "studios", :action => "show", :id => @studio.id, :style_id => style.id %>
+    </span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(style.created_at) %> ago.
     </span>
