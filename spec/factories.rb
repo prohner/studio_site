@@ -18,8 +18,14 @@ Factory.define :style do |style|
   style.association :studio
 end
 
-
 Factory.define :term_group do |term_group|
-  term_group.name "style name"
+  term_group.name "term group name"
   term_group.association :style
+end
+
+Factory.define :term do |term|
+  term.term             "ahneso phakuro mahk kee"
+  term.term_translated  "Inside outside block"
+  term.description      "whatever it is as a description"
+  term.association :term_group
 end
