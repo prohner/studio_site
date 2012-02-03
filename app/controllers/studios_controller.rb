@@ -19,6 +19,7 @@ class StudiosController < ApplicationController
     @new_style = Style.new
 
     @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", params[:style_id], params[:id]])
+    @term_groups = @current_style.term_groups unless @current_style.nil?
   end
   
   def create

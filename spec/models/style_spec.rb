@@ -53,6 +53,13 @@ describe Style do
     it "should have the right term groups in the right order" do
       @style.term_groups.should == [@tg1, @tg2]
     end
+    
+    it "should destroy associated term groups" do
+      @style.destroy
+      [@tg1, @tg2].each do |tg|
+        TermGroup.find_by_id(tg.id).should be_nil
+      end
+    end
   end
 end
 # == Schema Information

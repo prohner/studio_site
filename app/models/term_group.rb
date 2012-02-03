@@ -1,5 +1,5 @@
 class TermGroup < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :name_translated, :phonetic_spelling
 
   belongs_to :style
   has_many :terms, :dependent => :destroy

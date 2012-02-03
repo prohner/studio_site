@@ -178,31 +178,63 @@ describe StudiosController do
       response.should have_selector("h1>img", :class => "gravatar")
     end
     
-    it "should show the studio's styles" do
-      style1 = Factory(:style, :studio => @studio, :name => "tang soo")
-      style2 = Factory(:style, :studio => @studio, :name => "judo")
-      get :show, :id => @studio
-      response.should have_selector("span.style", :content => style1.name)
-      response.should have_selector("span.style", :content => style2.name)
-    end
-    
-    it "should show the current style" do
-      style1 = Factory(:style, :studio => @studio, :name => "tang soo")
-      style2 = Factory(:style, :studio => @studio, :name => "judo")
-      get :show, :id => @studio, :style_id => style1.id
-      response.should have_selector("span.current_style", :content => style1.name)
-    end
-    
-    it "should not be able to show someone else's style" do
-      other_studio = Factory(:studio, :email => "other@wherever.com")
+    describe "studio's styles" do
+      before(:each) do
+        @style1 = Factory(:style, :studio => @studio, :name => "tang soo")
+        @style2 = Factory(:style, :studio => @studio, :name => "judo")
+      end
       
-      style1 = Factory(:style, :studio => other_studio, :name => "tang soo")
-      style2 = Factory(:style, :studio => @studio, :name => "judo")
-      get :show, :id => @studio, :style_id => style1.id
-      response.should_not have_selector("span.current_style", :content => style1.name)
-
-
+      it "should show the studio's styles" do
+        get :show, :id => @studio
+        response.should have_selector("span.style", :content => @style1.name)
+        response.should have_selector("span.style", :content => @style2.name)
+      end
+    
+      it "should show the current style" do
+        get :show, :id => @studio, :style_id => @style1.id
+        response.should have_selector("span.current_style", :content => @style1.name)
+      end
+    
+      it "should not be able to show someone else's style" do
+        other_studio = Factory(:studio, :email => "other@wherever.com")
+      
+        other_style = Factory(:style, :studio => other_studio, :name => "tang soo")
+        get :show, :id => @studio, :style_id => other_style.id
+        response.should_not have_selector("span.current_style", :content => other_style.name)
+      end
+    
+      describe "term groups and terms" do
+        before(:each) do
+          @tg1 = Factory(:term_group, :style => @style1, :name => "blocks")
+          @tg2 = Factory(:term_group, :style => @style1, :name => "kicks")
+          @tg3 = Factory(:term_group, :style => @style2, :name => "strikes")
+          
+          
+          @term1 = Factory(:term, :term_group => @tg1, :term => "inside outside")
+          @term2 = Factory(:term, :term_group => @tg1, :term => "outside inside")
+        end
+        
+        it "should show the current style's term group and terms" do
+          get :show, :id => @studio, :style_id => @style1.id
+          response.should have_selector("span.term_group", :content => @tg1.name)
+          response.should have_selector("span.term_group", :content => @tg2.name)
+        end
+        
+        it "should show the current style's term group and terms" do
+          get :show, :id => @studio, :style_id => @style1.id
+          response.should have_selector("span.term", :content => @term1.term)
+          response.should have_selector("span.term", :content => @term1.term)
+        end
+        
+        #it "should not show the term group or terms for other style" do
+        #  get :show, :id => @studio, :style_id => @style2.id
+        #  response.should have_selector("span.term_group", :content => @tg1.name)
+        #  response.should have_selector("span.term_group", :content => @tg2.name)
+        #end
+        
+      end
     end
+    
   end
   
   describe "GET 'new'" do
