@@ -1,0 +1,16 @@
+<%= form_for @new_term_group do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="label">
+   New Term Group:
+  </div>
+  <div class="field">
+    <% if Rails.env.development? %>
+      <%= f.text_field :name, :value => Faker::Lorem.words().first %>
+    <% else %>
+      <%= f.text_field :name %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
