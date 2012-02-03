@@ -30,12 +30,12 @@ describe TermsController do
       
       it "should not create a term" do
         lambda do
-          post :create, :term => @attr, :term_group_id => @term_group.id
+          post :create, :term => @attr, :term => {"term_group_id" => @term_group.id}
         end.should_not change(Term, :count)
       end
       
       it "should render the home page" do
-        post :create, :term => @attr, :term_group_id => @term_group.id
+        post :create, :term => @attr, :term => {"term_group_id" => @term_group.id}
         response.should render_template('pages/home')
       end
     end
