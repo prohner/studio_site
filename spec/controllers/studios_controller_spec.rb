@@ -216,8 +216,8 @@ describe StudiosController do
         
         it "should show the current style's term group and terms" do
           get :show, :id => @studio, :style_id => @style1.id
-          response.should have_selector("span.term_group", :content => @tg1.name)
-          response.should have_selector("span.term_group", :content => @tg2.name)
+          response.should have_selector("div.term_group", :content => @tg1.name)
+          response.should have_selector("div.term_group", :content => @tg2.name)
         end
         
         it "should show the current style's term group and terms" do

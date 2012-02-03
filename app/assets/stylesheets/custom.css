@@ -258,16 +258,49 @@ span.current_style {
 	width: 100%;
 	background-color: #000;
 	color: #fff;
+	font-size:150%;
+	
 }
 
-span.term_group {
+div.term_group {
 	width: 100%;
-	background-color: #000;
-	color: #fff;
+	background-color: #f0f0f0;
+	#color: #fff;
 }
 
-#   <span class="term_group">
-#      <span class="term_group_name">
-#         <dt class="term_term">
-#         <dd class="term_term_translated">
-#            <span class="term_term_description">
+span.term_group_name {
+	width: 100%;
+	background-color: #666;
+	color: #fff;
+	padding: 2px;
+}
+
+span.term_group_name_translated {
+	width: 100%;
+	background-color: #666;
+	color: #fff;
+	padding: 2px;
+}
+
+dl.terms {
+	border: 3px double #ccc;
+	padding: 0.5em;
+}
+
+dt {
+	float: left;
+	clear: left;
+	width: 150px;
+	text-align: right;
+	font-weight: bold;
+	background-color: #d0d0d0;
+}
+
+dd {
+	margin: 0 0 0 152px;
+	padding: 0 0 0.5em 0;
+	background-color: #d0d0d0;
+	border-style:solid;
+	border-color:#000;
+}
+
