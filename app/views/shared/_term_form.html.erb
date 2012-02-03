@@ -1,8 +1,4 @@
-<% if @term_groups.nil? %>
-  <div id="name">
-   Can't add a term without a term group
-  </div>
-<% else %>
+<% unless @term_groups.nil? %>
    <%= form_for @new_term do |f| %>
      <%= render 'shared/error_messages', :object => f.object %>
      <div class="label">
