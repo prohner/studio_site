@@ -1,5 +1,5 @@
 class Term < ActiveRecord::Base
-  attr_accessible :term, :term_translated, :description, :phonetic_spelling
+  attr_accessible :term, :term_translated, :description, :phonetic_spelling, :term_group_id
 
   belongs_to :term_group
 
