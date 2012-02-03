@@ -1,4 +1,12 @@
 StudioSite::Application.routes.draw do
+  get "terms/create"
+
+  get "terms/destroy"
+
+  get "term_groups/create"
+
+  get "term_groups/destroy"
+
   #get "styles/create"
 
   #get "styles/destroy"
@@ -18,8 +26,9 @@ StudioSite::Application.routes.draw do
   match '/help',    :to => 'pages#help'
   
   resources :studios
-  resources :sessions, :only => [:new, :create, :destroy]
-  resources :styles, :only => [:create, :destroy]
+  resources :sessions,    :only => [:new, :create, :destroy]
+  resources :styles,      :only => [:create, :destroy]
+  resources :term_groups, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
