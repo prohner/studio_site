@@ -10,6 +10,36 @@ namespace :db do
     karate  = admin_studio.styles.create!(:name => "Shotokan")
     jj      = admin_studio.styles.create!(:name => "Jiu Jitsu")
     
+    tg = tsd.term_groups.create!(:name => "Mahk kee", :name_translated => "Blocks")
+    tg.terms.create!(:term => "Ha dan mahk kee", :term_translated => "Low block")
+    tg.terms.create!(:term => "Sang dan mahk kee", :term_translated => "High block")
+    tg.terms.create!(:term => "Ahneso phakuro mahk kee", :term_translated => "Inside-to-outside block", :description => "Hand comes across the body in a sweeping motion")
+    tg.terms.create!(:term => "Phakeso ahnuro mahk kee", :term_translated => "Outside-to-inside block")
+    
+    tg = tsd.term_groups.create!(:name => "Bahl Gi Sool", :name_translated => "Foot Techniques")
+    tg.terms.create!(:term => "Ahp podo oll ri ki cha gi", :term_translated => "Front stretch kick")
+    tg.terms.create!(:term => "Ahneso phakuro cha gi", :term_translated => "Inside-to-outside kick")
+    tg.terms.create!(:term => "Phakeso ahnuro cha gi", :term_translated => "Outside-to-inside kick")
+
+    tg = jj.term_groups.create!(:name => "Terminology")
+    tg.terms.create!(:term => "Atemi", :term_translated => "striking")
+    tg.terms.create!(:term => "Bushido", :term_translated => "way of the warrior")
+    tg.terms.create!(:term => "Eri", :term_translated => "jacket collar")
+    tg.terms.create!(:term => "Gatame", :term_translated => "arm bar (lock)")
+    tg.terms.create!(:term => "Hadaka Jime", :term_translated => "naked strangle or choke")
+
+    tg = karate.term_groups.create!(:name => "General Terms")
+    tg.terms.create!(:term => "karate do", :term_translated => "empty handed way")
+    tg.terms.create!(:term => "shihan", :term_translated => "master")
+    tg.terms.create!(:term => "sensei", :term_translated => "teacher")
+    tg.terms.create!(:term => "sempai", :term_translated => "senior student")
+    tg.terms.create!(:term => "kohai", :term_translated => "junior student")
+    
+    tg = karate.term_groups.create!(:name => "STANCES")
+    tg.terms.create!(:term => "zenkutsu dachi", :term_translated => "front stance")
+    tg.terms.create!(:term => "kokutsu dachi", :term_translated => "back stance")
+    tg.terms.create!(:term => "kiba dachi", :term_translated => "horse stance")
+    
     make_studios
     
     3.times do

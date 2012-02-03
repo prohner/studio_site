@@ -25,6 +25,42 @@
           <span class="current_style">
           <%= @current_style.name %>
           </span>
+          <br />
+          
+          <% @term_groups.each do |term_group| %>
+             <span class="term_group">
+                <span class="term_group_name">
+                  <%= term_group.name %> 
+                </span>
+                <% unless term_group.name_translated.nil? %>
+                   ==
+                   <span class="term_group_name_translated">
+                     <%= term_group.name_translated %> 
+                   </span>
+                <% end %>
+             </span>
+             <br />
+             
+             <% unless term_group.terms.nil? %>
+                <dl class="terms">
+                <% term_group.terms.each do |term| %>
+                   <dt class="term_term">
+                      <%= term.term %> 
+                   </dt>
+                   <dd class="term_term_translated">
+                      <%= term.term_translated %> 
+                      <% unless term.description.nil? %>
+                        <br />
+                         <span class="term_term_description">
+                            <%= term.description %> 
+                         </span>
+                      <% end %>
+                   </dd>
+                   <br />
+                <% end %>
+                </dl>
+             <% end %>
+          <% end %>
        <% end %>
     </td>
   </tr>

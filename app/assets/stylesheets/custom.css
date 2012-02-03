@@ -252,3 +252,22 @@ form.new_style textarea {
   height: 4em;
   margin-bottom: 0;
 }
+
+
+span.current_style {
+	width: 100%;
+	background-color: #000;
+	color: #fff;
+}
+
+span.term_group {
+	width: 100%;
+	background-color: #000;
+	color: #fff;
+}
+
+#   <span class="term_group">
+#      <span class="term_group_name">
+#         <dt class="term_term">
+#         <dd class="term_term_translated">
+#            <span class="term_term_description">

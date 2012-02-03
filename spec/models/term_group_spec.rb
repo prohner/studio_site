@@ -30,8 +30,16 @@ describe TermGroup do
       @term_group = @style.term_groups.create(@attr)
     end
     
-    it "should have a user attribute" do
+    it "should have a style attribute" do
       @term_group.should respond_to(:style)
+    end
+    
+    it "should have a name translated attribute" do
+      @term_group.should respond_to(:name_translated)
+    end
+    
+    it "should have a phonetic spelling attribute" do
+      @term_group.should respond_to(:phonetic_spelling)
     end
     
     it "should have the right associated style" do
@@ -53,6 +61,13 @@ describe TermGroup do
     
     it "should have the right terms in the right order" do
       @term_group.terms.should == [@term1, @term2]
+    end
+    
+    it "should destroy associated terms" do
+      @term_group.destroy
+      [@term1, @term2].each do |term|
+        TermGroup.find_by_id(term.id).should be_nil
+      end
     end
   end
 end
