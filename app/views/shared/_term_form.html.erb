@@ -1,0 +1,22 @@
+<%= form_for @new_term do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="label">
+   New Term :
+  </div>
+  <div class="field">
+    <% if Rails.env.development? %>
+      <%= f.text_field :term, :value => Faker::Lorem.words().first %>
+    <% else %>
+      <%= f.text_field :term %>
+    <% end %>
+  </div>
+  <div class="label">
+   Term Group :
+  </div>
+  <div class="field">
+    <%= f.select(:term_group_id, @term_groups.collect {|c| [c.name, c.id]}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
