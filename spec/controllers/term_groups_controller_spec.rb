@@ -21,12 +21,12 @@ describe TermGroupsController do
       @style = Factory(:style, :studio => @studio, :name => "style name")
       @term_group_name = "term group"
       @term_group = Factory(:term_group, :style => @style, :name => @term_group_name)
-      @term1 = Factory(:term, :term_group => @term_group, :term => "1 back  kick")
+      @term1 = Factory(:term, :term_group => @term_group, :term => "1 back kick")
       @term2 = Factory(:term, :term_group => @term_group, :term => "2 front kick")
     end
     
     it "should retrieve a JSON object" do
-      get :get, :term_group => @term_group, :format => :json
+      get :get, :id => @term_group.id, :format => :json
       response.body.should == [@term1, @term2].to_json
     end
   end

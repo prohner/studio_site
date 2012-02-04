@@ -1,5 +1,10 @@
 StudioSite::Application.routes.draw do
   get "sessions/new"
+  #get "styles(/:id(.:format))"
+  #match ':controller(/:action(/:id))(.:format)'
+  
+  #map.resources :styles
+  match ':controller/:action/:id.:format'
 
   get "pages/home"
   get "pages/contact"
@@ -15,8 +20,8 @@ StudioSite::Application.routes.draw do
   
   resources :studios
   resources :sessions,    :only => [:new, :create, :destroy]
-  resources :styles,      :only => [:create, :destroy, :get]
-  resources :term_groups, :only => [:create, :destroy, :get]
+  resources :styles#,      :only => [:create, :destroy, :get]
+  resources :term_groups#, :only => [:create, :destroy, :get]
   resources :terms,       :only => [:create, :destroy]
 
   # The priority is based upon order of creation:

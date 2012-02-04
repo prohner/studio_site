@@ -24,7 +24,7 @@ describe StylesController do
     end
     
     it "should retrieve a JSON object" do
-      get :get, :style => @style, :format => :json
+      get :get, :id => @style.id, :format => :json
       response.body.should == [@term_group].to_json
     end
   end

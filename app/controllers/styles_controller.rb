@@ -19,11 +19,10 @@ class StylesController < ApplicationController
   end
   
   def get
-    @style = Style.find(params[:style])
+    @style = Style.find_by_id(params[:id])
     respond_to do |format|
       format.json { render :json => @style.term_groups }
     end
-
   end
   
 end

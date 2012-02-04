@@ -16,11 +16,10 @@ class TermGroupsController < ApplicationController
   end
   
   def get
-    @term_group = TermGroup.find(params[:term_group])
+    @term_group = TermGroup.find(params[:id])
     respond_to do |format|
       format.json { render :json => @term_group.terms }
     end
 
   end
-  
 end
