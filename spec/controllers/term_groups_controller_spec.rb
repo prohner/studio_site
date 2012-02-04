@@ -41,7 +41,7 @@ describe TermGroupsController do
     
     describe "success" do
       before(:each) do
-        @attr = { :name => "blocks" }
+        @attr = { :name => "blocks", :name_translated => "mahk kee" }
       end
     
       it "should create a term group" do
@@ -52,8 +52,6 @@ describe TermGroupsController do
     
       it "should redirect to the studio page" do
         post :create, :term_group => @attr
-        #response.should render_template('studios/show')
-        #response.should redirect_to(@studio, :style_id => @style.id)
         redirect_to :controller => :studios, :action => :show, :id => @studio.id, :style_id => @style.id
       end
     
