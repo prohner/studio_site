@@ -19,11 +19,25 @@ class StudiosController < ApplicationController
     @new_style = Style.new
     @new_term_group = TermGroup.new
     @new_term = Term.new
+    
+    if params[:style_id].nil?
+      style = @studio.styles.first
+      unless style.nil?
+        style_id = style.id
+      end
+    else
+      style_id = params[:style_id]
+    end
 
-    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", params[:style_id], params[:id]])
+    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", style_id, params[:id]])
     @term_groups = @current_style.term_groups unless @current_style.nil?
     
     set_the_current_style_id(@current_style)
+    
+    respond_to do |format|
+      format.html
+      format.json { render :json => @term_groups }
+    end
   end
   
   def create
