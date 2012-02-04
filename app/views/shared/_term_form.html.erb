@@ -12,6 +12,26 @@
        <% end %>
      </div>
      <div class="label">
+      Translated :
+     </div>
+     <div class="field">
+       <% if Rails.env.development? %>
+         <%= f.text_field :term_translated, :value => Faker::Lorem.words().first %>
+       <% else %>
+         <%= f.text_field :term_translated %>
+       <% end %>
+     </div>
+     <div class="label">
+      Description :
+     </div>
+     <div class="field">
+       <% if Rails.env.development? %>
+         <%= f.text_area :description, :value => Faker::Lorem.sentences(3), :rows => 3 %>
+       <% else %>
+         <%= f.text_area :description, :rows => 3 %>
+       <% end %>
+     </div>
+     <div class="label">
       Term Group :
      </div>
      <div class="field">

@@ -15,6 +15,18 @@
          <%= f.text_field :name %>
        <% end %>
      </div>
+     <div class="label">
+      Translation:
+     </div>
+     <div class="field">
+       <% if Rails.env.development? %>
+         <%= f.text_field :name_translated, :value => Faker::Lorem.words().first %>
+       <% else %>
+         <%= f.text_field :name_translated %>
+       <% end %>
+     </div>
+     
+     
      <div class="actions">
        <%= f.submit "Submit" %>
      </div>
