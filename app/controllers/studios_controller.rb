@@ -34,10 +34,6 @@ class StudiosController < ApplicationController
     
     set_the_current_style_id(@current_style)
     
-    respond_to do |format|
-      format.html
-      format.json { render :json => @term_groups }
-    end
   end
   
   def create

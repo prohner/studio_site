@@ -15,8 +15,8 @@ StudioSite::Application.routes.draw do
   
   resources :studios
   resources :sessions,    :only => [:new, :create, :destroy]
-  resources :styles,      :only => [:create, :destroy]
-  resources :term_groups, :only => [:create, :destroy]
+  resources :styles,      :only => [:create, :destroy, :get]
+  resources :term_groups, :only => [:create, :destroy, :get]
   resources :terms,       :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
