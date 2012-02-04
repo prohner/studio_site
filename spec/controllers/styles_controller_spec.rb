@@ -14,6 +14,21 @@ describe StylesController do
       response.should redirect_to(signin_path)
     end
   end
+
+  describe "GET 'JSON'" do
+    before(:each) do
+      @studio = test_sign_in(Factory(:studio))
+      @style = Factory(:style, :studio => @studio, :name => "style name")
+      @term_group_name = "term group"
+      @term_group = Factory(:term_group, :style => @style, :name => @term_group_name)
+    end
+    
+    it "should retrieve a JSON object" do
+      get :get, :style => @style, :format => :json
+      response.body.should == [@term_group].to_json
+    end
+  end
+  
   
   describe "POST 'create'" do
     before(:each) do

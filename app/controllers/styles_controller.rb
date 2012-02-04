@@ -17,4 +17,13 @@ class StylesController < ApplicationController
 
   def destroy
   end
+  
+  def get
+    @style = Style.find(params[:style])
+    respond_to do |format|
+      format.json { render :json => @style.term_groups }
+    end
+
+  end
+  
 end
