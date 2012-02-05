@@ -2,7 +2,7 @@
   <tr>
     <td class="sidebar round">
       <strong>Name</strong> <%= @studio.name %><br />
-      <strong>URL</strong>  <%= link_to studio_path(@studio.name), @studio %>
+      <strong>URL</strong>  <%= link_to @studio.name, @studio %>
 
       <% if not @studio.styles.nil? %>
          <table class="styles" summary="Studio styles">
@@ -21,53 +21,15 @@
          <%= gravatar_for @studio, :size => 30 %>
          <%= @studio.name %>
        </h1>
+       &nbsp;<br/>
        <% unless @current_style.nil? %>
-          <span class="current_style">
+          <div class="current_style round">
           <%= @current_style.name %>
-          </span>
+          </div>
           <br />
           
-          <% @term_groups.each do |term_group| %>
-             <div class="term_group">
-                <span class="term_group_name">
-                  <%= term_group.name %> 
-                </span>
-                <% unless term_group.name_translated.nil? %>
-                   &nbsp;==&nbsp;
-                   <span class="term_group_name_translated">
-                     <%= term_group.name_translated %> 
-                   </span>
-                <% end %>
-             
-                <% unless term_group.terms.nil? %>
-                   <dl class="terms">
-                   <% term_group.terms.each do |term| %>
-                      <dt class="term_term">
-                         <%= term.term %> 
-                      </dt>
-                      <dd class="term_term_translated">
-                         <%= term.term_translated %> 
-                         <% unless term.description.nil? %>
-                           <br />
-                            <span class="term_term_description">
-                               <%= term.description %> 
-                            </span>
-                         <% end %>
-                      </dd>
-                      <dd>
-                         <%= link_to "delete", 
-                                 term, 
-                                 :method => :delete, 
-                                 :confirm => "Are you sure you want to delete #{term.term}?",
-                                 :title => "Delete #{term.term}" %>
-                      </dd>
-                      <br />
-                   <% end %>
-                   </dl>
-                <% end %>
-             </div>
-             <br />
-          <% end %>
+          <%= render :partial => "term_groups/show.html.erb", :collection => @term_groups, :as => :term_group %>
+
        <% end %>
        
        <hr size="1">

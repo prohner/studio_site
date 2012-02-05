@@ -192,7 +192,7 @@ describe StudiosController do
     
       it "should show the current style" do
         get :show, :id => @studio, :style_id => @style1.id
-        response.should have_selector("span.current_style", :content => @style1.name)
+        response.should have_selector("div.current_style", :content => @style1.name)
       end
     
       it "should not be able to show someone else's style" do
@@ -222,8 +222,8 @@ describe StudiosController do
         
         it "should show the current style's term group and terms" do
           get :show, :id => @studio, :style_id => @style1.id
-          response.should have_selector("dt.term_term", :content => @term1.term)
-          response.should have_selector("dt.term_term", :content => @term1.term)
+          response.should have_selector("span.term_term", :content => @term1.term)
+          response.should have_selector("span.term_term", :content => @term1.term)
         end
         
         #it "should not show the term group or terms for other style" do
