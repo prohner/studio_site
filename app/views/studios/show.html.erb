@@ -54,12 +54,13 @@
                             </span>
                          <% end %>
                       </dd>
-                      <% if nil %>
                       <dd>
-                         <%= link_to "delete", term, :method => :destroy, :confirm => "You sure?",
-                                                       :title => "Delete #{term.term}" %>
+                         <%= link_to "delete", 
+                                 term, 
+                                 :method => :delete, 
+                                 :confirm => "Are you sure you want to delete #{term.term}?",
+                                 :title => "Delete #{term.term}" %>
                       </dd>
-                      <% end %>
                       <br />
                    <% end %>
                    </dl>
