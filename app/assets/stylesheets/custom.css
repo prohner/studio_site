@@ -254,53 +254,52 @@ form.new_style textarea {
 }
 
 
-span.current_style {
+div.current_style {
 	width: 100%;
-	background-color: #000;
+	background-color: #606060;
 	color: #fff;
 	font-size:150%;
-	
+	text-align:center;
 }
 
 div.term_group {
 	width: 100%;
 	background-color: #f0f0f0;
-	#color: #fff;
+	color: #606060;
+	text-align:center;
 }
 
 span.term_group_name {
+	color:#000;
 	width: 100%;
-	background-color: #666;
-	color: #fff;
 	padding: 2px;
+	font-weight:bold;
 }
 
 span.term_group_name_translated {
+	color:#000;
 	width: 100%;
-	background-color: #666;
-	color: #fff;
 	padding: 2px;
+	font-weight:bold;
 }
 
-dl.terms {
-	border: 3px double #ccc;
-	padding: 0.5em;
+div.term {
+	text-align:left;
+	border-top: 1px dotted #ccc;
 }
 
-dt {
-	float: left;
-	clear: left;
-	width: 150px;
-	text-align: right;
-	font-weight: bold;
-	background-color: #d0d0d0;
+span.term_term {
+	float:left;
 }
 
-dd {
-	margin: 0 0 0 152px;
-	padding: 0 0 0.5em 0;
-	background-color: #d0d0d0;
-	border-style:solid;
-	border-color:#000;
+span.term_term_translated {
+	xtext-align:right;
+	float:right;
 }
 
+div.term_description {
+	text-align:left;
+}
+
+div.term_spacer {
+	background-color: #fff;
