@@ -15,7 +15,7 @@ class TermGroupsController < ApplicationController
   def destroy
   end
   
-  def get
+  def show
     @term_group = TermGroup.find(params[:id])
     respond_to do |format|
       format.json { render :json => @term_group.terms }

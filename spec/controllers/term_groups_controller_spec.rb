@@ -26,7 +26,7 @@ describe TermGroupsController do
     end
     
     it "should retrieve a JSON object" do
-      get :get, :id => @term_group.id, :format => :json
+      get :show, :id => @term_group.id, :format => :json
       response.body.should == [@term1, @term2].to_json
     end
   end
