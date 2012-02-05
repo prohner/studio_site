@@ -3,8 +3,11 @@
       <%= link_to studio.name, studio %>
 
       <% if current_studio.admin? %>
-      | <%= link_to "delete", studio, :method => :delete, :confirm => "You sure?",
-                                    :title => "Delete #{studio.name}" %>
+      | <%= link_to "delete", 
+            studio, 
+            :method => :delete, 
+            :confirm => "Are you sure you want to delete '#{studio.name}'?",
+            :title => "Delete #{studio.name}" %>
       <% end %>
 
     </li>
