@@ -11,11 +11,11 @@
               :title => "Delete #{term.term}" %>]
    </span>
    <br />
+   <% unless term.description.nil? %>
+      <div class="term_description">
+         <span class="term_term_description">
+            <%= term.description %> 
+         </span>
+      </div>
+   <% end %>
 </div>
-<% unless term.description.nil? %>
-   <div class="term_description">
-      <span class="term_term_description">
-         <%= term.description %> 
-      </span>
-   </div>
-<% end %>

@@ -1,5 +1,12 @@
 class TermGroupsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authenticate, :only => [:create, :destroy, :new]
+  
+  def new
+    @title = "Add Term Group"
+    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", current_style_id, params[:id]])
+    
+    @new_term_group = TermGroup.new
+  end
   
   def create
     style = Style.find(current_style_id)
@@ -13,6 +20,10 @@ class TermGroupsController < ApplicationController
   end
 
   def destroy
+    term_group = TermGroup.find(params[:id])
+    term_group.destroy
+    flash[:success] = "Studio destroyed."
+    redirect_to :controller => :studios, :action => :show, :id => term_group.style.studio.id, :style_id => term_group.style.id
   end
   
   def show
