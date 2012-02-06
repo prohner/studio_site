@@ -1,5 +1,12 @@
 class TermGroupsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authenticate, :only => [:create, :destroy, :new]
+  
+  def new
+    @title = "Add Term Group"
+    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", current_style_id, params[:id]])
+    
+    @new_term_group = TermGroup.new
+  end
   
   def create
     style = Style.find(current_style_id)
