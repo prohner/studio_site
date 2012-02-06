@@ -16,7 +16,7 @@
    
 
    <% unless term_group.terms.nil? %>
-      <%= render :partial => "terms/show.html.erb", :collection => term_group.terms, :as => :term %>
+      <%= render :partial => "terms/show", :collection => term_group.terms, :as => :term %>
    <% end %>
    <%= link_to 'Add new term', new_term_path, :class => 'term_group_add_term' %>
 </div>

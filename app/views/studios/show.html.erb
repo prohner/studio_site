@@ -29,7 +29,7 @@
           <br />
           <%= link_to 'Add group of terms', new_term_group_path %>
           
-          <%= render :partial => "term_groups/show.html.erb", :collection => @term_groups, :as => :term_group %>
+          <%= render :partial => "term_groups/show", :collection => @term_groups, :as => :term_group %>
 
        <% end %>
        
