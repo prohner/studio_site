@@ -10,7 +10,7 @@ describe TermGroupsController do
     end
     
     it "should deny access to 'new'" do
-      post :create
+      get :new
       response.should redirect_to(signin_path)
     end
     
