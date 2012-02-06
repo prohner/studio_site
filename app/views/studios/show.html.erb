@@ -27,13 +27,14 @@
           <%= @current_style.name %>
           </div>
           <br />
+          <%= link_to 'Add group of terms', new_term_group_path %>
           
           <%= render :partial => "term_groups/show.html.erb", :collection => @term_groups, :as => :term_group %>
 
        <% end %>
        
        <hr size="1">
-       <%= render 'shared/term_group_form' %>
+
        <hr size="1">
        <%= render 'shared/term_form' %>
        <% if Rails.env.development? %>

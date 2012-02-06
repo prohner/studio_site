@@ -9,6 +9,11 @@ describe TermGroupsController do
       response.should redirect_to(signin_path)
     end
     
+    it "should deny access to 'new'" do
+      post :create
+      response.should redirect_to(signin_path)
+    end
+    
     it "should deny access to 'destroy'" do
       delete :destroy, :id => 1
       response.should redirect_to(signin_path)
@@ -78,4 +83,19 @@ describe TermGroupsController do
     end
   end
 
+  describe "GET 'new'" do
+    before(:each) do
+      @studio = test_sign_in(Factory(:studio))
+    end
+
+    it "should be successful" do
+      get :new
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :new
+      response.should have_selector("title", :content => "Add")
+    end
+  end
 end
