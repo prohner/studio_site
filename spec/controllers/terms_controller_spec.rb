@@ -49,6 +49,9 @@ describe TermsController do
   describe "GET 'new'" do
     before(:each) do
       @studio = test_sign_in(Factory(:studio))
+      @style      = Factory(:style, :studio => @studio, :name => "style name")
+      @term_group = Factory(:term_group, :style => @style, :name => "blocks")
+      controller.set_the_current_style_id(@style)
     end
 
     it "should be successful" do
