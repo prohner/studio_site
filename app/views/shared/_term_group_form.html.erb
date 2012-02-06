@@ -6,6 +6,27 @@
    <%= form_for @new_term_group do |f| %>
      <%= render 'shared/error_messages', :object => f.object %>
      <div class="label">
+      Date Test:
+     </div>
+     <div class="field">
+       <%= f.text_field :created_at %>
+     </div>
+
+     <script type="text/javascript" charset="utf-8">
+        //$('#term_group_created_at').click(function() { alert('hi');$('#term_group_created_at').datepicker(); });
+        $(function() {
+        		$( "#term_group_created_at" ).datepicker();
+        	});
+        //$('#term_group_created_at').click(function() );
+
+     </script>
+
+
+
+
+
+
+     <div class="label">
       New Term Group:
      </div>
      <div class="field">
