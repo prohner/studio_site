@@ -3,9 +3,10 @@ class TermsController < ApplicationController
 
   def new
     @title = "Add Term"
-    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", current_style_id, params[:id]])
-    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", 1,1])
+    
+    @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", params[:style_id], params[:studio_id]])
     @term_groups = @current_style.term_groups
+    @selected_term_group_id = params[:term_group_id]
     @new_term = Term.new
   end
   
