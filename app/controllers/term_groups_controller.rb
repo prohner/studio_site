@@ -20,6 +20,10 @@ class TermGroupsController < ApplicationController
   end
 
   def destroy
+    term_group = TermGroup.find(params[:id])
+    term_group.destroy
+    flash[:success] = "Studio destroyed."
+    redirect_to :controller => :studios, :action => :show, :id => term_group.style.studio.id, :style_id => term_group.style.id
   end
   
   def show

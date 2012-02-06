@@ -8,6 +8,12 @@
         <%= term_group.name_translated %> 
       </span>
    <% end %>
+   [<%= link_to "X", 
+           term_group, 
+           :method => :delete, 
+           :confirm => "Are you sure you want to delete #{term_group.name}?",
+           :title => "Delete #{term_group.name}" %>]
+   
 
    <% unless term_group.terms.nil? %>
       <%= render :partial => "terms/show.html.erb", :collection => term_group.terms, :as => :term %>
