@@ -294,6 +294,10 @@ div.term {
 	border-top: 1px dotted #ccc;
 }
 
+div.term:hover {
+	background-color:#f8f880;
+}
+
 span.term_term {
 	float:left;
 	text-transform:capitalize;
