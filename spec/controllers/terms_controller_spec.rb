@@ -5,6 +5,11 @@ describe TermsController do
   
   describe "access control" do
     it "should deny access to 'create'" do
+      get :new
+      response.should redirect_to(signin_path)
+    end
+
+    it "should deny access to 'create'" do
       post :create
       response.should redirect_to(signin_path)
     end
@@ -40,4 +45,24 @@ describe TermsController do
       end
     end
   end
+  
+  describe "GET 'new'" do
+    before(:each) do
+      @studio = test_sign_in(Factory(:studio))
+      @style      = Factory(:style, :studio => @studio, :name => "style name")
+      @term_group = Factory(:term_group, :style => @style, :name => "blocks")
+      controller.set_the_current_style_id(@style)
+    end
+
+    it "should be successful" do
+      get :new
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :new
+      response.should have_selector("title", :content => "Add")
+    end
+  end
+
 end
