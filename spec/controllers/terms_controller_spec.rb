@@ -55,12 +55,12 @@ describe TermsController do
     end
 
     it "should be successful" do
-      get :new
+      get :new, :term_group_id => @term_group.id, :style_id => @style.id, :studio_id => @studio.id
       response.should be_success
     end
     
     it "should have the right title" do
-      get :new
+      get :new, :term_group_id => @term_group.id, :style_id => @style.id, :studio_id => @studio.id
       response.should have_selector("title", :content => "Add")
     end
   end
