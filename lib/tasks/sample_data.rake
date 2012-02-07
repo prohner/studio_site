@@ -1,5 +1,20 @@
 require 'faker'
 namespace :db do
+  desc "Load master data for styles"
+  task :master_data => :environment do
+    #Rake::Task['db:reset'].invoke
+    f = File.open(Rails.root.join("lib/tasks/sample_data.txt"))
+    records = f.readlines
+    records.each do |r|
+      vars = r.split('=')
+      if vars[0].starts_with?('ss_')
+        puts "New group #{vars[1]}"
+      else
+        puts "    Term #{vars[0]}"
+      end
+    end
+  end
+  
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke

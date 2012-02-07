@@ -1,0 +1,46 @@
+ss_style=Tang Soo Do
+ss_federation=Hwa Rang
+ss_group=10 Key Concepts
+1.Yong Gi=Courage
+2.In Neh=Endurance
+3.Chung Shin Tong Il=Concentration
+4.Chung Jik=Honesty
+5.Kyum Son=Humility
+6.Him Cho Chung=Control of Power
+7.Shin Chook=Tension & Relaxation
+8.Wan Gup=Speed Control
+9.Jung Uei=Justice
+10.Uei Rhee=Best Friendship
+
+ss_group=Blocks=Mahk kee
+Ha Dan Mahk kee=Low Block
+Sang Dan Mahk kee=High Block
+Ahneso Pakero Mahk kee=Inside/Outside Block
+Pahkeso Ahnuro Mahk kee=Outside/Inside Block
+Bahl Ba Dahk Ero Mahk kee=Sole of Foot Block
+Ha Dan Soo Do Mahk kee=Low Knife-Hand Block
+Jung Dan Soo Do Mahk kee=Middle Knife-Hand Block
+Sang Dan Soo Do Mahk kee=High Knife-Hand Block
+Ha Dan Ssang Soo Mahk kee=Low 2-Hand/Double Block
+Jung Dan Ssang Soo Mahk kee=Mid 2 Knife-Hand X-Block 
+Sang Dan Ssang Soo Mahk kee=High 2-Hand/Double Block
+
+ss_group=Hand Attacks= Kong kyuk
+Ha Dan Kong kyuk=Low punch
+Jung Dan Kong kyuk=Center punch
+Sang Dan Kong kyuk=High punch
+Wheng Jin Kong kyuk=Side punch, horse stance
+Jung Kwon Kong kyuk=Fore fist
+E Mah Kong kyuk=Head butt
+Jang Kwon Kong kyuk=Heel of palm
+Jung Dan Pahl Put Gi=Center punch, horse stance
+Cap KwonKong kyuk=Backfist
+Kwan Soo Kong kyuk=Spear-hand
+Ol Rea Chi Gi Kong kyuk=Upper cut
+Soo Gi Sool=Hand techniques
+Yuk Jin Kong kyuk=Reverse punch, back stance
+Kwon Do Kong kyuk=Hammer fist
+Yuk Soo Do Kong kyuk=Ridge hand
+Jip Kye Son Kong kyuk=Plier hand
+Pahl Koop Chi Kee=Elbow strike
+Son Dung Kong kyuk=Top of hand
