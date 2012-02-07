@@ -1,10 +1,10 @@
-   <%= form_for @new_term_group do |f| %>
+   <%= form_for @term_group do |f| %>
      <%= render 'shared/error_messages', :object => f.object %>
      <div class="label">
       New Term Group:
      </div>
      <div class="field">
-       <% if Rails.env.development? %>
+       <% if Rails.env.development? and @term_group.name.nil? %>
          <%= f.text_field :name, :value => Faker::Lorem.words().first %>
        <% else %>
          <%= f.text_field :name %>
@@ -14,7 +14,7 @@
       Translation:
      </div>
      <div class="field">
-       <% if Rails.env.development? %>
+       <% if Rails.env.development? and @term_group.name_translated.nil? %>
          <%= f.text_field :name_translated, :value => Faker::Lorem.words().first %>
        <% else %>
          <%= f.text_field :name_translated %>

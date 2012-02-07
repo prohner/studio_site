@@ -1,5 +1,5 @@
 class TermsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy, :new, :edit]
+  before_filter :authenticate, :only => [:create, :destroy, :new, :edit, :update]
 
   def new
     @title = "Add Term"

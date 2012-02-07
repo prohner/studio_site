@@ -1,11 +1,11 @@
 class TermGroupsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy, :new]
+  before_filter :authenticate, :only => [:create, :destroy, :new, :update]
   
   def new
     @title = "Add Term Group"
     @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", current_style_id, params[:id]])
     
-    @new_term_group = TermGroup.new
+    @term_group = TermGroup.new
   end
   
   def create
@@ -18,6 +18,22 @@ class TermGroupsController < ApplicationController
       render 'pages/home'
     end
   end
+
+  def edit
+    @term_group = TermGroup.find(params[:id])
+    @title = "Edit #{@term_group.name}"
+    @term_groups = @term_group.style.term_groups
+    @selected_term_group_id = @term_group.id
+  end
+
+  def update
+    term_group = TermGroup.find(params[:id])
+    if term_group.update_attributes(params[:term_group])
+      flash[:success] = "Group saved"
+      redirect_to :controller => :studios, :action => :show, :id => term_group.style.studio.id, :style_id => term_group.style.id
+    end
+  end
+  
 
   def destroy
     term_group = TermGroup.find(params[:id])
