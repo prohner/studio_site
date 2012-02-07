@@ -1,5 +1,5 @@
 class TermsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy, :new]
+  before_filter :authenticate, :only => [:create, :destroy, :new, :edit]
 
   def new
     @title = "Add Term"
@@ -7,7 +7,22 @@ class TermsController < ApplicationController
     @current_style = Style.find(:first, :conditions => ["id = ? and studio_id = ?", params[:style_id], params[:studio_id]])
     @term_groups = @current_style.term_groups
     @selected_term_group_id = params[:term_group_id]
-    @new_term = Term.new
+    @term = Term.new
+  end
+  
+  def edit
+    @term = Term.find(params[:id])
+    @title = "Edit #{@term.term}"
+    @term_groups = @term.term_group.style.term_groups
+    @selected_term_group_id = @term.term_group.id
+  end
+  
+  def update
+    term = Term.find(params[:id])
+    if term.update_attributes(params[:term])
+      flash[:success] = "Term saved"
+      redirect_to :controller => :studios, :action => :show, :id => term.term_group.style.studio.id, :style_id => term.term_group.style.id
+    end
   end
   
   def create
