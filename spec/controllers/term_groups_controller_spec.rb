@@ -18,6 +18,15 @@ describe TermGroupsController do
       delete :destroy, :id => 1
       response.should redirect_to(signin_path)
     end
+
+    it "should deny access to 'update'" do
+      @studio     = Factory(:studio)
+      @style      = Factory(:style,       :studio => @studio,         :name => "style name")
+      @term_group = Factory(:term_group,  :style => @style,           :name => "blocks")
+
+      put :update, :id => @term_group.id
+      response.should redirect_to(signin_path)
+    end
   end
 
   describe "GET 'JSON'" do
@@ -96,6 +105,22 @@ describe TermGroupsController do
     it "should have the right title" do
       get :new
       response.should have_selector("title", :content => "Add")
+    end
+  end
+
+  describe "PUT 'update'" do
+    before(:each) do
+      @studio     = test_sign_in(Factory(:studio))
+      @style      = Factory(:style,       :studio => @studio,         :name => "style name")
+      @term_group = Factory(:term_group,  :style => @style,           :name => "blocks")
+    end
+    
+    it "should save the changed term" do
+      new_group   = "another group"
+      put :update, :id => @term_group.id, :term_group => { :name => new_group }
+      @term_group.reload
+      @term_group.name.should == new_group
+
     end
   end
 end

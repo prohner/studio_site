@@ -19,6 +19,16 @@ describe TermsController do
       response.should redirect_to(signin_path)
     end
     
+    it "should deny access to 'update'" do
+      @studio     = Factory(:studio)
+      @style      = Factory(:style,       :studio => @studio,         :name => "style name")
+      @term_group = Factory(:term_group,  :style => @style,           :name => "blocks")
+      @term       = Factory(:term,        :term_group => @term_group, :term => "inside outside")
+
+      put :update, :id => @term.id
+      response.should redirect_to(signin_path)
+    end
+    
     it "should deny access to 'destroy'" do
       delete :destroy, :id => 1
       response.should redirect_to(signin_path)
@@ -100,7 +110,6 @@ describe TermsController do
     
     it "should save the changed term" do
       new_term    = "another term"
-      @term.term  = new_term
       put :update, :id => @term.id, :term => { :term => new_term }
       @term.reload
       @term.term.should == new_term
