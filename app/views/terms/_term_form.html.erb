@@ -1,21 +1,21 @@
 <% unless @term_groups.nil? %>
-   <%= form_for @new_term do |f| %>
+   <%= form_for @term do |f| %>
      <%= render 'shared/error_messages', :object => f.object %>
      <div class="label">
-      New Term :
+      Original Term :
      </div>
      <div class="field">
-       <% if Rails.env.development? %>
+       <% if Rails.env.development? and @term.term.nil? %>
          <%= f.text_field :term, :value => Faker::Lorem.words().first %>
        <% else %>
          <%= f.text_field :term %>
        <% end %>
      </div>
      <div class="label">
-      Translated :
+      Translated to our language :
      </div>
      <div class="field">
-       <% if Rails.env.development? %>
+       <% if Rails.env.development? and @term.term_translated.nil? %>
          <%= f.text_field :term_translated, :value => Faker::Lorem.words().first %>
        <% else %>
          <%= f.text_field :term_translated %>
@@ -32,7 +32,7 @@
        <% end %>
      </div>
      <div class="label">
-      Term Group :
+      Put this into category :
      </div>
      <div class="field">
        <%= f.select(:term_group_id, @term_groups.collect {|c| [c.name, c.id]}, :selected => @selected_term_group_id) %>

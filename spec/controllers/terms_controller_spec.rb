@@ -9,6 +9,11 @@ describe TermsController do
       response.should redirect_to(signin_path)
     end
 
+    it "should deny access to 'edit'" do
+      get :edit
+      response.should redirect_to(signin_path)
+    end
+
     it "should deny access to 'create'" do
       post :create
       response.should redirect_to(signin_path)
@@ -48,7 +53,7 @@ describe TermsController do
   
   describe "GET 'new'" do
     before(:each) do
-      @studio = test_sign_in(Factory(:studio))
+      @studio     = test_sign_in(Factory(:studio))
       @style      = Factory(:style, :studio => @studio, :name => "style name")
       @term_group = Factory(:term_group, :style => @style, :name => "blocks")
       controller.set_the_current_style_id(@style)
@@ -65,4 +70,41 @@ describe TermsController do
     end
   end
 
+  describe "GET 'edit'" do
+    before(:each) do
+      @studio     = test_sign_in(Factory(:studio))
+      @style      = Factory(:style,       :studio => @studio,         :name => "style name")
+      @term_group = Factory(:term_group,  :style => @style,           :name => "blocks")
+      @term       = Factory(:term,        :term_group => @term_group, :term => "inside outside")
+    end
+    
+    it "should be successful" do
+      get :edit, :id => @term.id
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @term.id
+      response.should have_selector("title", :content => "Edit")
+      response.should have_selector("title", :content => @term.term)
+    end
+  end
+  
+  describe "PUT 'update'" do
+    before(:each) do
+      @studio     = test_sign_in(Factory(:studio))
+      @style      = Factory(:style,       :studio => @studio,         :name => "style name")
+      @term_group = Factory(:term_group,  :style => @style,           :name => "blocks")
+      @term       = Factory(:term,        :term_group => @term_group, :term => "inside outside")
+    end
+    
+    it "should save the changed term" do
+      new_term    = "another term"
+      @term.term  = new_term
+      put :update, :id => @term.id, :term => { :term => new_term }
+      @term.reload
+      @term.term.should == new_term
+
+    end
+  end
 end
