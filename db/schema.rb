@@ -10,7 +10,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202220019) do
+ActiveRecord::Schema.define(:version => 20120207153531) do
+
+  create_table "master_federations", :force => true do |t|
+    t.string   "name"
+    t.integer  "master_style_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "master_styles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "master_term_groups", :force => true do |t|
+    t.string   "name"
+    t.string   "name_translated"
+    t.integer  "master_style_id"
+    t.integer  "master_federation_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "master_terms", :force => true do |t|
+    t.string   "term"
+    t.string   "term_translated"
+    t.text     "description"
+    t.integer  "master_term_group_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "studios", :force => true do |t|
     t.string   "name"

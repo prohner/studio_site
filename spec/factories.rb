@@ -29,3 +29,25 @@ Factory.define :term do |term|
   term.description      "whatever it is as a description"
   term.association :term_group
 end
+
+Factory.define :master_style do |style|
+  style.name    "master style"
+end
+
+Factory.define :master_federation do |fed|
+  fed.name            "Hwa Rang"
+  fed.master_style_id 1
+end
+
+Factory.define :master_term_group do |term_group|
+  term_group.name                 "Hwa Rang"
+  term_group.name_translated      "Flower Knights"
+  term_group.master_style_id      1
+  term_group.master_federation_id 1
+end
+
+Factory.define :master_term do |term|
+  term.term                   "Ha Dan Mahk kee"
+  term.term_translated        "Low Block"
+  term.master_term_group_id   1
+end
