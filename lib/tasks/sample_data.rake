@@ -11,12 +11,14 @@ namespace :db do
       vars = r.chomp.split('=')
       unless vars[0].nil?
         if vars[0].starts_with?('ss_style')
-          @style = MasterStyle.create!({ :name => vars[1]})
+          puts "style: #{vars[1]}"
+          @style = MasterStyle.create!({ :name => vars[1] })
         elsif vars[0].starts_with?('ss_federation')
+          puts "  fed: #{vars[1]}"
           @fed = MasterFederation.create!({ :name => vars[1], :master_style => @style })
         else
           
-          puts "    Term #{vars[0]}"
+          puts "    term #{vars[0]}"
         end
       end
     end
