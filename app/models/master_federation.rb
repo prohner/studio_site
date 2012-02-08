@@ -5,7 +5,8 @@ class MasterFederation < ActiveRecord::Base
   validates :name,
             :presence => true, 
             :length => { :maximum => 250 },
-            :uniqueness => { :case_sensitive => false }
+            :uniqueness => { :scope => :master_style_id, :case_sensitive => false }
+#            :uniqueness => { :case_sensitive => false }
             
   default_scope :order => 'master_federations.name'
 end

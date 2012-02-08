@@ -15,9 +15,19 @@ describe MasterFederation do
     MasterFederation.new(@attr).should be_valid
   end
 
-  it "should have a unique name" do
+  it "should have a unique name within a style" do
     MasterFederation.create!(@attr)
     MasterFederation.new(@attr).should_not be_valid
+  end
+
+  it "should allow a duplicate name in different styles" do
+    MasterFederation.create!(@attr)
+
+    @style2 = Factory(:master_style, :name => 'whatever else')
+    @attr = { :master_style => @style2, :name => @attr[:name] }
+
+    MasterFederation.new(@attr).should be_valid
+    #MasterFederation.new(@attr).should_not be_valid
   end
 
   it "should not have an excessively long name" do
