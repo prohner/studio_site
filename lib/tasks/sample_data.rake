@@ -3,14 +3,21 @@ namespace :db do
   desc "Load master data for styles"
   task :master_data => :environment do
     #Rake::Task['db:reset'].invoke
+    MasterStyle.delete_all
+    
     f = File.open(Rails.root.join("lib/tasks/sample_data.txt"))
     records = f.readlines
     records.each do |r|
-      vars = r.split('=')
-      if vars[0].starts_with?('ss_')
-        puts "New group #{vars[1]}"
-      else
-        puts "    Term #{vars[0]}"
+      vars = r.chomp.split('=')
+      unless vars[0].nil?
+        if vars[0].starts_with?('ss_style')
+          @style = MasterStyle.create!({ :name => vars[1]})
+        elsif vars[0].starts_with?('ss_federation')
+          @fed = MasterFederation.create!({ :name => vars[1], :master_style => @style })
+        else
+          
+          puts "    Term #{vars[0]}"
+        end
       end
     end
   end
