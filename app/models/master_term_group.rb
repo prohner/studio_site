@@ -1,6 +1,6 @@
 class MasterTermGroup < ActiveRecord::Base
   belongs_to  :master_federation
-  has_many    :master_terms
+  has_many    :master_terms, :dependent => :destroy
 
   validates :name,
             :presence => true, 

@@ -6,7 +6,6 @@ class MasterTerm < ActiveRecord::Base
             :length => { :maximum => 250 }
 
   validates :term_translated,
-            :presence => true, 
             :length => { :maximum => 250 }
 
 end
