@@ -1,0 +1,9 @@
+ss_style=Judo
+ss_federation=General
+
+ss_group=Other japanese phrases & words
+Iie, wakarimasen                    =No, I don't understand
+Anata no namae wa?                  =What is your name?
+Watashi no namae ...                =My name is ...
+Yukkuri hanashi te kudasai          =Please speak slowly?
+

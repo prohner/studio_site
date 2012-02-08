@@ -4,21 +4,38 @@ namespace :db do
   task :master_data => :environment do
     #Rake::Task['db:reset'].invoke
     MasterStyle.delete_all
+    MasterFederation.delete_all
+    MasterTermGroup.delete_all
+    MasterTerm.delete_all
     
     f = File.open(Rails.root.join("lib/tasks/sample_data.txt"))
     records = f.readlines
     records.each do |r|
       vars = r.chomp.split('=')
+      
+      # Capitalize first letter of each word
+      vars[1] = vars[1].split(' ').map {|w| w.capitalize }.join(' ') unless vars[1].nil?
+      vars[2] = vars[2].split(' ').map {|w| w.capitalize }.join(' ') unless vars[2].nil?
+      
       unless vars[0].nil?
         if vars[0].starts_with?('ss_style')
           puts "style: #{vars[1]}"
           @style = MasterStyle.create!({ :name => vars[1] })
         elsif vars[0].starts_with?('ss_federation')
           puts "  fed: #{vars[1]}"
-          @fed = MasterFederation.create!({ :name => vars[1], :master_style => @style })
+          @federation = MasterFederation.create!({ :name => vars[1], :master_style => @style })
+        elsif vars[0].starts_with?('ss_group')
+          puts "  tg: #{vars[1]} #{vars[2]}"
+          @term_group = MasterTermGroup.create!({ :name => vars[1], :name_translated => vars[2], :master_federation => @federation })
         else
-          
-          puts "    term #{vars[0]}"
+          vars[0] = vars[0].split(' ').map {|w| w.capitalize }.join(' ') unless vars[0].nil?
+          #puts "0==#{vars[0]}, 1==#{vars[1]}, 2==#{vars[2]}"
+          #if vars[1].nil?
+          #  vars[2] = vars[1] 
+          #  vars[1] = vars[0] 
+          #  exit
+          #end
+          @term = MasterTerm.create!({ :term => vars[0], :term_translated => vars[1], :master_term_group => @term_group })
         end
       end
     end
