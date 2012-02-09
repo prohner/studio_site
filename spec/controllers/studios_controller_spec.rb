@@ -110,6 +110,9 @@ describe StudiosController do
       response.should have_selector("a", :href => gravatar_url,
                                           :content => "change")
     end
+    
+    it "should allow the studio to change its own content"
+    it "should not allow one studio to change another's content"
   end
   
   describe "PUT 'update'" do

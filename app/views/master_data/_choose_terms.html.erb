@@ -1,4 +1,19 @@
-<%= form_tag(master_data_copy_terms_path, :method=>'get') do %>
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $('user_rating_positve').click(function() {
+        $('some_div').show();
+      }
+    });
+  </script>
+<% end %>
+
+<%= form_tag(master_data_copy_terms_path, :method=>'get', :name => 'terms_form') do %>
+
+   <%= link_to_function 'Check All', "$('input:checkbox').each(function(box){$(this).attr('checked', true);})" %>
+   &nbsp;&nbsp;&nbsp;
+   <%= link_to_function 'Uncheck All', "$('input:checkbox').each(function(box){$(this).attr('checked', false);})" %>
+   <br />
    <%= hidden_field_tag :target_term_group_id, @target_term_group_id %>
    <%= hidden_field_tag :master_style_id, @style.id %>
    <%= hidden_field_tag :master_federation_id, @federation.id %>
