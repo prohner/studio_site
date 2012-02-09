@@ -1,0 +1,8 @@
+<%= form_tag(master_data_show_terms_path, :method=>'get', :remote => true) do %>
+   <%= hidden_field_tag :master_style_id, @style.id %>
+   <%= hidden_field_tag :master_federation_id, @federation.id %>
+   <% @terms.each do |term| %>
+      <%= term.term %><br/>
+   <% end -%>
+<% end -%>
+
