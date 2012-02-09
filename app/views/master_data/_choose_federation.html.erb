@@ -1,0 +1,5 @@
+<%= form_tag(master_data_show_federations_path, :method=>'get', :remote => true) do %>
+   <%= select_tag "master_federation_id", options_for_select(@federations.collect { |s| [s.name, s.id] }) %>
+   <%= submit_tag "Find" %>
+<% end -%>
+
