@@ -2,6 +2,8 @@ StudioSite::Application.routes.draw do
   get "master_data/show_styles"
   get "master_data/show_federations"
   get "master_data/show_term_groups"
+  get "master_data/show_terms"
+  get "master_data/copy_terms"
   
   resources :master_data
 
