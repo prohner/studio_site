@@ -3,6 +3,8 @@ class MasterDataController < ApplicationController
     @title  = page_title
     @style  = nil
     @styles = MasterStyle.all
+    @target_term_group_id = params[:target_term_group_id]
+    puts "Our term group is #{@target_term_group_id}"
   end
 
   def show_federations
@@ -10,6 +12,7 @@ class MasterDataController < ApplicationController
     @style        = MasterStyle.find(params[:master_style_id])
     @styles       = MasterStyle.all
     @federations  = @style.master_federations
+    @target_term_group_id = params[:target_term_group_id]
     
     respond_to do |format|
       format.html ##{ redirect_to @federations }
@@ -21,6 +24,7 @@ class MasterDataController < ApplicationController
     @title        = page_title
     @style        = MasterStyle.find(params[:master_style_id])
     @styles       = MasterStyle.all
+    @target_term_group_id = params[:target_term_group_id]
 
     @federations  = @style.master_federations
     @federation   = MasterFederation.find(params[:master_federation_id])
@@ -36,6 +40,7 @@ class MasterDataController < ApplicationController
     @title        = page_title
     @style        = MasterStyle.find(params[:master_style_id])
     @styles       = MasterStyle.all
+    @target_term_group_id = params[:target_term_group_id]
 
     @federations  = @style.master_federations
     @federation   = MasterFederation.find(params[:master_federation_id])
@@ -47,6 +52,23 @@ class MasterDataController < ApplicationController
       format.html ##{ redirect_to @federations }
       format.js
     end
+  end
+  
+  def copy_terms
+    @terms = MasterTerm.find(params[:terms][:id])
+    term_group = TermGroup.find(params[:target_term_group_id])
+
+    @terms.each do |term|
+      puts term.term
+      new_term = Term.new
+      new_term.term = term.term
+      new_term.term_translated = term.term_translated
+      new_term.description = term.description
+      new_term.term_group = term_group
+      new_term.save!
+    end
+    
+    redirect_to :controller => 'studios', :action => 'show', :id => term_group.style.studio.id, :style_id => term_group.style.id
   end
   
   private

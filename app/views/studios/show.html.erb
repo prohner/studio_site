@@ -4,7 +4,6 @@
       <strong>Name</strong> <%= @studio.name %><br />
       <strong>URL</strong>  <%= link_to @studio.name, @studio %>
       <br/>
-      <%= link_to "Copy from Template", master_data_show_styles_path() %>
       <% if not @studio.styles.nil? %>
          <table class="styles" summary="Studio styles">
             <tr><th>Styles</th></tr>

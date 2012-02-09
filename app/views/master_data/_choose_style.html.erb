@@ -1,5 +1,6 @@
 
 <%= form_tag(master_data_show_federations_path, :method=>'get', :remote => :true) do %>
+   <%= hidden_field_tag :target_term_group_id, @target_term_group_id %>
    <%= select_tag "master_style_id", 
          options_for_select(@styles.collect { |s| [s.name, s.id] }, @style.nil? ? nil : @style.id),
          { :prompt => "Select a Style" } %>

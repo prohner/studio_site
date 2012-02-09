@@ -8,6 +8,7 @@
         <%= term_group.name_translated %> 
       </span>
    <% end %>
+   [<%= link_to "+", master_data_show_styles_path(:target_term_group_id => term_group.id) %>]
    [<%= link_to "X", 
            term_group, 
            :method => :delete, 
