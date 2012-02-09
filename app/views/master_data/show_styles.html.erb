@@ -1,0 +1,7 @@
+<h1>MasterData#show_styles</h1>
+
+<%= form_tag(master_data_path, :method=>'post', :multipart => true) do %>
+   <%= select_tag "styles", options_for_select(@styles.collect { |s| [s.name, s.id] }) %>
+   <%= submit_tag "Find" %>
+<% end -%>
+

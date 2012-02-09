@@ -44,6 +44,7 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
+    Rake::Task['db:master_data'].invoke
 
     admin_studio = Studio.create!( :name => "Admin Stud", :password => "123456", :email => "abc@def.com")
     admin_studio.toggle!(:admin)

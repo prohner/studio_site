@@ -1,4 +1,10 @@
 StudioSite::Application.routes.draw do
+  get "master_data/show_styles"
+  get "master_data/show_federations"
+  get "master_data/show_term_groups"
+  
+  resources :master_data
+
   get "sessions/new"
   #get "styles(/:id(.:format))"
   #match ':controller(/:action(/:id))(.:format)'

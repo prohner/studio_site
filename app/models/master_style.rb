@@ -6,6 +6,7 @@ class MasterStyle < ActiveRecord::Base
             :length => { :maximum => 50 },
             :uniqueness => { :case_sensitive => false }
             
+  default_scope :order => 'master_styles.name'
 end
 # == Schema Information
 #
