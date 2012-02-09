@@ -1,8 +1,17 @@
-<%= form_tag(master_data_show_terms_path, :method=>'get', :remote => true) do %>
+<%= form_tag(master_data_copy_terms_path, :method=>'get') do %>
+   <%= hidden_field_tag :target_term_group_id, @target_term_group_id %>
    <%= hidden_field_tag :master_style_id, @style.id %>
    <%= hidden_field_tag :master_federation_id, @federation.id %>
    <% @terms.each do |term| %>
-      <%= term.term %><br/>
+   
+      <%= check_box_tag "terms[id][]", term.id %>
+      <%= term.term %>
+      <% unless term.term_translated.nil? %>
+         ==&gt;
+         <%= term.term_translated %>
+      <% end %>
+      <br/>
    <% end -%>
+   <%= submit_tag "Add checked terms to my style"%>
 <% end -%>
 

@@ -1,4 +1,5 @@
 <%= form_tag(master_data_show_terms_path, :method=>'get', :remote => :true) do %>
+   <%= hidden_field_tag :target_term_group_id, @target_term_group_id %>
    <%= hidden_field_tag :master_style_id, @style.id %>
    <%= hidden_field_tag :master_federation_id, @federation.id %>
    <%= select_tag "master_term_group_id", options_for_select(@term_groups.collect { |s| [s.name, s.id] }, @term_group.nil? ? nil : @term_group.id) %>
