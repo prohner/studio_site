@@ -2,7 +2,7 @@
    <span class="term_group_name">
       <%= link_to term_group.name, edit_term_group_path(term_group) %> 
    </span>
-   <% unless term_group.name_translated.nil? %>
+   <% unless term_group.name_translated.nil? or term_group.name_translated.empty? %>
       &nbsp;==&nbsp;
       <span class="term_group_name_translated">
         <%= term_group.name_translated %> 
