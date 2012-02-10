@@ -5,11 +5,13 @@
    </span>
    <span class="term_term_translated">
       <%= term.term_translated %> 
-      [<%= link_to "X", 
-              term, 
-              :method => :delete, 
-              :confirm => "Are you sure you want to delete #{term.term}?",
-              :title => "Delete #{term.term}" %>]
+      <% if can_edit_studio %>
+         [<%= link_to "X", 
+                 term, 
+                 :method => :delete, 
+                 :confirm => "Are you sure you want to delete #{term.term}?",
+                 :title => "Delete #{term.term}" %>]
+     <% end %>
    </span>
    <br />
    <% unless term.description.nil? %>

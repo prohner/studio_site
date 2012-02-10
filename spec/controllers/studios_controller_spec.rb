@@ -91,6 +91,7 @@ describe StudiosController do
   describe "GET 'edit'" do
     before(:each) do
       @studio = Factory(:studio)
+      @style  = Factory(:style, :studio => @studio)
       test_sign_in(@studio)
     end
     
@@ -110,9 +111,6 @@ describe StudiosController do
       response.should have_selector("a", :href => gravatar_url,
                                           :content => "change")
     end
-    
-    it "should allow the studio to change its own content"
-    it "should not allow one studio to change another's content"
   end
   
   describe "PUT 'update'" do
@@ -212,7 +210,6 @@ describe StudiosController do
           @tg2 = Factory(:term_group, :style => @style1, :name => "kicks")
           @tg3 = Factory(:term_group, :style => @style2, :name => "strikes")
           
-          
           @term1 = Factory(:term, :term_group => @tg1, :term => "inside outside")
           @term2 = Factory(:term, :term_group => @tg1, :term => "outside inside")
         end
@@ -229,12 +226,68 @@ describe StudiosController do
           response.should have_selector("span.term_term", :content => @term1.term)
         end
         
-        #it "should not show the term group or terms for other style" do
-        #  get :show, :id => @studio, :style_id => @style2.id
-        #  response.should have_selector("span.term_group", :content => @tg1.name)
-        #  response.should have_selector("span.term_group", :content => @tg2.name)
-        #end
-        
+        describe "studio's own pages" do
+          before(:each) do
+            test_sign_in(@studio)
+          end
+
+          it "should allow the studio to add its own group of terms" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => new_term_group_path)
+          end
+
+          it "should allow the studio to import terms from templates" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => master_data_show_styles_path(:target_term_group_id => @tg1.id))
+          end
+
+          it "should allow the studio to delete a term group" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => term_group_path)
+          end
+
+          it "should allow the studio to delete a term" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => term_path)
+          end
+
+          it "should allow the studio to add a term" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => new_term_path(:term_group_id => @tg1.id, :style_id => @tg1.style.id, :studio_id => @tg1.style.studio.id))
+          end
+        end
+
+        describe "other studios' pages" do
+          before(:each) do
+            @other_studio = Factory(:studio, :email => "other@wherever.com")
+            test_sign_in(@other_studio)
+          end
+          
+          it "should not allow one studio to change another's content" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => new_term_group_path)
+          end
+
+          it "should not allow one studio to import terms from templates" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => master_data_show_styles_path(:target_term_group_id => @tg1.id))
+          end
+
+          it "should not allow one studio to delete another's a term group" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => term_group_path)
+          end
+
+          it "should not allow one studio to delete another's a term" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => term_path)
+          end
+
+          it "should not allow one studio to add a term to another" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => new_term_path(:term_group_id => @tg1.id, :style_id => @tg1.style.id, :studio_id => @tg1.style.studio.id))
+          end
+        end
       end
     end
     

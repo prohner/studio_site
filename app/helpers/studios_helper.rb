@@ -4,4 +4,8 @@ module StudiosHelper
                                               :class => 'gravatar',
                                               :gravatar => options)
   end
+  
+  def can_edit_studio
+    current_studio?(@studio)
+  end
 end

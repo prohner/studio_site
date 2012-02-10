@@ -33,6 +33,7 @@ class StudiosController < ApplicationController
     @term_groups = @current_style.term_groups unless @current_style.nil?
     
     set_the_current_style_id(@current_style)
+    current_studio
     
   end
   
