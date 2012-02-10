@@ -27,7 +27,9 @@
           <%= @current_style.name %>
           </div>
           <br />
-          <%= link_to 'Add group of terms', new_term_group_path %>
+          <%=  %><br/>
+          
+          <%= link_to_if can_edit_studio, 'Add group of terms', new_term_group_path %>
           
           <%= render :partial => "term_groups/show", :collection => @term_groups, :as => :term_group %>
 
