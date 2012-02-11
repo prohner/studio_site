@@ -255,6 +255,16 @@ describe StudiosController do
             get :show, :id => @studio, :style_id => @style1.id
             response.should have_selector("a", :href => new_term_path(:term_group_id => @tg1.id, :style_id => @tg1.style.id, :studio_id => @tg1.style.studio.id))
           end
+
+          it "should allow the studio to edit a term" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => edit_term_path(@term1))
+          end
+
+          it "should allow the studio to edit a term group" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should have_selector("a", :href => edit_term_group_path(@tg1))
+          end
         end
 
         describe "other studios' pages" do
@@ -286,6 +296,16 @@ describe StudiosController do
           it "should not allow one studio to add a term to another" do
             get :show, :id => @studio, :style_id => @style1.id
             response.should_not have_selector("a", :href => new_term_path(:term_group_id => @tg1.id, :style_id => @tg1.style.id, :studio_id => @tg1.style.studio.id))
+          end
+
+          it "should not allow one studio to edit another's term" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => edit_term_path(@term1))
+          end
+
+          it "should not allow one studio to edit another's term group" do
+            get :show, :id => @studio, :style_id => @style1.id
+            response.should_not have_selector("a", :href => edit_term_group_path(@tg1))
           end
         end
       end
