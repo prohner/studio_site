@@ -1,6 +1,4 @@
 StudioSite::Application.routes.draw do
-  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-
   get "master_data/show_styles"
   get "master_data/show_federations"
   get "master_data/show_term_groups"
