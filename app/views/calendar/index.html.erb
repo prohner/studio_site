@@ -3,4 +3,8 @@
 
 <h1>Calendar</h1>
 
+<%= form_tag(master_data_show_federations_path, :method=>'get', :remote => :true) do %>
+  <%= text_field_tag :date_picker_test %>
+<% end -%>
+
 <%= raw(event_calendar) %>

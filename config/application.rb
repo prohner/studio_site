@@ -18,7 +18,7 @@ end
 module StudioSite
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
+    # Applicationcation configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
@@ -61,5 +61,7 @@ module StudioSite
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui.min rails)
   end
 end
