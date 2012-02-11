@@ -43,6 +43,7 @@ group :assets do
 end
 
 gem 'jquery-rails', '1.0.9'
+gem "table_builder", :git => "git://github.com/watu/table_builder.git"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
