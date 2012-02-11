@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/watu/table_builder.git
+  revision: b8b1d43ea42e972026c2a60e268dfa46aa646d38
+  specs:
+    table_builder (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -143,6 +149,7 @@ DEPENDENCIES
   rspec-rails (= 2.8.1)
   sass-rails (~> 3.2.3)
   sqlite3 (= 1.3.5)
+  table_builder!
   uglifier (>= 1.0.3)
   webrat (= 0.7.1)
   will_paginate (= 3.0.pre4)

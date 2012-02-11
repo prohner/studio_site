@@ -1,4 +1,6 @@
 StudioSite::Application.routes.draw do
+  get "calendar/index"
+
   get "master_data/show_styles"
   get "master_data/show_federations"
   get "master_data/show_term_groups"

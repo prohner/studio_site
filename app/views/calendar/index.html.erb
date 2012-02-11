@@ -1,0 +1,14 @@
+<h1>Calendar#index</h1>
+<p>Find me in app/views/calendar/index.html.erb</p>
+
+<%= calendar_for(@styles) do |t| %>
+  <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+  <% t.day(:day_method => :created_at) do |day, styles| %>
+    <%= day.day %><br/>
+    <% styles.each do |style| %>
+      <%= style.name %>
+      <small><%= style.created_at %></small>
+      <br/>
+    <% end %>
+  <% end %>
+<% end %>
