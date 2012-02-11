@@ -1,6 +1,10 @@
 <div class="term_group round">
    <span class="term_group_name">
-      <%= link_to term_group.name, edit_term_group_path(term_group) %> 
+      <% if can_edit_studio %>
+         <%= link_to term_group.name, edit_term_group_path(term_group) %> 
+      <% else %>
+         <%= term_group.name %> 
+      <% end %>
    </span>
    <% unless term_group.name_translated.nil? or term_group.name_translated.empty? %>
       &nbsp;==&nbsp;
