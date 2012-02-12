@@ -1,14 +1,75 @@
-<h1>Calendar#index</h1>
-<p>Find me in app/views/calendar/index.html.erb</p>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
 
-<%= calendar_for(@styles) do |t| %>
-  <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
-  <% t.day(:day_method => :created_at) do |day, styles| %>
-    <%= day.day %><br/>
-    <% styles.each do |style| %>
-      <%= style.name %>
-      <small><%= style.created_at %></small>
-      <br/>
-    <% end %>
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        editable: true,
+        header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay'
+        },
+        slotMinutes:15,
+
+        eventSources: [{
+            url: '/events',
+            color: 'blue',
+            textColor: 'white',
+            ignoreTimezone: true
+        }],
+        
+        timeFormat: 'h:mm t{ - h:mm t} ',
+        dragOpacity: "0.5",
+        
+        //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
+        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+            updateEvent(event);
+        },
+
+        // http://arshaw.com/fullcalendar/docs/event_ui/eventResize/
+        eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+            updateEvent(event);
+        },
+
+        // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
+        eventClick: function(event, jsEvent, view){
+          // would like a lightbox here.
+        },
+    })
+});   
+
+
+function updateEvent(the_event) {
+    $.update(
+      "/events/" + the_event.id,
+      { event: { title: the_event.title,
+                 starts_at: "" + the_event.start,
+                 ends_at: "" + the_event.end,
+                 description: the_event.description
+               }
+      },
+      function (reponse) { alert('successfully updated task.'); }
+    );
+};
+
+</script>
+
+<div id='calendar'></div>
+<hr />
+
+<% if 1 == 0 %>
+   <%= calendar_for(@styles) do |t| %>
+     <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+     <% t.day(:day_method => :created_at) do |day, styles| %>
+       <%= day.day %><br/>
+       <% styles.each do |style| %>
+         <%= style.name %>
+         <small><%= style.created_at %></small>
+         <br/>
+       <% end %>
+     <% end %>
   <% end %>
 <% end %>
+   

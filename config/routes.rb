@@ -1,4 +1,13 @@
 StudioSite::Application.routes.draw do
+  resources :events
+  #get "events/index"
+  #get "events/show"
+  #get "events/new"
+  #get "events/edit"
+  #get "events/create"
+  #get "events/update"
+  #get "events/destroy"
+
   get "calendar/index"
 
   get "master_data/show_styles"
@@ -19,7 +28,7 @@ StudioSite::Application.routes.draw do
   get "pages/home"
   get "pages/contact"
   get "pages/about"
-
+  
   match '/signup',  :to => 'studios#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
