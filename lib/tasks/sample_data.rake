@@ -58,13 +58,12 @@ namespace :db do
     Event.create!(:title => "Kids Red & Black",           :starts_at => Time.zone.parse("2/11/2012 11:00"), :ends_at => Time.zone.parse("2/11/2012 12:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
     Event.create!(:title => "Adult Senior Class",         :starts_at => Time.zone.parse("2/11/2012 14:00"), :ends_at => Time.zone.parse("2/11/2012 16:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
 
-    Event.all.each do |e|
-      e.starts_at.hour += 8
-      e.ends_at.hour += 8
-      e.save!
-    end
+    #Event.all.each do |e|
+    #  e.starts_at.hour += 8
+    #  e.ends_at.hour += 8
+    #  e.save!
+    #end
     
-
 
     admin_studio = Studio.create!( :name => "Admin Stud", :password => "123456", :email => "abc@def.com")
     admin_studio.toggle!(:admin)

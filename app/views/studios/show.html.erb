@@ -4,6 +4,8 @@
       <strong>Name</strong> <%= @studio.name %><br />
       <strong>URL</strong>  <%= link_to @studio.name, @studio %>
       <br/>
+      <%= link_to "View Calendar", '/calendar/index' %>
+      <br/>
       <% if not @studio.styles.nil? %>
          <table class="styles" summary="Studio styles">
             <tr><th>Styles</th></tr>
