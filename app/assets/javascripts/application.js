@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
+
+$.ajaxSetup({
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/javascript");
+  }
+});
