@@ -40,30 +40,29 @@ namespace :db do
       end
     end
   end
+
+  desc "Fill calendar with sample data"
+  task :cal => :environment do
+    Event.delete_all
+    Event.create!(:title => "Private Lesson",             :starts_at => Time.local(2012, 2, 15, 8),       :ends_at => Time.local(2012, 2, 15, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Adults All Levels",          :starts_at => Time.local(2012, 2, 15, 9, 30),   :ends_at => Time.local(2012, 2, 15, 10, 30), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => Time.local(2012, 2, 15, 10),      :ends_at => Time.local(2012, 2, 15, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Kids Red & Black",           :starts_at => Time.local(2012, 2, 15, 17),      :ends_at => Time.local(2012, 2, 15, 18), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Adults All Levels",          :starts_at => Time.local(2012, 2, 15, 19),      :ends_at => Time.local(2012, 2, 15, 20), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+
+    Event.create!(:title => "Free Sparring",              :starts_at => Time.local(2012, 2, 16, 8),       :ends_at => Time.local(2012, 2, 16, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Adult All Levels",           :starts_at => Time.local(2012, 2, 16, 9),       :ends_at => Time.local(2012, 2, 16, 10), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => Time.local(2012, 2, 16, 10),      :ends_at => Time.local(2012, 2, 16, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Kids Red & Black",           :starts_at => Time.local(2012, 2, 16, 11),      :ends_at => Time.local(2012, 2, 16, 12), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+    Event.create!(:title => "Adult Senior Class",         :starts_at => Time.local(2012, 2, 16, 14),      :ends_at => Time.local(2012, 2, 16, 15), :all_day => false, :description => "Class description goes here and the text might get kind of long")
+
+  end
   
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     Rake::Task['db:master_data'].invoke
-
-    Event.create!(:title => "Private Lesson",             :starts_at => Time.zone.parse("2/15/2012 8:00"),  :ends_at => Time.zone.parse("2/15/2012 9:00"),  :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Adults All Levels",          :starts_at => Time.zone.parse("2/15/2012 9:30"),  :ends_at => Time.zone.parse("2/15/2012 10:30"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => Time.zone.parse("2/15/2012 16:00"), :ends_at => Time.zone.parse("2/15/2012 17:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Kids Red & Black",           :starts_at => Time.zone.parse("2/15/2012 17:00"), :ends_at => Time.zone.parse("2/15/2012 18:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Adults All Levels",          :starts_at => Time.zone.parse("2/15/2012 19:00"), :ends_at => Time.zone.parse("2/15/2012 20:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-
-    Event.create!(:title => "Free Sparring",              :starts_at => Time.zone.parse("2/16/2012 8:00"),  :ends_at => Time.zone.parse("2/16/2012 9:00"),  :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Adult All Levels",           :starts_at => Time.zone.parse("2/16/2012 9:00"),  :ends_at => Time.zone.parse("2/16/2012 10:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => Time.zone.parse("2/16/2012 10:00"), :ends_at => Time.zone.parse("2/16/2012 11:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Kids Red & Black",           :starts_at => Time.zone.parse("2/16/2012 11:00"), :ends_at => Time.zone.parse("2/16/2012 12:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-    Event.create!(:title => "Adult Senior Class",         :starts_at => Time.zone.parse("2/16/2012 14:00"), :ends_at => Time.zone.parse("2/16/2012 16:00"), :all_day => false, :description => "Class description goes here and the text might get kind of long")
-
-    #Event.all.each do |e|
-    #  e.starts_at.hour += 8
-    #  e.ends_at.hour += 8
-    #  e.save!
-    #end
-    
+    Rake::Task['db:cal'].invoke
 
     admin_studio = Studio.create!( :name => "Admin Stud", :password => "123456", :email => "abc@def.com")
     admin_studio.toggle!(:admin)
