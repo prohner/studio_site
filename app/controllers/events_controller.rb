@@ -5,7 +5,6 @@ class EventsController < ApplicationController
     # appropriate month/week/day.  It should be possiblt to change
     # this to be starts_at and ends_at to match rails conventions.
     # I'll eventually do that to make the demo a little cleaner.
-    puts "INDEX METHOD HAS BEEN CALLED"
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
@@ -30,6 +29,11 @@ class EventsController < ApplicationController
   end
 
   def update
+    event             = Event.find(params[:id])
+    event.starts_at   = params[:event][:starts_at]
+    event.ends_at     = params[:event][:ends_at]
+    event.description = params[:event][:description]
+    event.save!
   end
 
   def destroy
