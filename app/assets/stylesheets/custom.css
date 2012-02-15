@@ -316,3 +316,37 @@ text-align: left;
 
 div.term_spacer {
 background-color: #fff;
+}
+
+div.calendar {
+	float:left;
+	display:inline;
+	//background-color:#f00;
+	width:650px;
+}
+div.calendar_entry {
+	background-color:#f0f0f0;
+	border:1px solid #f0f0f0;
+	margin-left: 15px;
+	display:inline-block;
+	width:200px;
+	padding:0px;
+}
+
+div.calendar_entry_header {
+	margin:0 5 0 0;
+	background-color:#ffffbb;
+	font-weight:bold;
+	padding:2px;
+	width:98%;
+	display:block;
+}
+
+.calendar_entry_form {
+	padding:8px;
+}
+
+.small_label {
+	font-size:12px;
+	font-weight:normal;
+}

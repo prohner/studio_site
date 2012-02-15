@@ -9,9 +9,6 @@ class EventsController < ApplicationController
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
     
-    puts "=" * 50
-    puts @events.first.starts_at.rfc822
-    puts "=" * 50
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
