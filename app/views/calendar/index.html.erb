@@ -5,10 +5,10 @@
 
 <div id="calendar_entry" class="calendar_entry">
    <div id="calendar_entry_header" class="calendar_entry_header">Today February 14</div>
-   <%= form_tag(master_data_show_federations_path, :method=>'get', :remote => :true, :class => "calendar_entry_form") do %>
-      <%= hidden_field :the_working_day, '' %>
-      <%= label_tag :the_date, "Add an event or class" %><br />
-      <%= text_field_tag :the_date, '', :size => 32 %>
+   <%= form_tag(new_event_path, :method=>'get', :remote => :true, :class => "calendar_entry_form") do %>
+      <%= hidden_field "calendar", "the_working_day" %>
+      <%= label_tag :class_name, "Add an event or class" %><br />
+      <%= text_field_tag :class_name, 'new class name', :size => 32 %>
       
       <hr width="75%"/>
       <%= label_tag :repeat, "Repeat", :class => "small_label" %>
