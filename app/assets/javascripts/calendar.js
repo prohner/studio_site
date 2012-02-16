@@ -56,8 +56,8 @@ $(document).ready(function() {
 			var el = $("#calendar_entry_header");
 			el.html(date.toDateString());
 
-			el = $("#the_working_day");
-			el.html(date.toDateString());
+			el = $("#calendar_the_working_day");
+			el.val(date.toDateString());
 
 			// change the day's background color just for fun
 			if (lastItem) {
@@ -66,12 +66,15 @@ $(document).ready(function() {
 			lastItem = this;
 			lastItemColor = $(this).css('background-color');
 	        $(this).css('background-color', 'yellow');
-
 		}
 
 	})
 });   
 
+function refreshCalendarForDay(day) {
+	//alert('hello from refresh');
+	$("#calendar").fullCalendar("refetchEvents");
+}
 
 function updateEvent(the_event) {
 	$.update(
