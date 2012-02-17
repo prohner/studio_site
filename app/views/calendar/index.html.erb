@@ -8,7 +8,8 @@
    <%= form_tag(new_event_path, :method=>'get', :remote => :true, :class => "calendar_entry_form") do %>
       <%= hidden_field "calendar", "the_working_day" %>
       <%= label_tag :class_name, "Add an event or class" %><br />
-      <%= text_field_tag :class_name, 'new class name', :size => 32 %>
+      <%= text_field_tag :class_name, nil, {:size => 32, :placeholder => 'Class title'} %>
+      <%= text_area_tag :class_description, nil, {:rows => 5, :cols => 10} %>
       
       <hr width="75%"/>
       <%= label_tag :repeat, "Repeat", :class => "small_label" %>

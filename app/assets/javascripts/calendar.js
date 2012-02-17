@@ -1,6 +1,9 @@
 var lastItem = null;
 var lastItemColor = null;
 
+var lastDay = null;
+var lastDayColor = null;
+
 $(document).ready(function() {
 
 	// page is now ready, initialize the calendar...
@@ -13,7 +16,7 @@ $(document).ready(function() {
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
 		},
-		slotMinutes:15,
+		slotMinutes:30,
 
 		loading: function(bool) {
 			if (bool) {
@@ -46,6 +49,16 @@ $(document).ready(function() {
 		// http://arshaw.com/fullcalendar/docs/mouse/eventClick/
 		eventClick: function(event, jsEvent, view){
 			// would like a lightbox here.
+			
+			if (lastItem) {
+				$(lastItem).css('background-color', lastItemColor);
+			}
+			
+			var divElement = this.childNodes[0];
+			lastItem = divElement;
+			lastItemColor = $(divElement).css('background-color');
+			$(divElement).css('background-color', 'green');
+			return false;
 		},
 
 		select: function( startDate, endDate, allDay, jsEvent, view ){
@@ -60,12 +73,12 @@ $(document).ready(function() {
 			el.val(date.toDateString());
 
 			// change the day's background color just for fun
-			if (lastItem) {
-				$(lastItem).css('background-color', lastItemColor);
+			if (lastDay) {
+				$(lastDay).css('background-color', lastDayColor);
 			}
-			lastItem = this;
-			lastItemColor = $(this).css('background-color');
-	        $(this).css('background-color', 'yellow');
+			lastDay = this;
+			lastDayColor = $(this).css('background-color');
+			$(this).css('background-color', 'yellow');
 		}
 
 	})
