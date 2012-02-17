@@ -31,7 +31,7 @@ $(document).ready(function() {
 			url: '/events',
 			color: 'blue',
 			textColor: 'white',
-			ignoreTimezone: true
+			ignoreTimezone: false
 		}],
         
 		timeFormat: 'h:mm t{ - h:mm t} ',
