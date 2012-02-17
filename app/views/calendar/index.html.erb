@@ -5,11 +5,16 @@
 
 <div id="calendar_entry" class="calendar_entry">
    <div id="calendar_entry_header" class="calendar_entry_header">Today February 14</div>
-   <%= form_tag(new_event_path, :method=>'get', :remote => :true, :class => "calendar_entry_form") do %>
+   <%= form_tag(new_event_path, 
+               :method=>'get', 
+               :remote => :true, 
+               :class => "calendar_entry_form",
+               :id => "calendar_entry_form") do %>
       <%= hidden_field "calendar", "the_working_day" %>
+      <%= hidden_field "calendar", "id" %>
       <%= label_tag :class_name, "Add an event or class" %><br />
       <%= text_field_tag :class_name, nil, {:size => 32, :placeholder => 'Class title'} %>
-      <%= text_area_tag :class_description, nil, {:rows => 5, :cols => 10} %>
+      <%= text_area_tag :class_description, nil, {:class => "class_description"} %>
       
       <hr width="75%"/>
       <%= label_tag :repeat, "Repeat", :class => "small_label" %>
@@ -19,7 +24,7 @@
                                           ])
                      %>
       <hr width="75%"/>
-      <%= submit_tag "Add event" %>
+      <%= submit_tag "Add event", :id => "calendar_submit_button" %>
    <% end -%>
 
 </div>

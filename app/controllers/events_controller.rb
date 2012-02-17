@@ -21,9 +21,16 @@ class EventsController < ApplicationController
 
   def new
     puts params.inspect
-    event = Event.new(:title => params[:class_name],
-                      :description => params[:class_description],
-                      :starts_at => "#{params[:calendar][:the_working_day]}")
+    if params[:calendar][:id] == ""
+      event = Event.new(:title => params[:class_name],
+                        :description => params[:class_description],
+                        :starts_at => params[:calendar][:the_working_day])
+    else
+      event = Event.find(params[:calendar][:id])
+      event.title = params[:class_name]
+      event.description = params[:class_description]
+      event.starts_at = params[:calendar][:the_working_day]
+    end
     event.ends_at = (event.starts_at + 1.hours).to_datetime
     puts event
     event.save!

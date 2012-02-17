@@ -350,3 +350,8 @@ div.calendar_entry_header {
 	font-size:12px;
 	font-weight:normal;
 }
+
+textarea.class_description {
+	width:170px;
+	height:100px;
+}

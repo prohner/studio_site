@@ -7,6 +7,7 @@ var lastDayColor = null;
 $(document).ready(function() {
 
 	// page is now ready, initialize the calendar...
+	setFormValues(null, null, new Date(), null);
 
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
@@ -49,15 +50,11 @@ $(document).ready(function() {
 		// http://arshaw.com/fullcalendar/docs/mouse/eventClick/
 		eventClick: function(event, jsEvent, view){
 			// would like a lightbox here.
+			setSelectedItemColor(this.childNodes[0], 'green');
 			
-			if (lastItem) {
-				$(lastItem).css('background-color', lastItemColor);
-			}
+			//calendar_entry_form
+			setFormValues(event.title, event.description, event.start, event.id);
 			
-			var divElement = this.childNodes[0];
-			lastItem = divElement;
-			lastItemColor = $(divElement).css('background-color');
-			$(divElement).css('background-color', 'green');
 			return false;
 		},
 
@@ -66,23 +63,34 @@ $(document).ready(function() {
 		},
 
 		dayClick: function(date, allDay, jsEvent, view) {
-			var el = $("#calendar_entry_header");
-			el.html(date.toDateString());
+			setFormValues(null, null, date, null);
 
-			el = $("#calendar_the_working_day");
-			el.val(date.toDateString());
+			setSelectedItemColor(this, 'yellow');
 
-			// change the day's background color just for fun
-			if (lastDay) {
-				$(lastDay).css('background-color', lastDayColor);
-			}
-			lastDay = this;
-			lastDayColor = $(this).css('background-color');
-			$(this).css('background-color', 'yellow');
 		}
 
 	})
 });   
+
+function setFormValues(className, description, dateTime, id) {
+	$("#calendar_entry_header").html(dateTime.toDateString());
+	$("#calendar_the_working_day").val(dateTime.toDateString());
+	$("#calendar_id").val(id);
+	$("#class_name").val(className ? className : "");
+	$("#class_description").val(description ? description : "");
+	
+	$("#calendar_submit_button").val(id ? "Update event" : "Add event");
+}
+
+function setSelectedItemColor(el, newColor) {
+	if (lastItem) {
+		$(lastItem).css('background-color', lastItemColor);
+	}
+
+	lastItem = el;
+	lastItemColor = $(el).css('background-color');
+	$(el).css('background-color', newColor);
+}
 
 function refreshCalendarForDay(day) {
 	//alert('hello from refresh');
