@@ -355,3 +355,17 @@ textarea.class_description {
 	width:170px;
 	height:100px;
 }
+
+div.calendar_repeat_weekly {
+	font-size:12px;
+	font-weight:normal;
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.calendar_repeat_weekly ul{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
