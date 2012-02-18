@@ -1,7 +1,29 @@
 require 'spec_helper'
 
-describe Event do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Event do  
+  before(:each) do
+    @attr = { :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00" }
+  end
+
+  it "should respond to studio" do
+    ev = Event.new(@attr)
+    ev.should respond_to(:studio)
+  end
+  
+  it "should require a title" do
+    ev = Event.new(@attr.merge(:title => ""))
+    ev.should_not be_valid
+  end
+
+  it "should titles that are too long" do
+    ev = Event.new(@attr.merge(:title => "a" * 51))
+    ev.should_not be_valid
+  end
+  
+  it "should have to belong to a studio" do
+    ev = Event.new(@attr.merge(:studio_id => nil))
+    ev.should_not be_valid
+  end
 end
 # == Schema Information
 #
@@ -15,5 +37,6 @@ end
 #  description :text
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
+#  studio_id   :integer
 #
 

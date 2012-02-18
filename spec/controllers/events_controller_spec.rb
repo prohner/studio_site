@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe EventsController do
+  before(:each) do
+    @studio = Factory(:studio)
+    @attr = { :title => "title of event", 
+      :starts_at => "2/12/2012 09:00", 
+      :ends_at => "2/12/2012 10:00",
+      :studio => @studio
+      }
+  end
 
   describe "GET 'index'" do
     it "returns http success" do
@@ -18,7 +26,11 @@ describe EventsController do
 
   describe "GET 'new'" do
     it "returns http success" do
-      get 'new'
+      @vars = { :calendar => { :id => "", :the_working_day => "2/2/2012 09:00" }, 
+                :class_name => "class", 
+                :class_description => "whatever",
+                :studio_id => @studio.id }
+      get 'new', @vars
       response.should be_success
     end
   end
@@ -39,7 +51,16 @@ describe EventsController do
 
   describe "GET 'update'" do
     it "returns http success" do
-      get 'update'
+      ev = Factory(:event, @attr)
+      @vars = { :id => ev.id,
+                :event => { 
+                  :starts_at => "2/2/2012 09:00",
+                  :ends_at => "2/2/2012 10:00",
+                  :description => "whatever"
+                   }
+              }
+
+      get 'update', @vars
       response.should be_success
     end
   end

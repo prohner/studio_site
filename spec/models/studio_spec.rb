@@ -57,6 +57,53 @@ describe Studio do
     studio_with_duplicate_email.should_not be_valid
   end
 
+  describe "attributes" do
+    before(:each) do
+      @studio       = Studio.create!(@attr)
+      @studio_other = Factory(:studio, :email => "other@email.com")
+      @ev1 = Factory(:event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      @ev2 = Factory(:event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      
+      @re1 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      @re2 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+
+      @event_other = Factory(:event, :studio => @studio_other, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      @repeat_other = Factory(:repeating_event, :studio => @studio_other, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+    end
+    
+    describe "'events'" do
+      it "should have an events" do
+        @studio.should respond_to(:events)
+      end
+      
+      it "should have the right events" do
+        @studio.events.include?(@ev1).should be_true
+        @studio.events.include?(@ev2).should be_true
+      end
+      
+      it "should not have others' events" do
+        @studio.events.include?(@event_other).should be_false
+      end
+    end
+    
+    
+    describe "'repeating_events'" do
+      it "should have an events" do
+        @studio.should respond_to(:repeating_events)
+      end
+      
+      it "should have the right repeating events" do
+        @studio.repeating_events.include?(@re1).should be_true
+        @studio.repeating_events.include?(@re2).should be_true
+      end
+      
+      it "should not have others' events" do
+        @studio.repeating_events.include?(@repeat_other).should be_false
+      end
+    end
+  end
+  
+
   describe "password validations" do
 
     it "should require a password" do
