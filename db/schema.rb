@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212061405) do
+ActiveRecord::Schema.define(:version => 20120218173053) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120212061405) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "studio_id"
   end
 
   create_table "master_federations", :force => true do |t|
@@ -51,6 +52,19 @@ ActiveRecord::Schema.define(:version => 20120212061405) do
     t.integer  "master_term_group_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+  end
+
+  create_table "repeating_events", :force => true do |t|
+    t.string   "title"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean  "all_day"
+    t.text     "description"
+    t.integer  "repetition_frequency"
+    t.string   "repetition_options"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "studio_id"
   end
 
   create_table "studios", :force => true do |t|

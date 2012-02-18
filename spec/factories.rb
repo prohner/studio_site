@@ -51,3 +51,16 @@ Factory.define :master_term do |term|
   term.term_translated        "Low Block"
   term.master_term_group_id   1
 end
+
+Factory.define :event do |ev|
+  ev.title      "Event title"
+  ev.starts_at  "2/12/2012 09:00"
+  ev.ends_at    "2/12/2012 10:00"
+end
+
+
+Factory.define :repeating_event do |ev|
+  ev.title      "Event title"
+  ev.starts_at  "2/12/2012 09:00"
+  ev.ends_at    "2/12/2012 10:00"
+end

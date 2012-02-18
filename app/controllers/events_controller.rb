@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    puts params.inspect
+    #puts params.inspect
     if params[:calendar][:id] == ""
       event = Event.new(:title => params[:class_name],
                         :description => params[:class_description],
@@ -32,7 +32,8 @@ class EventsController < ApplicationController
       event.starts_at = params[:calendar][:the_working_day]
     end
     event.ends_at = (event.starts_at + 1.hours).to_datetime
-    puts event
+    event.studio_id = params[:studio_id]
+    #puts event
     event.save!
     
     respond_to do |format|
