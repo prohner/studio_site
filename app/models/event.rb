@@ -8,7 +8,21 @@ class Event < ActiveRecord::Base
             :presence   => true,
             :length     => { :maximum => 50 }
   validates :studio_id, :presence => true
+  validates :starts_at, 
+            :presence   => true
+  validates :ends_at, 
+            :presence   => true
   
+  validate :starts_at_must_be_before_ends_at
+  
+  def starts_at_must_be_before_ends_at
+    unless starts_at.nil? or ends_at.nil?
+      if starts_at.utc > ends_at.utc
+        errors.add(:starts_at, "Start date must be before end date")
+      end
+    end
+  end
+
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})

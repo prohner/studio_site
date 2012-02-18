@@ -15,6 +15,10 @@ describe EventsController do
       get 'index'
       response.should be_success
     end
+    
+    it "should return the right events within a timeframe"
+    it "should not return events outside the timeframe"
+    it "should include repeating events that are within the timeframe"
   end
 
   describe "GET 'show'" do

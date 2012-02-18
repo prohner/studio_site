@@ -4,7 +4,7 @@ class MasterDataController < ApplicationController
     @style  = nil
     @styles = MasterStyle.all
     @target_term_group_id = params[:target_term_group_id]
-    puts "Our term group is #{@target_term_group_id}"
+    #puts "Our term group is #{@target_term_group_id}"
   end
 
   def show_federations

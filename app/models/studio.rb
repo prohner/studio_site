@@ -6,8 +6,8 @@ class Studio < ActiveRecord::Base
   attr_accessible :name, :email, :address, :address2, :city, :state, :postal_code, :telephone, :fax
   
   has_many :styles, :dependent => :destroy
-  has_many :events
-  has_many :repeating_events
+  has_many :events, :dependent => :destroy
+  has_many :repeating_events, :dependent => :destroy
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

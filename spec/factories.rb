@@ -60,7 +60,8 @@ end
 
 
 Factory.define :repeating_event do |ev|
-  ev.title      "Event title"
-  ev.starts_at  "2/12/2012 09:00"
-  ev.ends_at    "2/12/2012 10:00"
+  ev.title                "Event title"
+  ev.starts_at            "2/12/2012 09:00"
+  ev.ends_at              "2/12/2012 10:00"
+  ev.repetition_type      "weekly"
 end

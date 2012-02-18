@@ -64,11 +64,11 @@ describe Studio do
       @ev1 = Factory(:event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
       @ev2 = Factory(:event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
       
-      @re1 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
-      @re2 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      @re1 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00", :on_monday => true)
+      @re2 = Factory(:repeating_event, :studio => @studio, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00", :on_monday => true)
 
       @event_other = Factory(:event, :studio => @studio_other, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
-      @repeat_other = Factory(:repeating_event, :studio => @studio_other, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00")
+      @repeat_other = Factory(:repeating_event, :studio => @studio_other, :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00", :on_monday => true)
     end
     
     describe "'events'" do
@@ -84,11 +84,18 @@ describe Studio do
       it "should not have others' events" do
         @studio.events.include?(@event_other).should be_false
       end
+
+      it "should destroy associated events" do
+        @studio.destroy
+        [@ev1, @ev2].each do |ev|
+          Event.find_by_id(ev.id).should be_nil
+        end
+      end
     end
     
     
     describe "'repeating_events'" do
-      it "should have an events" do
+      it "should have a repeating_events" do
         @studio.should respond_to(:repeating_events)
       end
       
@@ -99,6 +106,13 @@ describe Studio do
       
       it "should not have others' events" do
         @studio.repeating_events.include?(@repeat_other).should be_false
+      end
+
+      it "should be destroyed along with studio" do
+        @studio.destroy
+        [@re1, @re2].each do |ev|
+          RepeatingEvent.find_by_id(ev.id).should be_nil
+        end
       end
     end
   end
