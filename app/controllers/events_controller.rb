@@ -16,7 +16,6 @@ class EventsController < ApplicationController
     
     #repeater = RepeatingEvent.new(:title => "weekly Mon", :on_monday => true, :studio => @studio, :repetition_type => 'weekly', :all_day => false, :starts_at => "2/1/2012 09:00", :ends_at => "3/12/2012 10:00")
     @repeating_events.each do |repeater|
-      puts "Repeating for #{repeater.title}"
       @events += repeater.events_for_timeframe(Time.at(params['start'].to_i), Time.at(params['end'].to_i))
     end
     
