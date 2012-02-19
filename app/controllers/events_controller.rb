@@ -5,9 +5,20 @@ class EventsController < ApplicationController
     # appropriate month/week/day.  It should be possiblt to change
     # this to be starts_at and ends_at to match rails conventions.
     # I'll eventually do that to make the demo a little cleaner.
+    puts params.inspect
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
+
+    @repeating_events = RepeatingEvent.scoped
+    @repeating_events = @repeating_events.after(params['start']) if (params['start'])
+    @repeating_events = @repeating_events.before(params['end']) if (params['end'])
+    
+    #repeater = RepeatingEvent.new(:title => "weekly Mon", :on_monday => true, :studio => @studio, :repetition_type => 'weekly', :all_day => false, :starts_at => "2/1/2012 09:00", :ends_at => "3/12/2012 10:00")
+    @repeating_events.each do |repeater|
+      puts "Repeating for #{repeater.title}"
+      @events += repeater.events_for_timeframe(Time.at(params['start'].to_i), Time.at(params['end'].to_i))
+    end
     
     respond_to do |format|
       format.html # index.html.erb
