@@ -82,7 +82,7 @@ describe RepeatingEvent do
     #end
   end
 
-  describe "building events for timeframe" do
+  describe "when building events for timeframe" do
     it "should create the correct number of events"
     it "should create the correct number of events"
     it "should not create any events out of timeframe"

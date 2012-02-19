@@ -20,12 +20,16 @@ class RepeatingEvent < ActiveRecord::Base
     
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
-    if repetition_type = :weekly
-      puts "Checking weekly from #{from_date} to #{to_date}"
+    if repetition_type == "weekly"
+      puts "working in weekly"
       (from_date..to_date).each do |d|
         if appears_on_day(d)
-          new_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M")).to_date
-          new_ends_at   = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M")).to_date
+          str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
+          str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
+          
+          new_starts_at = str_starts_at.to_time
+          new_ends_at   = str_ends_at.to_time
+          puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
           @events << Event.new( :title => self.title,
                                 :starts_at => new_starts_at,
                                 :ends_at => new_ends_at,
@@ -40,7 +44,6 @@ class RepeatingEvent < ActiveRecord::Base
   
   def appears_on_day(day)
     is_it_on_the_day = false
-    puts "Checking if #{title} is on #{day}"
     if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
       if starts_at < day and ends_at > day
         is_it_on_the_day = true
