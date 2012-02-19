@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    Time.zone = 'Pacific Time (US & Canada)'
+    Time.zone = current_studio.time_zone  if signed_in?
   end
 end
