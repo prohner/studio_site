@@ -11,14 +11,49 @@ describe EventsController do
   end
 
   describe "GET 'index'" do
+    before(:each) do
+      @ev1       = Event.create!( :title => "ev1", 
+                                  :studio => @studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
+      @ev2       = Event.create!( :title => "ev2", 
+                                  :studio => @studio,
+                                  :starts_at => "2/16/2012 00:00:01", 
+                                  :ends_at => "2/16/2012 23:59:59")
+      @ev_during = Event.create!( :title => "ev during", 
+                                  :studio => @studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
+      @ev_before = Event.create!( :title => "ev before", 
+                                  :studio => @studio,
+                                  :starts_at => "1/31/2012 00:00:01", 
+                                  :ends_at => "1/31/2012 23:59:59")
+      @ev_after = Event.create!(  :title => "ev after", 
+                                  :studio => @studio,
+                                  :starts_at => "3/1/2012 00:00:01", 
+                                  :ends_at => "3/1/2012 23:59:59")
+      @vars = { :start => DateTime.strptime("2012-02-01 00:00:00", "%Y-%m-%d %H:%M:%S").to_time.to_i,
+                :end => DateTime.strptime("2012-02-29 23:59:59", "%Y-%m-%d %H:%M:%S").to_time.to_i}
+      get 'index', @vars
+    end
+    
     it "returns http success" do
-      get 'index'
       response.should be_success
     end
     
-    it "should return the right events within a timeframe"
-    it "should not return events outside the timeframe"
+    it "should return the right events within a timeframe" do
+      assigns[:events].should include(@ev1)
+      assigns[:events].should include(@ev2)
+      assigns[:events].should include(@ev_during)
+    end
+    
+    it "should not return events outside the timeframe" do
+      assigns[:events].should_not include(@ev_before)
+      assigns[:events].should_not include(@ev_after)
+    end
+    
     it "should include repeating events that are within the timeframe"
+    it "should not include repeating events that are out of the timeframe"
   end
 
   describe "GET 'show'" do

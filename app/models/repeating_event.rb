@@ -1,5 +1,9 @@
 class RepeatingEvent < ActiveRecord::Base
   belongs_to :studio
+  
+  # CAUTION:  This is the reverse of Event
+  scope :before, lambda {|end_time|   {:conditions => ["starts_at < ?", Event.format_date(end_time)] }}
+  scope :after,  lambda {|start_time| {:conditions => ["ends_at > ?", Event.format_date(start_time)] }}
 
   validates :title, 
             :presence   => true,
@@ -11,6 +15,39 @@ class RepeatingEvent < ActiveRecord::Base
   validate :must_have_valid_repetition_info
   validate :starts_at_must_be_before_ends_at
   
+  def events_for_timeframe(from_date_as_int, to_date_as_int)
+    @events = []
+    
+    from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
+    to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
+    if repetition_type = :weekly
+      puts "Checking weekly from #{from_date} to #{to_date}"
+      (from_date..to_date).each do |d|
+        if appears_on_day(d)
+          new_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M")).to_date
+          new_ends_at   = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M")).to_date
+          @events << Event.new( :title => self.title,
+                                :starts_at => new_starts_at,
+                                :ends_at => new_ends_at,
+                                :studio_id => self.studio_id)
+        end
+      end
+      
+    end
+    puts "adding #{@events.inspect}"
+    @events
+  end
+  
+  def appears_on_day(day)
+    is_it_on_the_day = false
+    puts "Checking if #{title} is on #{day}"
+    if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
+      if starts_at < day and ends_at > day
+        is_it_on_the_day = true
+      end
+    end
+    is_it_on_the_day
+  end
   
   def starts_at_must_be_before_ends_at
     unless starts_at.nil? or ends_at.nil?
@@ -31,6 +68,26 @@ class RepeatingEvent < ActiveRecord::Base
         errors.add(:repetition_type, "Need a day along with monthly")
       end
     end
+  end
+  
+  # need to override the json view to return what full_calendar is expecting.
+  # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :title => self.title,
+      :description => self.description || "",
+      :start => self.starts_at.rfc822,
+      :end => self.ends_at.rfc822,
+      :allDay => self.all_day,
+      :recurring => true,
+      :repetition_type => self.repetition_type,
+      :url => Rails.application.routes.url_helpers.event_path(id)
+    }
+  end
+  
+  def self.format_date(date_time)
+    Time.at(date_time.to_i).to_formatted_s(:db)
   end
 end
 
