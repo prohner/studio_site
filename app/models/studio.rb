@@ -4,6 +4,7 @@ class Studio < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :password, :password_confirmation
   attr_accessible :name, :email, :address, :address2, :city, :state, :postal_code, :telephone, :fax
+  attr_accessible :time_zone
   
   has_many :styles, :dependent => :destroy
   has_many :events, :dependent => :destroy

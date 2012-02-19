@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218064633) do
+ActiveRecord::Schema.define(:version => 20120219054244) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120218064633) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.string   "time_zone"
   end
 
   add_index "studios", ["email"], :name => "index_studios_on_email", :unique => true
