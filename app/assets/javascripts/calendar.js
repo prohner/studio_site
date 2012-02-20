@@ -53,7 +53,19 @@ $(document).ready(function() {
 			setSelectedItemColor(this.childNodes[0], 'green');
 			
 			//calendar_entry_form
-			setFormValues(event.title, event.description, event.start, event.id);
+			//setFormValues(event.title, event.description, event.start, event.id);
+			//$("#calendar_url").html(event.url);
+			console.log(event.url);
+			$.ajax({url: 			event.url,
+					dataType: 		"json", 
+					type: 			"GET",  
+					processData: 	false, 
+					contentType:	"application/json",
+					complete: function(jqXHR, textStatus) {
+							//console.log("Got:" + jqXHR.responseText);
+							eval(jqXHR.responseText);
+						}
+					});
 			
 			return false;
 		},
@@ -71,6 +83,11 @@ $(document).ready(function() {
 
 	})
 });   
+
+function ajaxComplete(e, xhr, settings) {
+		console.log(xhr.responseText);
+		eval(xhr.responseText);
+}
 
 function setFormValues(className, description, dateTime, id) {
 	$("#calendar_entry_header").html(dateTime.toDateString());

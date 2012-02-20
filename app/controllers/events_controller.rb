@@ -6,6 +6,7 @@ class EventsController < ApplicationController
     # this to be starts_at and ends_at to match rails conventions.
     # I'll eventually do that to make the demo a little cleaner.
     puts params.inspect
+    @event  = Event.new
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
@@ -53,6 +54,20 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event  = Event.find(params[:id])
+    respond_to do |format|
+      format.js { render @event }
+    end
+    
+    #render :partial => 'events/edit' #, :json => @event 
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.xml  { render :xml => @event }
+    #  format.js  { 
+    #    puts "RENDERING #{@event.title}"
+    #    render :partial => 'event_form', :json => @event 
+    #    }
+    #end
   end
 
   def create
