@@ -41,6 +41,10 @@ describe EventsController do
       response.should be_success
     end
     
+    it "should have a new event to edit" do
+      assigns[:event].should_not be_nil
+    end
+    
     it "should return the right events within a timeframe" do
       assigns[:events].should include(@ev1)
       assigns[:events].should include(@ev2)
@@ -75,9 +79,17 @@ describe EventsController do
   end
 
   describe "GET 'edit'" do
+    before(:each) do
+      @ev1       = Event.create!( :title => "ev1", 
+                                  :studio => @studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
+    end
+    
     it "returns http success" do
-      get 'edit'
+      get 'edit', :id => @ev1.id
       response.should be_success
+      assigns[:event].should == @ev1
     end
   end
 

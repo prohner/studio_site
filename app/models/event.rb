@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
       :end => self.ends_at.rfc822,
       :allDay => self.all_day,
       :recurring => false,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      :url => Rails.application.routes.url_helpers.edit_event_path(id)
     }
   end
   

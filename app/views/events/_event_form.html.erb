@@ -1,0 +1,32 @@
+<div id="calendar_entry_header" class="calendar_entry_header">Today February 14</div>
+<div id="calendar_url"></div>
+<%= form_for @event, :remote => true, :html => {:class => "calendar_entry_form", :id => "calendar_entry_form"} do |f| %>
+   <%= hidden_field "calendar", "the_working_day" %>
+   <%= hidden_field "calendar", "id" %>
+   <%= f.label  "Add an event or class" %><br />
+   <%= f.text_field :title, {:size => 32, :placeholder => 'Class title'} %>
+   <%= f.text_area :description, {:class => "class_description"} %>
+   
+   <hr width="75%"/>
+   <%= f.label :repeat, :class => "small_label" %>
+   <%= select_tag :repeat,
+                  options_for_select([["None", "1"], 
+                                       ["Weekly", "2"]
+                                       ])
+                  %>
+   <div class="calendar_repeat_weekly">
+      <%= label_tag :weekly_repeat, "Repeat at the same time every:", :style => "font-weight:normal;" %>
+      
+      <ul>
+         <li><%= check_box_tag :weekly_repeat, 'Monday' %>Monday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Tuesday' %>Tuesday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Wednesday' %>Wednesday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Thursday' %>Thursday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Friday' %>Friday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Saturday' %>Saturday</li>
+         <li><%= check_box_tag :weekly_repeat, 'Sunday' %>Sunday</li>
+      </ul>
+   </div>
+   <hr width="75%"/>
+   <%= submit_tag "Add event", :id => "calendar_submit_button" %>
+<% end %>
