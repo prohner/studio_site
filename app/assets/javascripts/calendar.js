@@ -27,12 +27,20 @@ $(document).ready(function() {
 			};
 		},
 
-		eventSources: [{
-			url: '/events',
+		eventSources: [
+		{
+			url: '/events/repeaters',
 			color: 'blue',
 			textColor: 'white',
 			ignoreTimezone: false
-		}],
+		},
+		{
+			url: '/events',
+			color: 'red',
+			textColor: 'white',
+			ignoreTimezone: false
+		}
+		],
         
 		timeFormat: 'h:mm t{ - h:mm t} ',
 		dragOpacity: "0.5",
@@ -62,7 +70,7 @@ $(document).ready(function() {
 					processData: 	false, 
 					contentType:	"application/json",
 					complete: function(jqXHR, textStatus) {
-							//console.log("Got:" + jqXHR.responseText);
+							console.log("Got:" + jqXHR.responseText);
 							eval(jqXHR.responseText);
 						}
 					});

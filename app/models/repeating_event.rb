@@ -1,6 +1,8 @@
 class RepeatingEvent < ActiveRecord::Base
   belongs_to :studio
   
+  attr_accessor :edit_url
+  
   # CAUTION:  This is the reverse of Event
   scope :before, lambda {|end_time|   {:conditions => ["starts_at < ?", Event.format_date(end_time)] }}
   scope :after,  lambda {|start_time| {:conditions => ["ends_at > ?", Event.format_date(start_time)] }}
@@ -21,7 +23,7 @@ class RepeatingEvent < ActiveRecord::Base
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
     if repetition_type == "weekly"
-      puts "working in weekly"
+      #puts "working in weekly"
       (from_date..to_date).each do |d|
         if appears_on_day(d)
           str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
@@ -29,7 +31,7 @@ class RepeatingEvent < ActiveRecord::Base
           
           new_starts_at = str_starts_at.to_time
           new_ends_at   = str_ends_at.to_time
-          puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
+          #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
           @events << Event.new( :title => self.title,
                                 :starts_at => new_starts_at,
                                 :ends_at => new_ends_at,
@@ -38,10 +40,10 @@ class RepeatingEvent < ActiveRecord::Base
       end
       
     end
-    puts "adding #{@events.inspect}"
+    #puts "adding #{@events.inspect}"
     @events
   end
-  
+
   def appears_on_day(day)
     is_it_on_the_day = false
     if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)

@@ -16,6 +16,11 @@ describe RepeatingEvent do
     ev.should respond_to(:studio)
   end
   
+  it "should be able to cough up its own edit URL" do
+    ev = RepeatingEvent.new(@attr)
+    ev.should respond_to(:edit_url)
+  end
+  
   it "should require a title" do
     ev = RepeatingEvent.new(@attr.merge(:title => nil))
     ev.should_not be_valid

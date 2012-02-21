@@ -1,6 +1,6 @@
 <div id="calendar_entry_header" class="calendar_entry_header">Today February 14</div>
 <div id="calendar_url"></div>
-<%= form_for @event, :remote => true, :html => {:class => "calendar_entry_form", :id => "calendar_entry_form"} do |f| %>
+<%= form_for @event, :url => @event.edit_url, :remote => true, :html => {:class => "calendar_entry_form", :id => "calendar_entry_form"} do |f| %>
    <%= hidden_field "calendar", "the_working_day" %>
    <%= hidden_field "calendar", "id" %>
    <%= f.label  "Add an event or class" %><br />

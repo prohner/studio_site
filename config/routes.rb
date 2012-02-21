@@ -1,5 +1,9 @@
 StudioSite::Application.routes.draw do
   resources :events
+
+  match '/events/repeaters',  :to => 'events#repeaters'
+  #get "events/repeaters"
+
   #get "events/index"
   #get "events/show"
   #get "events/new"

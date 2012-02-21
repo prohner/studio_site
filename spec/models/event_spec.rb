@@ -16,6 +16,11 @@ describe Event do
     ev.should respond_to(:studio)
   end
   
+  it "should be able to cough up its own edit URL" do
+    ev = Event.new(@attr)
+    ev.should respond_to(:edit_url)
+  end
+  
   it "should require a title" do
     ev = Event.new(@attr.merge(:title => ""))
     ev.should_not be_valid
