@@ -22,25 +22,21 @@ class EventsController < ApplicationController
   end
 
   def repeaters
-    @events = RepeatingEvent.scoped
-    @events = @events.after(params['start']) if (params['start'])
-    @events = @events.before(params['end']) if (params['end'])
-
-    respond_to do |format|
-      format.html "index" # index.html.erb
-      format.xml  { render :xml => @repeating_events }
-      format.js  { render :json => @events.to_json }
-    end
   end
   
   def show
-    @events = RepeatingEvent.scoped
-    @events = @events.after(params['start']) if (params['start'])
-    @events = @events.before(params['end']) if (params['end'])
+    @events = []
+    @repeating_events = RepeatingEvent.scoped
+    @repeating_events = @repeating_events.after(params['start']) if (params['start'])
+    @repeating_events = @repeating_events.before(params['end']) if (params['end'])
+
+    @repeating_events.each do |repeater|
+      @events += repeater.events_for_timeframe(Time.at(params['start'].to_i), Time.at(params['end'].to_i))
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @repeating_events }
+      format.xml  { render :xml => @events }
       format.js  { render :json => @events.to_json }
     end
   end
