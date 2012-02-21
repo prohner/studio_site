@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   belongs_to :studio
   
+  attr_accessor :edit_url
+  
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
 
@@ -22,7 +24,7 @@ class Event < ActiveRecord::Base
       end
     end
   end
-
+  
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
