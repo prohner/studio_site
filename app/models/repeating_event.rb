@@ -29,6 +29,7 @@ class RepeatingEvent < ActiveRecord::Base
           str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
           str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
           
+          puts "DATE==(#{str_starts_at})"
           new_starts_at = str_starts_at.to_time
           new_ends_at   = str_ends_at.to_time
           #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
