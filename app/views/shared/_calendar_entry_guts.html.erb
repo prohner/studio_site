@@ -1,4 +1,6 @@
-<%= f.text_field :edit_url %><br />
+<% if Rails.env.development? %>
+   <%= f.text_field :edit_url %><br />
+<% end %>
 
    <%= hidden_field "calendar", "the_working_day" %>
    <%= hidden_field "calendar", "id" %>
