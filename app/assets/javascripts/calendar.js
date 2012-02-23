@@ -29,14 +29,14 @@ $(document).ready(function() {
 
 		eventSources: [
 		{
-			url: '/repeating_events',
+			url: 'http://studio-site.herokuapp.com/repeating_events',
 			color: '#2d2d2d',
 			textColor: 'white',
 			ignoreTimezone: false,
 			editable: false
 		},
 		{
-			url: '/events',
+			url: 'http://studio-site.herokuapp.com/events',
 			color: 'blue',
 			textColor: 'white',
 			ignoreTimezone: false
