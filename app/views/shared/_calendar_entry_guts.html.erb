@@ -1,0 +1,13 @@
+<%= f.text_field :edit_url %><br />
+
+   <%= hidden_field "calendar", "the_working_day" %>
+   <%= hidden_field "calendar", "id" %>
+   <% if @event.new_record? %>
+      <%= f.label  "Add an event or class" %>
+   <% else %>
+      <%= f.label  "Edit the class" %>
+   <% end %>
+   <br />
+   <%= f.text_field :title, {:size => 32, :placeholder => 'Class title'} %>
+   <%= f.text_area :description, {:class => "class_description"} %>
+   

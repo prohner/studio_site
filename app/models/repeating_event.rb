@@ -16,7 +16,7 @@ class RepeatingEvent < ActiveRecord::Base
   
   validate :must_have_valid_repetition_info
   validate :starts_at_must_be_before_ends_at
-  
+
   def events_for_timeframe(from_date_as_int, to_date_as_int)
     @events = []
     
@@ -32,7 +32,8 @@ class RepeatingEvent < ActiveRecord::Base
           new_starts_at = str_starts_at.to_time
           new_ends_at   = str_ends_at.to_time
           #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
-          @events << Event.new( :title => self.title,
+          @events << Event.new( :id => self.id + 1000000,
+                                :title => self.title,
                                 :starts_at => new_starts_at,
                                 :ends_at => new_ends_at,
                                 :studio_id => self.studio_id)
@@ -87,7 +88,7 @@ class RepeatingEvent < ActiveRecord::Base
       :allDay => self.all_day,
       :recurring => true,
       :repetition_type => self.repetition_type,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      :url => self.edit_url ##Rails.application.routes.url_helpers.event_path(id)
     }
   end
   

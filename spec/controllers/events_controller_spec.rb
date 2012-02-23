@@ -58,6 +58,7 @@ describe EventsController do
     
     it "should include repeating events that are within the timeframe"
     it "should not include repeating events that are out of the timeframe"
+    it "should have a calendar entry header area when showing the edit form"
   end
 
   describe "GET 'show'" do
@@ -74,6 +75,11 @@ describe EventsController do
                 :class_description => "whatever",
                 :studio_id => @studio.id }
       get 'new', @vars
+      response.should be_success
+    end
+    
+    it "should respond to URL for AJAX call" do
+      get '/events/new'
       response.should be_success
     end
   end
