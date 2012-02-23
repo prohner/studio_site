@@ -1,0 +1,6 @@
+<% if @event.new_record? %>
+   <%= submit_tag "Add event", :id => "calendar_submit_button" %>
+<% else %>
+   <%= submit_tag "Update event", :id => "calendar_submit_button" %>
+<% end %>
+

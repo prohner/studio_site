@@ -1,8 +1,14 @@
 StudioSite::Application.routes.draw do
-  resources :events
+  #get "repeating_events/index"
+  #get "repeating_events/show"
+  #get "repeating_events/new"
+  #get "repeating_events/edit"
+  #get "repeating_events/create"
+  #get "repeating_events/update"
+  #get "repeating_events/destroy"
 
-  match '/events/repeaters',  :to => 'events#repeaters'
-  #get "events/repeaters"
+  resources :repeating_events
+  resources :events
 
   #get "events/index"
   #get "events/show"

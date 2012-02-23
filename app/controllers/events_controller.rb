@@ -21,27 +21,12 @@ class EventsController < ApplicationController
     end
   end
 
-  def repeaters
+  def new
+    @event = Event.new
+    @event.starts_at = params[:dt] unless params[:dt].nil?
   end
   
-  def show
-    @events = []
-    @repeating_events = RepeatingEvent.scoped
-    @repeating_events = @repeating_events.after(params['start']) if (params['start'])
-    @repeating_events = @repeating_events.before(params['end']) if (params['end'])
-
-    @repeating_events.each do |repeater|
-      @events += repeater.events_for_timeframe(Time.at(params['start'].to_i), Time.at(params['end'].to_i))
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @events }
-      format.js  { render :json => @events.to_json }
-    end
-  end
-
-  def new
+  def new_OLD
     puts params.inspect
     if params[:calendar][:id] == ""
       event = Event.new(:title => params[:class_name],
@@ -66,6 +51,7 @@ class EventsController < ApplicationController
 
   def edit
     @event  = Event.find(params[:id])
+    @event.edit_url = edit_event_path(@event)
     
     @event = Event.new if @event.nil?
     respond_to do |format|
@@ -85,29 +71,12 @@ class EventsController < ApplicationController
     #end
   end
 
-  def edit_repeater
-    @event  = RepeatingEvent.find(params[:id])
-    respond_to do |format|
-      format.js { render @event }
-    end
-    
-    #render :partial => 'events/edit' #, :json => @event 
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.xml  { render :xml => @event }
-    #  format.js  { 
-    #    puts "RENDERING #{@event.title}"
-    #    render :partial => 'event_form', :json => @event 
-    #    }
-    #end
-  end
-
-
   def create
   end
 
   def update
     event             = Event.find(params[:id])
+    event.title       = params[:event][:title]
     event.starts_at   = params[:event][:starts_at]
     event.ends_at     = params[:event][:ends_at]
     event.description = params[:event][:description]
