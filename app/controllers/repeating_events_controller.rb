@@ -48,7 +48,21 @@ class RepeatingEventsController < ApplicationController
     #event.starts_at   = params[:repeating_event][:starts_at]
     #event.ends_at     = params[:repeating_event][:ends_at]
     event.description = params[:repeating_event][:description]
+
+    event.on_monday     = params[:repeating_event][:on_monday]
+    event.on_tuesday    = params[:repeating_event][:on_tuesday]
+    event.on_wednesday  = params[:repeating_event][:on_wednesday]
+    event.on_thursday   = params[:repeating_event][:on_thursday]
+    event.on_friday     = params[:repeating_event][:on_friday]
+    event.on_saturday   = params[:repeating_event][:on_saturday]
+    event.on_sunday     = params[:repeating_event][:on_sunday]
     event.save!
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @event }
+      format.js { render @event }
+    end
   end
 
   def destroy
