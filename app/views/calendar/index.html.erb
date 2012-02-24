@@ -8,6 +8,12 @@
 </div>
 <hr />
 
+<% if Rails.env.development? %>
+   <ul>
+      <li>Nice example of tool tip on calendar: <%= link_to "http://obpk.com/fc/ex/fc.html", "http://obpk.com/fc/ex/fc.html" %></li>
+   </ul>
+<% end %>
+
 <% if 1 == 0 %>
 
 
