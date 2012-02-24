@@ -7,8 +7,8 @@ var lastDayColor = null;
 var lastDayBackgroundColor = null;
 
 var remoteServerName;
-remoteServerName = "http://studio-site.herokuapp.com";
 remoteServerName = "http://0.0.0.0:3000";
+remoteServerName = "http://studio-site.herokuapp.com";
 
 
 $(document).ready(function() {
@@ -20,7 +20,7 @@ $(document).ready(function() {
 	// page is now ready, initialize the calendar...
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
-		editable: true,
+		editable: false,
 		header: {
 			left: 'prev,next today',
 			center: 'title',
