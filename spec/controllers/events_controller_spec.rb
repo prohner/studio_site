@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe EventsController do
+  render_views
+  
   before(:each) do
     @studio = Factory(:studio)
     @attr = { :title => "title of event", 
@@ -79,7 +81,7 @@ describe EventsController do
     end
     
     it "should respond to URL for AJAX call" do
-      get '/events/new'
+      get 'new'
       response.should be_success
     end
   end
@@ -97,6 +99,11 @@ describe EventsController do
       response.should be_success
       assigns[:event].should == @ev1
     end
+
+    it "should have a calendar entry header area when showing the edit form" do
+      get 'edit', :id => @ev1.id
+      response.should have_selector("#calendar_entry_header")
+    end
   end
 
   describe "GET 'create'" do
@@ -110,7 +117,8 @@ describe EventsController do
     it "returns http success" do
       ev = Factory(:event, @attr)
       @vars = { :id => ev.id,
-                :event => { 
+                :event => {
+                  :title => "some title",
                   :starts_at => "2/2/2012 09:00",
                   :ends_at => "2/2/2012 10:00",
                   :description => "whatever"
