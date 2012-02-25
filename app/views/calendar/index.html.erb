@@ -4,7 +4,11 @@
 <div id='calendar' class="calendar"></div>
 
 <div id="calendar_entry" class="calendar_entry">
-   <%= render :partial => "events/event_form" %>
+   <% if @event.starts_at.nil? %>
+      Click on a day to add an event.  Or, click on an event to change it.
+   <% else %>
+      <%= render :partial => "events/event_form" %>
+   <% end %>
 </div>
 <hr />
 

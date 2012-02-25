@@ -75,12 +75,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    event             = Event.find(params[:id])
-    event.title       = params[:event][:title]
-    event.starts_at   = params[:event][:starts_at]
-    event.ends_at     = params[:event][:ends_at]
-    event.description = params[:event][:description]
-    event.save!
+    @event             = Event.find(params[:id])
+    @event.title       = params[:event][:title]
+    @event.starts_at   = params[:event][:starts_at]
+    @event.ends_at     = params[:event][:ends_at]
+    @event.description = params[:event][:description]
+    @event.save!
   end
 
   def destroy

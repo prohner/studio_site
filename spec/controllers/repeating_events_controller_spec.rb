@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe RepeatingEventsController do
+  before(:each) do
+    @studio = Factory(:studio)
+    @attr = { :title => "title of event", :studio_id => @studio.id, :on_monday => true, :studio => @studio, :repetition_type => 'weekly', :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00" }
+  end
 
   describe "GET 'index'" do
     it "returns http success" do
@@ -25,7 +29,8 @@ describe RepeatingEventsController do
 
   describe "GET 'edit'" do
     it "returns http success" do
-      get 'edit'
+      ev = RepeatingEvent.create!(@attr)
+      get 'edit', :id => ev.id
       response.should be_success
     end
     it "should have a calendar entry header area when showing the edit form"
@@ -40,7 +45,19 @@ describe RepeatingEventsController do
 
   describe "GET 'update'" do
     it "returns http success" do
-      get 'update'
+      ev = Factory(:repeating_event, @attr)
+      @vars = { :id => ev.id,
+                :repeating_event => {
+                  :title => "some title",
+                  :starts_at => "2/2/2012 09:00",
+                  :ends_at => "2/2/2012 10:00",
+                  :description => "whatever",
+                  :repetition_type => "weekly",
+                  :on_monday => true
+                   }
+              }
+
+      get 'update', @vars
       response.should be_success
     end
   end
