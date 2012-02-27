@@ -34,6 +34,14 @@ describe EventsController do
                                   :studio => @studio,
                                   :starts_at => "3/1/2012 00:00:01", 
                                   :ends_at => "3/1/2012 23:59:59")
+                                  
+      @february_repeater = RepeatingEvent.create!(  :title => "title of event", 
+                                                    :on_monday => true, 
+                                                    :studio => @studio, 
+                                                    :repetition_type => 'weekly', 
+                                                    :starts_at => "1/1/2012 09:00", 
+                                                    :ends_at => "2/29/2012 10:00" )
+                                  
       @vars = { :start => DateTime.strptime("2012-02-01 00:00:00", "%Y-%m-%d %H:%M:%S").to_time.to_i,
                 :end => DateTime.strptime("2012-02-29 23:59:59", "%Y-%m-%d %H:%M:%S").to_time.to_i}
       get 'index', @vars
@@ -58,9 +66,6 @@ describe EventsController do
       assigns[:events].should_not include(@ev_after)
     end
     
-    it "should include repeating events that are within the timeframe"
-    it "should not include repeating events that are out of the timeframe"
-    it "should have a calendar entry header area when showing the edit form"
   end
 
   describe "GET 'show'" do

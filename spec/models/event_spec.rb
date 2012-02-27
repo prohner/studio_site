@@ -6,20 +6,9 @@ describe Event do
     @attr = { :title => "title of event", :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00", :studio => @studio }
   end
 
-  it "should be valid given valid attributes" do
-    ev = Event.new(@attr)
-    ev.should be_valid
-  end
-  
-  it "should respond to studio" do
-    ev = Event.new(@attr)
-    ev.should respond_to(:studio)
-  end
-  
-  it "should be able to cough up its own edit URL" do
-    ev = Event.new(@attr)
-    ev.should respond_to(:edit_url)
-  end
+  specify { Event.new(@attr).should be_valid }
+  specify { Event.new(@attr).should respond_to(:studio) }
+  specify { Event.new(@attr).should respond_to(:edit_url) }
   
   it "should require a title" do
     ev = Event.new(@attr.merge(:title => ""))

@@ -60,15 +60,6 @@ class EventsController < ApplicationController
       format.js { render @event }
     end
     
-    #render :partial => 'events/edit' #, :json => @event 
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.xml  { render :xml => @event }
-    #  format.js  { 
-    #    puts "RENDERING #{@event.title}"
-    #    render :partial => 'event_form', :json => @event 
-    #    }
-    #end
   end
 
   def create
