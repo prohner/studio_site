@@ -7,13 +7,17 @@ class EventsController < ApplicationController
     # I'll eventually do that to make the demo a little cleaner.
     #puts params.inspect
     
-    raise ActionController::RoutingError.new("Studio missing") if params[:id].blank? || Studio.find(params[:id]).nil?
+    studio_id = params[:id] || current_studio.id
+    #puts "request.url=#{request.url}"
+    #puts "studio_id = #{studio_id}, params['id'] = #{params[:id]}, current_studio = #{current_studio}"
+    
+    raise ActionController::RoutingError.new("Studio missing") if studio_id.blank? || Studio.find(studio_id).nil?
     
     @event  = Event.new
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
-    @events = @events.studio_id(params['id']) if (params['id'])
+    @events = @events.studio_id(studio_id) if (studio_id)
     
     @events.each do |event|
       event.edit_url = edit_event_path(event)
