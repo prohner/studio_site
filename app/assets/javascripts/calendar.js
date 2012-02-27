@@ -12,8 +12,8 @@ remoteServerName = "http://0.0.0.0:3000";
 
 
 $(document).ready(function() {
-	var repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js';
-	var eventsSourceUrl = remoteServerName + '/events.js';
+	var repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1';
+	var eventsSourceUrl = remoteServerName + '/events.js?id=1';
 
 	console.log("Should use: " + repeatingEventsSourceUrl);
 	console.log("Should use: " + eventsSourceUrl);
