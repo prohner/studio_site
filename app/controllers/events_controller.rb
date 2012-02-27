@@ -5,11 +5,16 @@ class EventsController < ApplicationController
     # appropriate month/week/day.  It should be possiblt to change
     # this to be starts_at and ends_at to match rails conventions.
     # I'll eventually do that to make the demo a little cleaner.
-    puts params.inspect
+    #puts params.inspect
+    
+    raise ActionController::RoutingError.new("Studio missing") if params[:id].blank? || Studio.find(params[:id]).nil?
+    
     @event  = Event.new
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
+    @events = @events.studio_id(params['id']) if (params['id'])
+    
     @events.each do |event|
       event.edit_url = edit_event_path(event)
     end

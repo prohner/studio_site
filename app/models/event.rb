@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
+  scope :studio_id, lambda {|studio_id| {:conditions => ["studio_id = ?", studio_id] }}
 
   validates :title, 
             :presence   => true,

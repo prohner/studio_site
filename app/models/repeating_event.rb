@@ -23,16 +23,16 @@ class RepeatingEvent < ActiveRecord::Base
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
     if repetition_type == "weekly"
-      puts "working in weekly from #{from_date} to #{to_date}"
+      #puts "working in weekly from #{from_date} to #{to_date}"
       (from_date..to_date).each do |d|
         if appears_on_day(d)
           str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
           str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
           
-          puts "starts==(#{str_starts_at})  ends==(#{str_ends_at})"
+          #puts "starts==(#{str_starts_at})  ends==(#{str_ends_at})"
           new_starts_at = DateTime.strptime(str_starts_at, "%m/%d/%Y %H:%M")
           new_ends_at   = DateTime.strptime(str_ends_at, "%m/%d/%Y %H:%M")
-          puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
+          #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
           events << Event.new(  :id => self.id + 1000000,
                                 :title => self.title,
                                 :starts_at => new_starts_at,

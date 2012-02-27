@@ -12,8 +12,19 @@ describe EventsController do
       }
   end
 
+  describe "studio access" do
+    it "should not return results without a studio id" do
+      lambda {
+        @vars = { :start => DateTime.strptime("2012-02-01 00:00:00", "%Y-%m-%d %H:%M:%S").to_time.to_i,
+                  :end => DateTime.strptime("2012-02-29 23:59:59", "%Y-%m-%d %H:%M:%S").to_time.to_i}
+        get 'index', @vars
+      }.should raise_error(ActionController::RoutingError)    
+    end
+  end
+  
   describe "GET 'index'" do
     before(:each) do
+      @other_studio = Factory(:studio, :email => Factory.next(:email))
       @ev1       = Event.create!( :title => "ev1", 
                                   :studio => @studio,
                                   :starts_at => "2/15/2012 00:00:01", 
@@ -34,6 +45,10 @@ describe EventsController do
                                   :studio => @studio,
                                   :starts_at => "3/1/2012 00:00:01", 
                                   :ends_at => "3/1/2012 23:59:59")
+      @ev_other = Event.create!(  :title => "Other Studio Event", 
+                                  :studio => @other_studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
                                   
       @february_repeater = RepeatingEvent.create!(  :title => "title of event", 
                                                     :on_monday => true, 
@@ -42,13 +57,10 @@ describe EventsController do
                                                     :starts_at => "1/1/2012 09:00", 
                                                     :ends_at => "2/29/2012 10:00" )
                                   
-      @vars = { :start => DateTime.strptime("2012-02-01 00:00:00", "%Y-%m-%d %H:%M:%S").to_time.to_i,
+      @vars = { :id => @studio.id,
+                :start => DateTime.strptime("2012-02-01 00:00:00", "%Y-%m-%d %H:%M:%S").to_time.to_i,
                 :end => DateTime.strptime("2012-02-29 23:59:59", "%Y-%m-%d %H:%M:%S").to_time.to_i}
       get 'index', @vars
-    end
-    
-    it "returns http success" do
-      response.should be_success
     end
     
     it "should have a new event to edit" do
@@ -66,6 +78,9 @@ describe EventsController do
       assigns[:events].should_not include(@ev_after)
     end
     
+    it "should show calendar events for only one studio at a time" do
+      assigns[:events].should_not include(@ev_other)
+    end
   end
 
   describe "GET 'show'" do
