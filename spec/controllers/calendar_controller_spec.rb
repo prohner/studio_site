@@ -20,6 +20,7 @@ describe CalendarController do
       response.should have_selector('div.calendar_entry')
     end
     
+    it "should show calendar events for only one studio at a time"
   end
 
 end

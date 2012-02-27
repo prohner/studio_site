@@ -41,6 +41,13 @@ describe RepeatingEvent do
     ev.should_not be_valid
   end
   
+  it "should blow up with bad params to events_for_timeframe " do
+    from_date_as_int = "2/16/2012".to_time.to_i
+    to_date_as_int = "2/1/2012".to_time.to_i
+    lambda do
+      @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int) 
+    end.should raise_error
+  end
   
   describe "repetition settings" do
     before(:each) do
@@ -73,24 +80,43 @@ describe RepeatingEvent do
       @ev.should_not be_valid
     end
     
-    #it "should reject bad repetition frequency values" do
-    #  @ev.repetition_frequency = 0
-    #  @ev.should_not be_valid
-
-    #  @ev.repetition_frequency = 2
-    #  @ev.should_not be_valid
-    #end
-    
-    #it "should deal nicely with weekly repetitions" do
-    #  @ev.repetition_frequency = 1
-    #  @ev.should     be_valid
-    #end
   end
 
   describe "when building events for timeframe" do
-    it "should create the correct number of events"
-    it "should create the correct number of events"
-    it "should not create any events out of timeframe"
+    before(:each) do
+      @attr = { :title => "title of event", :on_monday => true, :studio => @studio, :repetition_type => 'weekly', :starts_at => "2/1/2012 09:00", :ends_at => "2/29/2012 10:00" }
+      @february_repeater = RepeatingEvent.create!(@attr)
+    end
+    
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      from_date_as_int = "2/1/2012".to_time.to_i
+      to_date_as_int = "2/16/2012".to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 2
+    end
+    
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      from_date_as_int = "1/1/2012".to_time.to_i
+      to_date_as_int = "3/16/2012".to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 4
+    end
+    
+    it "should not create any events for prior to its timeframe" do
+      from_date_as_int = "1/1/2012".to_time.to_i
+      to_date_as_int = "1/31/2012".to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 0
+    end
+    
+    it "should not create any events for after to its timeframe" do
+      from_date_as_int = "3/1/2012".to_time.to_i
+      to_date_as_int = "6/31/2012".to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 0
+    end
+    
+    it "should create the correct number of events for a monthly repeater"
   end
 end
 # == Schema Information
