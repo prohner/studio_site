@@ -25,7 +25,9 @@
    <% if term_group.terms.nil? or term_group.terms.count == 0 %>
       <br/>
    <% else %>
-      <%= render :partial => "terms/show", :collection => term_group.terms, :as => :term %>
+      <ul id="sortable_terms">
+         <%= render :partial => "terms/show", :collection => term_group.terms, :as => :term %>
+      </ul>
    <% end %>
    <%= link_to_if can_edit_studio, 'Add new term', new_term_path(:term_group_id => term_group.id, :style_id => term_group.style.id, :studio_id => term_group.style.studio.id), :class => 'term_group_add_term' %>
 </div>

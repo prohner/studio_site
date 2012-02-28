@@ -20,3 +20,6 @@ $.ajaxSetup({
     xhr.setRequestHeader("Accept", "text/javascript");
   }
 });
+
+$(document).ready -> 
+   alert "Diggety 1"
