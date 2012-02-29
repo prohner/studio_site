@@ -2,14 +2,21 @@
    <%= f.text_field :edit_url %><br />
 <% end %>
 
-   <%= hidden_field "calendar", "the_working_day" %>
-   <%= hidden_field "calendar", "id" %>
    <% if @event.new_record? %>
+      <%= hidden_field "calendar", "the_working_day" %>
+      <%= hidden_field "calendar", "id" %>
       <%= f.label  "Add an event or class" %>
    <% else %>
+      <%= hidden_field "calendar", "the_working_day" %>
+      <%= hidden_field "calendar", "id" %>
       <%= f.label  "Edit the class" %>
    <% end %>
    <br />
    <%= f.text_field :title, {:size => 32, :placeholder => 'Class title'} %>
    <%= f.text_area :description, {:class => "class_description"} %>
    
+   <%= f.label "Start time"%><br />
+   <%= time_select "event", "starts_at", :prefix => :starts_at, :prompt => true, :ampm => true, :minute_step => 5 %> <br/>
+   
+   <%= f.label "End time"%><br />
+   <%= time_select "event", "ends_at", :prefix => :ends_at, :prompt => true, :ampm => true, :minute_step => 5 %> <br/>

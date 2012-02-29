@@ -72,14 +72,38 @@ class EventsController < ApplicationController
   end
 
   def create
+    if signed_in?
+      event = Event.new
+      event.studio_id   = current_studio.id
+      event.title       = params[:event][:title]
+      event.starts_at   = params[:starts_at]
+      event.ends_at     = params[:ends_at]
+      event.description = params[:event][:description]
+      event.save!
+    else
+      redirect_to(root_path) 
+    end
   end
 
   def update
-    @event             = Event.find(params[:id])
-    @event.title       = params[:event][:title]
-    @event.starts_at   = params[:event][:starts_at]
-    @event.ends_at     = params[:event][:ends_at]
-    @event.description = params[:event][:description]
+    puts params.inspect
+    puts "params[:starts_at]==#{params[:starts_at]}"
+    @event              = Event.find(params[:id])
+    @event.title        = params[:event][:title]
+    @event.description  = params[:event][:description]
+
+    begin
+      @event.starts_at    = Event.parse_calculator_time(params[:starts_at], "starts_at")
+      @event.ends_at      = Event.parse_calculator_time(params[:ends_at], "ends_at")
+    rescue Exception => e
+      puts "PARSING"
+      @event.starts_at    = params[:event][:starts_at]
+      @event.ends_at      = params[:event][:ends_at]
+    end
+    
+
+    puts "@event.starts_at==#{@event.starts_at}"
+    puts "@event.ends_at==#{@event.ends_at}"
     @event.save!
   end
 

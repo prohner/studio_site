@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :studio
   
   attr_accessor :edit_url
+  attr_accessible :studio, :studio_id, :title, :description, :starts_at, :ends_at
   
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
@@ -43,6 +44,17 @@ class Event < ActiveRecord::Base
   
   def self.format_date(date_time)
     Time.at(date_time.to_i).to_formatted_s(:db)
+  end
+  
+  def self.parse_calculator_time(hash, tag_name)
+    t1 = hash["#{tag_name}(1i)"]
+    t2 = hash["#{tag_name}(2i)"]
+    t3 = hash["#{tag_name}(3i)"]
+    t4 = hash["#{tag_name}(4i)"]
+    t5 = hash["#{tag_name}(5i)"]
+    s = "#{t1}-#{t2}-#{t3} #{t4}:#{t5}:00"
+    puts "#{s} ==> #{Time.parse(s)}"
+    Time.parse(s)
   end
 end
 # == Schema Information
