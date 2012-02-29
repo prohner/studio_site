@@ -9,6 +9,10 @@ describe Event do
   specify { Event.new(@attr).should be_valid }
   specify { Event.new(@attr).should respond_to(:studio) }
   specify { Event.new(@attr).should respond_to(:edit_url) }
+  specify { Event.new(@attr).should respond_to(:title) }
+  specify { Event.new(@attr).should respond_to(:description) }
+  specify { Event.new(@attr).should respond_to(:starts_at) }
+  specify { Event.new(@attr).should respond_to(:ends_at) }
   
   it "should require a title" do
     ev = Event.new(@attr.merge(:title => ""))
@@ -39,6 +43,7 @@ describe Event do
     ev = Event.new(@attr.merge(:studio_id => nil))
     ev.should_not be_valid
   end
+  
 end
 # == Schema Information
 #

@@ -28,4 +28,8 @@ RSpec.configure do |config|
   def test_sign_in(studio)
     controller.sign_in(studio)
   end
+
+  def test_sign_out
+    controller.sign_out
+  end
 end
