@@ -43,6 +43,8 @@ namespace :db do
 
   desc "Fill calendar with sample data"
   task :cal => :environment do
+    curr_mon = Time.now.month
+    
     RepeatingEvent.delete_all
     RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 9, 0),  :ends_at => make_time(2012, 3, 1, 10),  :repetition_type => "weekly", :on_monday => true, :title => "Mon - Monthlong",    :description => "A repeating class", :all_day => false, :studio_id => 1)
     RepeatingEvent.create!(:starts_at => make_time(2012, 2, 15, 9, 0), :ends_at => make_time(2012, 3, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Wed - Monthlong", :description => "A repeating class", :all_day => false, :studio_id => 1)
@@ -54,17 +56,17 @@ namespace :db do
     RepeatingEvent.create!(:starts_at => make_time(2012, 4, 1, 9), :ends_at => make_time(2012, 4, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Future repeater", :description => "A repeating class", :all_day => false, :studio_id => 1)
     
     Event.delete_all
-    Event.create!(:title => "Private Lesson",             :starts_at => make_time(2012, 2, 15, 8),       :ends_at => make_time(2012, 2, 15, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Adults All Levels",          :starts_at => make_time(2012, 2, 15, 9, 30),   :ends_at => make_time(2012, 2, 15, 10, 30), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => make_time(2012, 2, 15, 10),      :ends_at => make_time(2012, 2, 15, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Kids Red & Black",           :starts_at => make_time(2012, 2, 15, 17),      :ends_at => make_time(2012, 2, 15, 18), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Adults All Levels",          :starts_at => make_time(2012, 2, 15, 19),      :ends_at => make_time(2012, 2, 15, 20), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Private Lesson",             :starts_at => make_time(2012, curr_mon, 15, 8),       :ends_at => make_time(2012, curr_mon, 15, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Adults All Levels",          :starts_at => make_time(2012, curr_mon, 15, 9, 30),   :ends_at => make_time(2012, curr_mon, 15, 10, 30), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => make_time(2012, curr_mon, 15, 10),      :ends_at => make_time(2012, curr_mon, 15, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Kids Red & Black",           :starts_at => make_time(2012, curr_mon, 15, 17),      :ends_at => make_time(2012, curr_mon, 15, 18), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Adults All Levels",          :starts_at => make_time(2012, curr_mon, 15, 19),      :ends_at => make_time(2012, curr_mon, 15, 20), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
                                                                                                             
-    Event.create!(:title => "Free Sparring",              :starts_at => make_time(2012, 2, 16, 8),       :ends_at => make_time(2012, 2, 16, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Adult All Levels",           :starts_at => make_time(2012, 2, 16, 9),       :ends_at => make_time(2012, 2, 16, 10), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => make_time(2012, 2, 16, 10),      :ends_at => make_time(2012, 2, 16, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Kids Red & Black",           :starts_at => make_time(2012, 2, 16, 11),      :ends_at => make_time(2012, 2, 16, 12), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
-    Event.create!(:title => "Adult Senior Class",         :starts_at => make_time(2012, 2, 16, 14),      :ends_at => make_time(2012, 2, 16, 15), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Free Sparring",              :starts_at => make_time(2012, curr_mon, 16, 8),       :ends_at => make_time(2012, curr_mon, 16, 9),  :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Adult All Levels",           :starts_at => make_time(2012, curr_mon, 16, 9),       :ends_at => make_time(2012, curr_mon, 16, 10), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Kids White, Yellow & Green", :starts_at => make_time(2012, curr_mon, 16, 10),      :ends_at => make_time(2012, curr_mon, 16, 11), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Kids Red & Black",           :starts_at => make_time(2012, curr_mon, 16, 11),      :ends_at => make_time(2012, curr_mon, 16, 12), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
+    Event.create!(:title => "Adult Senior Class",         :starts_at => make_time(2012, curr_mon, 16, 14),      :ends_at => make_time(2012, curr_mon, 16, 15), :all_day => false, :description => "Class description goes here and the text might get kind of long", :studio_id => 1)
 
   end
   

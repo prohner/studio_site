@@ -369,3 +369,11 @@ div.calendar_repeat_weekly ul{
 	padding: 0px;
 	margin: 0px;
 }
+
+ul.calendar_entry_colors {
+	font-size:12px;
+	font-weight:normal;
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}

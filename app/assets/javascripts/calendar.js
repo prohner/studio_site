@@ -7,8 +7,8 @@ var lastDayColor = null;
 var lastDayBackgroundColor = null;
 
 var remoteServerName;
-remoteServerName = "http://0.0.0.0:3000";
 remoteServerName = "http://studio-site.herokuapp.com";
+remoteServerName = "http://0.0.0.0:3000";
 
 
 $(document).ready(function() {
@@ -39,22 +39,26 @@ $(document).ready(function() {
 		eventSources: [
 		{
 			url: repeatingEventsSourceUrl,
-			color: '#2d2d2d',
+			color: 'green',
 			textColor: 'white',
 			ignoreTimezone: false,
-			editable: false,
+			editable: true,
 			crossDomain: true,
 			jsonp: true
 		},
 		{
 			url: eventsSourceUrl,
-			color: 'blue',
+			//color: 'blue',
 			textColor: 'white',
 			ignoreTimezone: false,
 			crossDomain: true,
 			jsonp: true
 		}
 		],
+		
+		//eventRender: function(event, element) {
+		//	$(element).css('background-color', "#0f0");
+		//},
         
 		//disableDragging: true, 
 		timeFormat: 'h:mm t{ - h:mm t} ',
