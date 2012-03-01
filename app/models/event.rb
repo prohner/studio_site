@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :studio
   
   attr_accessor :edit_url
-  attr_accessible :studio, :studio_id, :title, :description, :starts_at, :ends_at
+  attr_accessible :studio, :studio_id, :title, :description, :starts_at, :ends_at, :all_day, :color
   
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
@@ -38,6 +38,7 @@ class Event < ActiveRecord::Base
       :end => self.ends_at.rfc822,
       :allDay => self.all_day,
       :recurring => false,
+      :color => self.color.nil? ? "blue" : self.color,
       :url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
     }
   end
@@ -55,6 +56,17 @@ class Event < ActiveRecord::Base
     s = "#{t1}-#{t2}-#{t3} #{t4}:#{t5}:00"
     puts "#{s} ==> #{Time.parse(s)}"
     Time.parse(s)
+  end
+  
+  def self.HTML_color_names
+    { "red"           => "Red",
+      "green"         => "Green",
+      "blue"          => "Blue",
+      "darkorchid"    => "Dark Orchid",
+      "darkgoldenrod" => "Dark Golden Rod",
+      "aqua"          => "Aqua",
+      "fuchsia"       => "Fuschsia"
+      }
   end
 end
 # == Schema Information

@@ -48,6 +48,7 @@ class RepeatingEventsController < ApplicationController
     #event.starts_at   = params[:repeating_event][:starts_at]
     #event.ends_at     = params[:repeating_event][:ends_at]
     event.description = params[:repeating_event][:description]
+    event.color        = params[:repeating_event][:color]
 
     event.on_monday     = params[:repeating_event][:on_monday]
     event.on_tuesday    = params[:repeating_event][:on_tuesday]

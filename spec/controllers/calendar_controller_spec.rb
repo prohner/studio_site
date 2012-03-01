@@ -3,8 +3,13 @@ require 'spec_helper'
 describe CalendarController do
   render_views
 
+  before(:each) do
+    @studio = Factory(:studio)
+  end
+
   describe "GET 'index'" do
     before(:each) do
+      test_sign_in(@studio)
       get 'index'
     end
     
@@ -19,7 +24,6 @@ describe CalendarController do
     it "should have a calendar form container" do
       response.should have_selector('div.calendar_entry')
     end
-    
   end
 
 end

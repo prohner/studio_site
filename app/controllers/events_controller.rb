@@ -31,8 +31,9 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
-    @event.starts_at = params[:dt] unless params[:dt].nil?
+    @event            = Event.new
+    @event.starts_at  = Time.parse("#{params[:dt]} 09:00 am") unless params[:dt].nil?
+    @event.ends_at    = Time.parse("#{params[:dt]} 10:00 am") unless params[:dt].nil?
   end
   
   def new_OLD
@@ -76,9 +77,12 @@ class EventsController < ApplicationController
       event = Event.new
       event.studio_id   = current_studio.id
       event.title       = params[:event][:title]
-      event.starts_at   = params[:starts_at]
-      event.ends_at     = params[:ends_at]
       event.description = params[:event][:description]
+
+      event              = dates_from_form(event)
+
+      puts "event.starts_at==#{event.starts_at}"
+      puts "event.ends_at==#{event.ends_at}"
       event.save!
     else
       redirect_to(root_path) 
@@ -91,16 +95,9 @@ class EventsController < ApplicationController
     @event              = Event.find(params[:id])
     @event.title        = params[:event][:title]
     @event.description  = params[:event][:description]
+    @event.color        = params[:event][:color]
 
-    begin
-      @event.starts_at    = Event.parse_calculator_time(params[:starts_at], "starts_at")
-      @event.ends_at      = Event.parse_calculator_time(params[:ends_at], "ends_at")
-    rescue Exception => e
-      puts "PARSING"
-      @event.starts_at    = params[:event][:starts_at]
-      @event.ends_at      = params[:event][:ends_at]
-    end
-    
+    @event              = dates_from_form(@event)
 
     puts "@event.starts_at==#{@event.starts_at}"
     puts "@event.ends_at==#{@event.ends_at}"
@@ -109,4 +106,17 @@ class EventsController < ApplicationController
 
   def destroy
   end
+  
+  private 
+    def dates_from_form(event)
+      begin
+        event.starts_at    = Event.parse_calculator_time(params[:starts_at], "starts_at")
+        event.ends_at      = Event.parse_calculator_time(params[:ends_at], "ends_at")
+      rescue Exception => e
+        puts "PARSING"
+        event.starts_at    = params[:event][:starts_at]
+        event.ends_at      = params[:event][:ends_at]
+      end
+      event
+    end
 end

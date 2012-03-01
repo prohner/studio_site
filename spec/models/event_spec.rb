@@ -43,6 +43,20 @@ describe Event do
     ev = Event.new(@attr.merge(:studio_id => nil))
     ev.should_not be_valid
   end
+
+  describe "HTML colors" do
+    it "should respond to HTML_color_names" do
+      Event.should respond_to(:HTML_color_names)
+    end
+
+    it "should return a hash of valid HTML color names" do
+      Event.HTML_color_names.class.should == Hash
+    end
+
+    it "should have at least 4 color names" do
+      Event.HTML_color_names.length.should > 3
+    end
+  end
   
 end
 # == Schema Information

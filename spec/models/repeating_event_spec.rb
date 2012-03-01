@@ -49,6 +49,20 @@ describe RepeatingEvent do
     end.should raise_error
   end
   
+  describe "HTML colors" do
+    it "should respond to HTML_color_names" do
+      RepeatingEvent.should respond_to(:HTML_color_names)
+    end
+
+    it "should return a hash of valid HTML color names" do
+      RepeatingEvent.HTML_color_names.class.should == Hash
+    end
+
+    it "should have at least 4 color names" do
+      RepeatingEvent.HTML_color_names.count.should > 3
+    end
+  end
+
   describe "repetition settings" do
     before(:each) do
       @ev = RepeatingEvent.new(@attr)

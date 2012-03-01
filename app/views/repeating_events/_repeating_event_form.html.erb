@@ -24,7 +24,14 @@
          <li><%= f.check_box :on_sunday %>Sunday</li>
       </ul>
    </div>
-   <hr width="75%"/>
+
+   <hr size="1" width="70%">
+   <% RepeatingEvent.HTML_color_names.each do |color, name| %>
+      <ul class="calendar_entry_colors">
+         <%= render :partial => 'shared/calendar_entry_color', :locals => {:f => f, :color => color, :name => name} %>
+      </ul>
+   <% end %>
    
+
    <%= render 'shared/calendar_entry_submit_button' %>
 <% end %>

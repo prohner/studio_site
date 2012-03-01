@@ -37,7 +37,8 @@ class RepeatingEvent < ActiveRecord::Base
                                 :title => self.title,
                                 :starts_at => new_starts_at,
                                 :ends_at => new_ends_at,
-                                :studio_id => self.studio_id)
+                                :studio_id => self.studio_id,
+                                :color => self.color)
         end
       end
       
@@ -89,12 +90,21 @@ class RepeatingEvent < ActiveRecord::Base
       :allDay => self.all_day,
       :recurring => true,
       :repetition_type => self.repetition_type,
+      :color => self.color.nil? ? "green" : self.color,
       :url => self.edit_url ##Rails.application.routes.url_helpers.event_path(id)
     }
   end
   
   def self.format_date(date_time)
     Time.at(date_time.to_i).to_formatted_s(:db)
+  end
+
+  def self.HTML_color_names
+    { "darkred"         => "Dark Red",
+      "green"           => "Green",
+      "royalblue"       => "Royal Blue",
+      "darkolivegreen"  => "Dark Olive Green"
+      }
   end
 end
 
