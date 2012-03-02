@@ -85,7 +85,7 @@ namespace :db do
       RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 11, 00), :ends_at => make_time(2013, 3, 1, 11, 45), :repetition_type => "weekly", :on_saturday => true, :title => "Children", :color => "royalblue", :description => "", :all_day => false, :studio_id => 1)
 
       Event.create!(:title => "Promotions & Banquet", :starts_at => make_time(2012, curr_mon, 1, 17),       :ends_at => make_time(2012, curr_mon, 1, 20, 0),  :all_day => false, :description => "Delicious pot luck buffet", :studio_id => 1, :color => "darkgoldenrod")
-      Event.create!(:title => "World Dang Soo Do Union Championship. Lancaster, Ohio", :starts_at => make_time(2012, 4, 13),       :ends_at => make_time(2012, 4, 14),  :all_day => true, :description => "", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "World Dang Soo Do Union Championship. Lancaster, Ohio", :starts_at => make_time(2012, 4, 13, 0),       :ends_at => make_time(2012, 4, 14, 0),  :all_day => true, :description => "", :studio_id => 1, :color => "darkgoldenrod")
 
     end
 
