@@ -127,7 +127,7 @@ namespace :db do
 end
 
 def make_time(y, m, d, h, mi=0)
-  Time.local(y, m, d, h, mi)
+  Time.utc(y, m, d, h, mi)
 end
 
 def make_studios

@@ -91,7 +91,6 @@ class EventsController < ApplicationController
 
   def update
     puts params.inspect
-    puts "params[:starts_at]==#{params[:starts_at]}"
     @event              = Event.find(params[:id])
     @event.title        = params[:event][:title]
     @event.description  = params[:event][:description]
@@ -99,9 +98,9 @@ class EventsController < ApplicationController
 
     @event              = dates_from_form(@event)
 
-    puts "@event.starts_at==#{@event.starts_at}"
-    puts "@event.ends_at==#{@event.ends_at}"
+    puts "#{@event.title} goes from #{@event.starts_at} to #{@event.ends_at}"
     @event.save!
+
   end
 
   def destroy
