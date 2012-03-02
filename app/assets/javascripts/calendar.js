@@ -152,11 +152,12 @@ function updateEvent(the_event) {
 				ends_at: "" + the_event.end,
 				description: the_event.description
 			}
-		},
-
-	function (reponse) { 
-		alert('successfully updated task.'); 
-	}
+		}
+		
+	//,
+	//function (reponse) { 
+	//	alert('successfully updated task.'); 
+	//}
 	);
 };
 
