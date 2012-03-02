@@ -88,11 +88,17 @@ namespace :db do
       Event.create!(:title => "World Dang Soo Do Union Championship", :starts_at => make_time(2012, 4, 13, 0),       :ends_at => make_time(2012, 4, 14, 0),  :all_day => true, :description => "Lancaster, Ohio", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "31st Dan Testing at Master Harshall", :starts_at => make_time(2012, 4, 20, 0),       :ends_at => make_time(2012, 4, 22, 0),  :all_day => true, :description => "Latrobe, Pennsylvania", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "Grand Master Samane Seminar", :starts_at => make_time(2012, 5, 4, 0),       :ends_at => make_time(2012, 5, 6, 0),  :all_day => true, :description => "Philadelphia, Pennslyvania", :studio_id => 1, :color => "darkgoldenrod")
-      Event.create!(:title => "32st Dan Testing West Coast at HRWTSDF  HQ", :starts_at => make_time(2012, 5, 17, 17),       :ends_at => make_time(2012, 5, 17, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "32nd Dan Testing West Coast at HRWTSDF  HQ", :starts_at => make_time(2012, 5, 17, 17),       :ends_at => make_time(2012, 5, 17, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "HRWTSDF Seminar", :starts_at => make_time(2012, 5, 18, 15),       :ends_at => make_time(2012, 5, 18, 17),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "Battle Of L.A.", :starts_at => make_time(2012, 5, 19, 15),       :ends_at => make_time(2012, 5, 19, 17),  :all_day => true, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "South Korea and China Tour", :starts_at => make_time(2012, 8, 2, 15),       :ends_at => make_time(2012, 8, 11, 17),  :all_day => true, :description => "", :studio_id => 1, :color => "darkgoldenrod")
 
+      Event.create!(:title => "Grand Master Samane Seminar", :starts_at => make_time(2012, 10, 12, 0),       :ends_at => make_time(2012, 10, 15, 0),  :all_day => true, :description => "Philadelphia, Pennslyvania", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "United Kingdom Seminars & Dan Testing", :starts_at => make_time(2012, 10, 16, 0),       :ends_at => make_time(2012, 10, 20, 0),  :all_day => true, :description => "", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "33rd Dan Testing at Master Delenela", :starts_at => make_time(2012, 11, 16, 0),       :ends_at => make_time(2012, 11, 18, 0),  :all_day => true, :description => "Austin, Texas", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "34th Dan Testing West Coast at HRWTSDF  HQ", :starts_at => make_time(2012, 12, 1, 17),       :ends_at => make_time(2012, 12, 1, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "Gup Testing", :starts_at => make_time(2012, 12, 13, 19),       :ends_at => make_time(2012, 12, 13, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "Promotions & Banquet", :starts_at => make_time(2012, 12, 20, 17),       :ends_at => make_time(2012, 12, 20, 20, 0),  :all_day => false, :description => "Delicious pot luck buffet", :studio_id => 1, :color => "darkgoldenrod")
     end
 
 
