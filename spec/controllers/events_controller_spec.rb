@@ -128,11 +128,11 @@ describe EventsController do
   describe "GET 'create'" do
     before(:each) do
       @vars = { :id => nil,
-                :starts_at => "2/2/2012 09:00",
-                :ends_at => "2/2/2012 10:00",
                 :event => {
                   :title => "some title",
-                  :description => "whatever"
+                  :description => "whatever",
+                  :starts_at => "2/2/2012 09:00",
+                  :ends_at => "2/2/2012 10:00"
                    }
               }
     end
