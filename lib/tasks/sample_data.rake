@@ -46,21 +46,33 @@ namespace :db do
     curr_mon = Time.now.month
     
     RepeatingEvent.delete_all
-    RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 9, 0),  :ends_at => make_time(2012, 3, 1, 10),  :repetition_type => "weekly", :on_monday => true, :title => "Mon - Monthlong",    :description => "A repeating class", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 2, 15, 9, 0), :ends_at => make_time(2012, 3, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Wed - Monthlong", :description => "A repeating class", :all_day => false, :studio_id => 1)
+    
+    if false
+      RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 9, 0),  :ends_at => make_time(2012, 3, 1, 10),  :repetition_type => "weekly", :on_monday => true, :title => "Mon - Monthlong",    :description => "A repeating class", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 2, 15, 9, 0), :ends_at => make_time(2012, 3, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Wed - Monthlong", :description => "A repeating class", :all_day => false, :studio_id => 1)
 
-    #RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 13),  :ends_at => make_time(2013, 3, 1, 14),  :repetition_type => "weekly", :on_monday => true, :title => "Mon - Yearlong",    :description => "A repeating class", :all_day => false, :studio_id => 1)
-    #RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 13),  :ends_at => make_time(2013, 3, 15, 14), :repetition_type => "weekly", :on_wednesday => true, :title => "Wed - Yearlong", :description => "A repeating class", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 13),  :ends_at => make_time(2013, 3, 1, 14),  :repetition_type => "weekly", :on_monday => true, :title => "Mon - Yearlong",    :description => "A repeating class", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 2, 1, 13),  :ends_at => make_time(2013, 3, 15, 14), :repetition_type => "weekly", :on_wednesday => true, :title => "Wed - Yearlong", :description => "A repeating class", :all_day => false, :studio_id => 1)
 
-    RepeatingEvent.create!(:starts_at => make_time(2012, 1, 1, 9), :ends_at => make_time(2012, 1, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Historical repeater", :description => "A repeating class", :all_day => false, :studio_id => 1)
-    #RepeatingEvent.create!(:starts_at => make_time(2012, 4, 1, 9), :ends_at => make_time(2012, 4, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Future repeater", :description => "A repeating class", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 1, 1, 9), :ends_at => make_time(2012, 1, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Historical repeater", :description => "A repeating class", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 4, 1, 9), :ends_at => make_time(2012, 4, 15, 10), :repetition_type => "weekly", :on_wednesday => true, :title => "Future repeater", :description => "A repeating class", :all_day => false, :studio_id => 1)
+    else
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 9, 30),  :ends_at => make_time(2013, 3, 1, 10, 30), :repetition_type => "weekly", :on_monday => true, :on_wednesday => true, :on_friday => true, :title => "Healing Class", :color => "darkred", :description => "Stretch and yoga", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 11, 00), :ends_at => make_time(2013, 3, 1, 11, 45), :repetition_type => "weekly", :on_monday => true, :on_wednesday => true, :on_friday => true, :title => "Mom & Me", :color => "royalblue", :description => "", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 16, 00), :ends_at => make_time(2013, 3, 1, 16, 30), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_friday => true, :title => "LIL DRAGONS", :color => "green", :description => "3-6 year olds", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 16, 30), :ends_at => make_time(2013, 3, 1, 17, 10), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_thursday => true, :title => "Children 1", :color => "green", :description => "White & Yellow Belts", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 17, 10), :ends_at => make_time(2013, 3, 1, 18, 00), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_thursday => true, :title => "Children 3", :color => "darkolivegreen", :description => "Green, Red & Black", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 17, 10), :ends_at => make_time(2013, 3, 1, 18, 00), :repetition_type => "weekly", :on_wednesday => true, :title => "Children 1 & 2", :description => "White to Green Belts", :color => "green", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 18, 10), :ends_at => make_time(2013, 3, 1, 19, 00), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_thursday => true, :title => "Children 1 & 2", :color => "green", :description => "White to Green Belts", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 18, 10), :ends_at => make_time(2013, 3, 1, 19, 00), :repetition_type => "weekly", :on_wednesday => true, :title => "Children 3", :color => "darkolivegreen", :description => "Green, Red & Black", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 18, 10), :ends_at => make_time(2013, 3, 1, 19, 00), :repetition_type => "weekly", :on_friday => true, :title => "Gymnastics/Weapons", :color => "darkolivegreen", :description => "All belts", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 19, 00), :ends_at => make_time(2013, 3, 1, 20, 00), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_wednesday => true, :on_thursday => true, :title => "Adults All Belts", :color => "royalblue", :description => "", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1,  9, 00), :ends_at => make_time(2013, 3, 1, 10, 00), :repetition_type => "weekly", :on_saturday => true, :title => "All Adults", :color => "royalblue", :description => "", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 10, 00), :ends_at => make_time(2013, 3, 1, 10, 45), :repetition_type => "weekly", :on_saturday => true, :title => "Children", :color => "royalblue", :description => "Green and up", :all_day => false, :studio_id => 1)
+      RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 11, 00), :ends_at => make_time(2013, 3, 1, 11, 45), :repetition_type => "weekly", :on_saturday => true, :title => "Children", :color => "royalblue", :description => "", :all_day => false, :studio_id => 1)
 
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 9, 30),  :ends_at => make_time(2013, 3, 1, 10, 30), :repetition_type => "weekly", :on_monday => true, :on_wednesday => true, :on_friday => true, :title => "Healing Class", :description => "Stretch and yoga", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 11, 00), :ends_at => make_time(2013, 3, 1, 11, 45), :repetition_type => "weekly", :on_monday => true, :on_wednesday => true, :on_friday => true, :title => "Mom & Me", :description => "", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 16, 00), :ends_at => make_time(2013, 3, 1, 16, 30), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_friday => true, :title => "LIL DRAGONS", :description => "3-6 year olds", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 16, 30), :ends_at => make_time(2013, 3, 1, 17, 10), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_friday => true, :title => "Children 1", :description => "White & Yellow Belts", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 17, 10), :ends_at => make_time(2013, 3, 1, 18, 00), :repetition_type => "weekly", :on_monday => true, :on_tuesday => true, :on_friday => true, :title => "Children 3", :description => "Green, Red & Black", :all_day => false, :studio_id => 1)
-    RepeatingEvent.create!(:starts_at => make_time(2012, 3, 1, 17, 10), :ends_at => make_time(2013, 3, 1, 18, 00), :repetition_type => "weekly", :on_wednesday => true, :title => "Children 1 & 2", :description => "White to Green Belts", :all_day => false, :studio_id => 1)
+
+    end
 
     
     Event.delete_all
