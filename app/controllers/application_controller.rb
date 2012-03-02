@@ -18,4 +18,21 @@ class ApplicationController < ActionController::Base
   def set_timezone
     Time.zone = current_studio.time_zone  if signed_in?
   end
+  
+  def dates_from_form(event)
+    begin
+      event.starts_at    = Event.parse_calculator_time(params[:starts_at], "starts_at")
+      event.ends_at      = Event.parse_calculator_time(params[:ends_at], "ends_at")
+    rescue Exception => e
+      if params[:repeating_event].nil?
+        event.starts_at    = params[:event][:starts_at]
+        event.ends_at      = params[:event][:ends_at]
+      else 
+        event.starts_at    = params[:repeating_event][:starts_at]
+        event.ends_at      = params[:repeating_event][:ends_at]
+      end
+    end
+    event
+  end
+  
 end

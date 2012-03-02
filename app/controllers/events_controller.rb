@@ -107,16 +107,4 @@ class EventsController < ApplicationController
   def destroy
   end
   
-  private 
-    def dates_from_form(event)
-      begin
-        event.starts_at    = Event.parse_calculator_time(params[:starts_at], "starts_at")
-        event.ends_at      = Event.parse_calculator_time(params[:ends_at], "ends_at")
-      rescue Exception => e
-        puts "PARSING"
-        event.starts_at    = params[:event][:starts_at]
-        event.ends_at      = params[:event][:ends_at]
-      end
-      event
-    end
 end
