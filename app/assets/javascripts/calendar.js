@@ -42,7 +42,7 @@ $(document).ready(function() {
 			url: repeatingEventsSourceUrl,
 			color: 'green',
 			textColor: 'white',
-			ignoreTimezone: false,
+			ignoreTimezone: true,
 			editable: true,
 			crossDomain: true,
 			jsonp: true
@@ -51,7 +51,7 @@ $(document).ready(function() {
 			url: eventsSourceUrl,
 			//color: 'blue',
 			textColor: 'white',
-			ignoreTimezone: false,
+			ignoreTimezone: true,
 			crossDomain: true,
 			jsonp: true
 		}
