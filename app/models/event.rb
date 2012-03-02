@@ -54,8 +54,8 @@ class Event < ActiveRecord::Base
     t4 = hash["#{tag_name}(4i)"]
     t5 = hash["#{tag_name}(5i)"]
     s = "#{t1}-#{t2}-#{t3} #{t4}:#{t5}:00"
-    puts "#{s} ==> #{Time.parse(s)}"
-    Time.parse(s)
+    #puts "#{s} ==> #{Time.parse(s)}"
+    Time.zone.parse(s)
   end
   
   def self.HTML_color_names
