@@ -154,10 +154,10 @@ function updateEvent(the_event) {
 			}
 		}
 		
-	//,
-	//function (reponse) { 
-	//	alert('successfully updated task.'); 
-	//}
+	,
+	function (reponse) { 
+		alert('successfully updated task.'); 
+	}
 	);
 };
 
