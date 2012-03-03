@@ -100,6 +100,11 @@ class EventsController < ApplicationController
 
     puts "#{@event.title} goes from #{@event.starts_at} to #{@event.ends_at}"
     @event.save!
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @event }
+      format.js { render @event }
+    end
 
   end
 

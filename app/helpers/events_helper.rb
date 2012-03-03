@@ -10,5 +10,4 @@ module EventsHelper
     
     s += ", " + date.strftime("%b %d, %Y")
   end
-
 end

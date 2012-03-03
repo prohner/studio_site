@@ -48,9 +48,23 @@ class RepeatingEventsController < ApplicationController
     #event.starts_at   = params[:repeating_event][:starts_at]
     #event.ends_at     = params[:repeating_event][:ends_at]
     event.description = params[:repeating_event][:description]
-    event.color        = params[:repeating_event][:color]
+    event.color         = params[:repeating_event][:color]
 
-    event              = dates_from_form(event)
+    if params[:event_start].nil?
+      puts "GOING LEFT"
+      event.starts_at = params[:starts_at]
+      event.ends_at   = params[:ends_at]
+    else
+      #event               = dates_from_form(event)
+      i1  = params[:event_start]["starts_at(1i)"]
+      i2  = params[:event_start]["starts_at(2i)"]
+      i3  = params[:event_start]["starts_at(3i)"]
+      i4  = params[:starts_at]["starts_at(4i)"]
+      i5  = params[:starts_at]["starts_at(5i)"]
+      s = "#{i1}-#{i2}-#{i3} #{i4}:#{i5}:00"
+      puts "OUR VAR #{s} ==> #{Time.parse(s)}"
+      event.starts_at = Time.zone.parse(s)
+    end
 
     event.on_monday     = params[:repeating_event][:on_monday]
     event.on_tuesday    = params[:repeating_event][:on_tuesday]
