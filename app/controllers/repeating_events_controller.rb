@@ -67,7 +67,7 @@ class RepeatingEventsController < ApplicationController
       i4              = params[:ends_at]["ends_at(4i)"]
       i5              = params[:ends_at]["ends_at(5i)"]
       s               = "#{i1}-#{i2}-#{i3} #{i4}:#{i5}:00"
-      event.ends_at   = params[:repeating_event][:ends_at]
+      event.ends_at   = Time.zone.parse(s)
     end
 
     event.on_monday     = params[:repeating_event][:on_monday]
