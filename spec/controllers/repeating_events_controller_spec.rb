@@ -5,7 +5,11 @@ describe RepeatingEventsController do
   
   before(:each) do
     @studio = Factory(:studio)
-    @attr = { :title => "title of event", :studio_id => @studio.id, :on_monday => true, :studio => @studio, :repetition_type => 'weekly', :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00" }
+    @attr = { :title => "title of event", 
+              :studio_id => @studio.id, 
+              :on_monday => true, 
+              :studio => @studio, 
+              :repetition_type => 'weekly', :starts_at => "2/12/2012 09:00", :ends_at => "2/12/2012 10:00" }
   end
 
   describe "GET 'index'" do

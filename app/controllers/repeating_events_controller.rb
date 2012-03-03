@@ -45,25 +45,29 @@ class RepeatingEventsController < ApplicationController
   def update
     event             = RepeatingEvent.find(params[:id])
     event.title       = params[:repeating_event][:title]
-    #event.starts_at   = params[:repeating_event][:starts_at]
-    #event.ends_at     = params[:repeating_event][:ends_at]
+
     event.description = params[:repeating_event][:description]
     event.color         = params[:repeating_event][:color]
 
     if params[:event_start].nil?
-      puts "GOING LEFT"
       event.starts_at = params[:starts_at]
       event.ends_at   = params[:ends_at]
     else
-      #event               = dates_from_form(event)
-      i1  = params[:event_start]["starts_at(1i)"]
-      i2  = params[:event_start]["starts_at(2i)"]
-      i3  = params[:event_start]["starts_at(3i)"]
-      i4  = params[:starts_at]["starts_at(4i)"]
-      i5  = params[:starts_at]["starts_at(5i)"]
-      s = "#{i1}-#{i2}-#{i3} #{i4}:#{i5}:00"
-      puts "OUR VAR #{s} ==> #{Time.parse(s)}"
+      i1              = params[:event_start]["starts_at(1i)"]
+      i2              = params[:event_start]["starts_at(2i)"]
+      i3              = params[:event_start]["starts_at(3i)"]
+      i4              = params[:starts_at]["starts_at(4i)"]
+      i5              = params[:starts_at]["starts_at(5i)"]
+      s               = "#{i1}-#{i2}-#{i3} #{i4}:#{i5}:00"
       event.starts_at = Time.zone.parse(s)
+
+      i1              = params[:event_end]["ends_at(1i)"]
+      i2              = params[:event_end]["ends_at(2i)"]
+      i3              = params[:event_end]["ends_at(3i)"]
+      i4              = params[:ends_at]["ends_at(4i)"]
+      i5              = params[:ends_at]["ends_at(5i)"]
+      s               = "#{i1}-#{i2}-#{i3} #{i4}:#{i5}:00"
+      event.ends_at   = params[:repeating_event][:ends_at]
     end
 
     event.on_monday     = params[:repeating_event][:on_monday]
