@@ -130,7 +130,8 @@ describe RepeatingEvent do
       events.count.should == 0
     end
     
-    it "should create the correct number of events for a monthly repeater"
+    ### it "should create the correct number of events for a monthly repeater"
+    
   end
 end
 # == Schema Information

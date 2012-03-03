@@ -7,14 +7,18 @@
    <hr width="75%"/>
    <%= f.label :starts_at, :class => "small_label" %><br/>
    <%= f.date_select :starts_at, :prefix => "event_start", :prompt => false, :use_month_numbers => true %> <br/>
+   <%= f.label :end_at, :class => "small_label" %><br/>
+   <%= f.date_select :ends_at, :prefix => "event_end", :prompt => false, :use_month_numbers => true %> <br/>
 
    <hr width="75%"/>
-   <%= f.label :repeat, :class => "small_label" %>
-   <%= select_tag :repeat,
-                  options_for_select([["None", "1"], 
-                                       ["Weekly", "2"]
-                                       ])
-                  %>
+   <% if false %>
+      <%= f.label :repeat, :class => "small_label" %>
+      <%= select_tag :repeat,
+                     options_for_select([["None", "1"], 
+                                          ["Weekly", "2"]
+                                          ])
+                     %>
+   <% end %>
    <div class="calendar_repeat_weekly">
       <%= label_tag :weekly_repeat, "Repeat at the same time every:", :style => "font-weight:normal;" %>
       
