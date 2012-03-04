@@ -123,6 +123,11 @@ describe EventsController do
       get 'edit', :id => @ev1.id
       response.should have_selector("#calendar_entry_header")
     end
+
+    it "should have a calendar entry delete entry when showing the edit form" do
+      get 'edit', :id => @ev1.id
+      response.should have_selector("#calendar_entry_delete")
+    end
   end
 
   describe "GET 'create'" do
@@ -200,10 +205,24 @@ describe EventsController do
   end
 
   describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
+    before(:each) do
+      @ev1       = Event.create!( :title => "ev1", 
+                                  :studio => @studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
     end
+
+    it "returns http success" do
+      get 'destroy', :id => @ev1.id
+      response.should redirect_to(calendar_index_path)
+    end
+    
+    it "returns delete a record" do
+      lambda do
+        get 'destroy', :id => @ev1.id
+      end.should change(Event, :count).by(-1)
+    end
+    
   end
 
 end
