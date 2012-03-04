@@ -14,9 +14,25 @@
    <br />
    <%= f.text_field :title, {:size => 32, :placeholder => 'Class title'} %>
    <%= f.text_area :description, {:class => "class_description"} %>
-   
+
+
+<% if @event.class == Event %>
+   <%= f.check_box :all_day, :onclick => "if (this.checked){$('#partial_day_event').hide('fast');}else{$('#partial_day_event').show('fast');}if (this.checked){$('#all_day_event').show('fast');}else{$('#all_day_event').hide('fast');}" %>
+   <%= f.label :all_day, "All day event" %><br/>
+<% end %>
+
+<div id="partial_day_event" style="display:<%= @event.all_day? ? 'none' : 'block' %>;">
    <%= f.label "Start time"%><br />
    <%= time_select "event", "starts_at", :prefix => :starts_at, :prompt => true, :ampm => true, :minute_step => 5 %> <br/>
    
    <%= f.label "End time"%><br />
    <%= time_select "event", "ends_at", :prefix => :ends_at, :prompt => true, :ampm => true, :minute_step => 5 %> <br/>
+</div>
+
+<div id="all_day_event" style="display:<%= @event.all_day? ? 'block' : 'none' %>;">
+   <%= f.label "Start day"%><br />
+   <%= date_select "event", "starts_at", :prefix => :starts_at, :prompt => true, :ampm => true, :minute_step => 5, :use_month_numbers => true %> <br/>
+   
+   <%= f.label "End day"%><br />
+   <%= date_select "event", "ends_at", :prefix => :ends_at, :prompt => true, :ampm => true, :minute_step => 5, :use_month_numbers => true %> <br/>
+</div>

@@ -4,29 +4,6 @@
 
 <%= render :partial => 'shared/calendar_entry_guts', :locals => {:f => f}  %>
   
-   <% if 0 == 1 %> 
-      <hr width="75%"/>
-      <%= f.label :repeat, :class => "small_label" %>
-      <%= select_tag :repeat,
-                     options_for_select([["None", "1"], 
-                                          ["Weekly", "2"]
-                                          ])
-                     %>
-      <div class="calendar_repeat_weekly">
-         <%= label_tag :weekly_repeat, "Repeat at the same time every:", :style => "font-weight:normal;" %>
-      
-         <ul>
-            <li><%= check_box_tag :weekly_repeat, 'Monday' %>Monday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Tuesday' %>Tuesday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Wednesday' %>Wednesday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Thursday' %>Thursday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Friday' %>Friday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Saturday' %>Saturday</li>
-            <li><%= check_box_tag :weekly_repeat, 'Sunday' %>Sunday</li>
-         </ul>
-      </div>
-      <hr width="75%"/>
-   <% end %>
 
    <hr size="1" width="70%">
    <% Event.HTML_color_names.each do |color, name| %>

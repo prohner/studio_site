@@ -78,6 +78,7 @@ class EventsController < ApplicationController
       event.studio_id   = current_studio.id
       event.title       = params[:event][:title]
       event.description = params[:event][:description]
+      event.all_day     = params[:event][:all_day]
 
       event              = dates_from_form(event)
 
@@ -95,6 +96,7 @@ class EventsController < ApplicationController
     @event.title        = params[:event][:title]
     @event.description  = params[:event][:description]
     @event.color        = params[:event][:color]
+    @event.all_day      = params[:event][:all_day]
 
     @event              = dates_from_form(@event)
 
@@ -103,7 +105,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @event }
-      format.js { render @event }
+      format.js #{ render @event }
     end
 
   end
