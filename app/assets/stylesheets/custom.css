@@ -377,3 +377,10 @@ ul.calendar_entry_colors {
 	padding: 0px;
 	margin: 0px;
 }
+
+.calendar_entry_delete {
+	font-size:10px;
+	font-weight:normal;
+	text-decoration:underline;
+	float:right;
+}

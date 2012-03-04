@@ -5,6 +5,6 @@
 <% else %>
    <%= submit_tag "Update", :id => "calendar_submit_button" %>
    
-   <%= button_to "Delete", @event, :method => :delete, :id => "calendar_entry_delete" %>
+   <%= link_to "Delete event", @event, :confirm => "We are about to remove all past, present and future traces of '#{@event.title}' will be gone. Seriously.\r\n\r\nAre you really sure we should remove it entirely from the calendar?", :remote => true, :method => :delete, :id => "calendar_entry_delete", :class => "calendar_entry_delete" %>
 <% end %>
 
