@@ -111,6 +111,14 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    Event.find_by_id(params[:id]).destroy
+    flash[:success] = "Event destroyed."
+    
+    respond_to do |format|
+      format.html { redirect_to calendar_index_path }
+      format.xml  { head :ok }
+      format.js
+    end
   end
   
 end

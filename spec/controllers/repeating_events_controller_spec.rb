@@ -76,10 +76,25 @@ describe RepeatingEventsController do
   end
 
   describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
+    before(:each) do
+      @ev1       = Event.create!( :title => "ev1", 
+                                  :studio => @studio,
+                                  :starts_at => "2/15/2012 00:00:01", 
+                                  :ends_at => "2/15/2012 23:59:59")
+      @ev1 = Factory(:repeating_event, @attr)
     end
+
+    it "returns http success" do
+      get 'destroy', :id => @ev1.id
+      response.should redirect_to(calendar_index_path)
+    end
+
+    it "returns delete a record" do
+      lambda do
+        get 'destroy', :id => @ev1.id
+      end.should change(RepeatingEvent, :count).by(-1)
+    end
+
   end
 
 end
