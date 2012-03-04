@@ -88,7 +88,7 @@ class RepeatingEventsController < ApplicationController
 
   def destroy
     RepeatingEvent.find_by_id(params[:id]).destroy
-    flash[:success] = "Event destroyed."
+    flash[:success] = "Event deleted from the calendar."
     
     respond_to do |format|
       format.html { redirect_to calendar_index_path }
