@@ -103,6 +103,8 @@ class RepeatingEvent < ActiveRecord::Base
     { "darkred"         => "Dark Red",
       "green"           => "Green",
       "royalblue"       => "Royal Blue",
+      "lawngreen"       => "Lawn Green",
+      "crimson"         => "Crimson",
       "darkolivegreen"  => "Dark Olive Green"
       }
   end
