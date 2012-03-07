@@ -6,6 +6,7 @@ StudioSite::Application.routes.draw do
   #get "repeating_events/create"
   #get "repeating_events/update"
   #get "repeating_events/destroy"
+  match '/events/choose',  :to => 'events#choose'
 
   resources :repeating_events
   resources :events

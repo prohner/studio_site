@@ -65,7 +65,7 @@ class Event < ActiveRecord::Base
       "darkorchid"    => "Dark Orchid",
       "darkgoldenrod" => "Dark Golden Rod",
       "aqua"          => "Aqua",
-      "fuchsia"       => "Fuschsia"
+      "fuchsia"       => "Fuchsia"
       }
   end
 end

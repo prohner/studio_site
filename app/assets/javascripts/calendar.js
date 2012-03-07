@@ -101,7 +101,7 @@ $(document).ready(function() {
 
 		dayClick: function(date, allDay, jsEvent, view) {
 			setSelectedItemColor(this, 'blue', 'yellow');
-			var url = remoteServerName + '/events/new?dt=' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			var url = remoteServerName + '/events/choose?dt=' + date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
 			console.log(url);
 			$.ajax({url: 			url,
 					dataType: 		"json", 
