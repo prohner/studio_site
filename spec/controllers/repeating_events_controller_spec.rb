@@ -50,9 +50,42 @@ describe RepeatingEventsController do
   end
   
   describe "GET 'create'" do
-    it "returns http success" do
-      get 'create'
-      response.should be_success
+    before(:each) do
+      @vars = { :repeating_event => {
+                  :title => "some title",
+                  :starts_at => "2/2/2012 09:00",
+                  :ends_at => "2/2/2012 10:00",
+                  :description => "whatever",
+                  :repetition_type => "weekly",
+                  :on_monday => true
+                   }
+              }
+    end
+    it "should fail without sign in" do
+      controller.sign_out
+      get 'create', @vars
+      response.should redirect_to(root_path)
+    end
+
+    describe "when signed in" do
+      before(:each) do
+        test_sign_in(@studio)
+      end
+
+      it "should return http success" do
+        get 'create', @vars
+        response.should be_success
+      end
+
+      it "should add an event" do
+        lambda do
+          get 'create', @vars
+        end.should change(RepeatingEvent, :count).by(1)
+      end
+    
+      it "must have a studio id" do
+        controller.current_studio.id.nil?.should be_false
+      end
     end
   end
 

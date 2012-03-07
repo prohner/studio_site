@@ -36,6 +36,15 @@ class EventsController < ApplicationController
     @event.ends_at    = Time.parse("#{params[:dt]} 10:00 am") unless params[:dt].nil?
   end
   
+  def choose
+    @dt = params[:dt]
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render }
+      format.js  { render }
+    end
+  end
+  
   def new_OLD
     puts params.inspect
     if params[:calendar][:id] == ""
@@ -79,6 +88,7 @@ class EventsController < ApplicationController
       event.title       = params[:event][:title]
       event.description = params[:event][:description]
       event.all_day     = params[:event][:all_day]
+      event.color       = params[:event][:color]
 
       event              = dates_from_form(event)
 

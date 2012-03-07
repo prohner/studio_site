@@ -166,7 +166,6 @@ describe EventsController do
     
       it "must have a studio id" do
         controller.current_studio.id.nil?.should be_false
-      
       end
     end
   end
