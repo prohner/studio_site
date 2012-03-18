@@ -88,8 +88,8 @@ class RepeatingEventsController < ApplicationController
       event.on_saturday   = params[:repeating_event][:on_saturday]
       event.on_sunday     = params[:repeating_event][:on_sunday]
 
-      puts "event.starts_at==#{event.starts_at}"
-      puts "event.ends_at==#{event.ends_at}"
+      puts "event.starts_at==#{event.starts_at}" if not Rails.env.test?
+      puts "event.ends_at==#{event.ends_at}" if not Rails.env.test?
       event.save!
     else
       redirect_to(root_path) 
