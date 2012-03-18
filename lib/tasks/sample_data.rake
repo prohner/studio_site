@@ -110,6 +110,14 @@ namespace :db do
     Rake::Task['db:master_data'].invoke
 
     admin_studio = Studio.create!(:name => "Admin Stud", :password => "123456", :email => "abc@def.com")
+    admin_studio.address = Faker::Address.street_address
+    admin_studio.city = Faker::Address.city
+    admin_studio.state = Faker::Address.us_state_abbr
+    admin_studio.postal_code = Faker::Address.zip_code
+    admin_studio.telephone = Faker::PhoneNumber.phone_number
+    admin_studio.fax = Faker::PhoneNumber.phone_number
+    admin_studio.save!
+    
 
     Rake::Task['db:cal'].invoke
 
