@@ -18,6 +18,35 @@
     <%= f.label :password_confirmation, "Confirmation" %><br />
     <%= f.password_field :password_confirmation %>
   </div>
+  
+  <%= field_set_tag 'Address' do %>
+     <div class="field">
+       <%= f.label :address, "Street" %><br />
+       <%= f.text_field :address %>
+     </div>
+     <div class="field">
+       <%= f.text_field :address2 %>
+     </div>
+     <div class="field">
+       <%= f.label :city, "City, State, ZIP/Postal code" %><br />
+       <%= f.text_field :city %>
+       <%= f.text_field :state, :size => 2 %>
+       <%= f.text_field :postal_code, :size => 7 %>
+     </div>
+  <% end %>
+
+  <%= field_set_tag 'Contact' do %>
+     <div class="field">
+       <%= f.label :telephone, "Telephone" %><br />
+       <%= f.text_field :telephone %>
+     </div>
+     <div class="field">
+       <%= f.label :fax, "Fax" %><br />
+       <%= f.text_field :fax %>
+     </div>
+  <% end %>
+
+  
   <div class="field">
     <%= f.label :time_zone %><br />
     <%= f.time_zone_select :time_zone %>

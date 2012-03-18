@@ -72,5 +72,6 @@ end
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  studio_id   :integer
+#  color       :string(255)
 #
 
