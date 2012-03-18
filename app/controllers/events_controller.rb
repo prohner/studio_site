@@ -46,7 +46,7 @@ class EventsController < ApplicationController
   end
   
   def new_OLD
-    puts params.inspect
+    puts params.inspect if not Rails.env.test?
     if params[:calendar][:id] == ""
       event = Event.new(:title => params[:class_name],
                         :description => params[:class_description],
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
     end
     event.ends_at = (event.starts_at + 1.hours).to_datetime
     event.studio_id = params[:studio_id]
-    puts event.inspect
+    puts event.inspect if not Rails.env.test?
     event.save!
     
     respond_to do |format|
@@ -92,8 +92,8 @@ class EventsController < ApplicationController
 
       event              = dates_from_form(event)
 
-      puts "event.starts_at==#{event.starts_at}"
-      puts "event.ends_at==#{event.ends_at}"
+      puts "event.starts_at==#{event.starts_at}" if not Rails.env.test?
+      puts "event.ends_at==#{event.ends_at}" if not Rails.env.test?
       event.save!
     else
       redirect_to(root_path) 
@@ -101,7 +101,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    puts params.inspect
+    puts params.inspect if not Rails.env.test?
     @event              = Event.find(params[:id])
     @event.title        = params[:event][:title]
     @event.description  = params[:event][:description]
@@ -110,7 +110,7 @@ class EventsController < ApplicationController
 
     @event              = dates_from_form(@event)
 
-    puts "#{@event.title} goes from #{@event.starts_at} to #{@event.ends_at}"
+    puts "#{@event.title} goes from #{@event.starts_at} to #{@event.ends_at}" if not Rails.env.test?
     @event.save!
     respond_to do |format|
       format.html # index.html.erb
