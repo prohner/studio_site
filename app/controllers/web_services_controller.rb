@@ -4,11 +4,18 @@ class WebServicesController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @studios }
-      format.json  { render :json => @studios }
+      format.json  { render :json => @studios, :only => [:id, :name, :address] }
     end
   end
 
+  def studio
+    @studio = Studio.find(params[:id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json => @studio, :include => :styles, :except => [:salt, :encrypted_password, :updated_at, :created_at, :admin, :time_zone] }
+    end
+  end
+  
   def events
   end
 
@@ -16,5 +23,12 @@ class WebServicesController < ApplicationController
   end
 
   def terminology
+    style = Style.find(params[:id])
+    @term_groups = style.term_groups
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json => @term_groups, :include => :terms, :except => [:updated_at, :created_at ] }
+    end
   end
 end
