@@ -1,10 +1,8 @@
 StudioSite::Application.routes.draw do
   get "web_services/studios"
-
+  get "web_services/studio"
   get "web_services/events"
-
   get "web_services/repeating_events"
-
   get "web_services/terminology"
 
   #get "repeating_events/index"
