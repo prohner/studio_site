@@ -17,9 +17,19 @@ class WebServicesController < ApplicationController
   end
   
   def events
+    @studio = Studio.find(params[:id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json => @studio.events, :except => [:created_at, :updated_at, :studio_id] }
+    end
   end
 
   def repeating_events
+    @studio = Studio.find(params[:id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json  { render :json => @studio.repeating_events, :except => [:created_at, :updated_at, :studio_id] }
+    end
   end
 
   def terminology
