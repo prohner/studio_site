@@ -39,6 +39,8 @@ class Event < ActiveRecord::Base
       :allDay => self.all_day,
       :recurring => false,
       :color => self.color.nil? ? "blue" : self.color,
+      :location => self.location,
+      :notes => self.notes,
       :url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
     }
   end
@@ -83,5 +85,7 @@ end
 #  updated_at  :datetime        not null
 #  studio_id   :integer
 #  color       :string(255)
+#  location    :string(255)
+#  notes       :string(255)
 #
 

@@ -158,5 +158,7 @@ end
 #  created_at           :datetime        not null
 #  updated_at           :datetime        not null
 #  color                :string(255)
+#  location             :string(255)
+#  notes                :string(255)
 #
 

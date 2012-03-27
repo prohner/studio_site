@@ -91,6 +91,15 @@ class RepeatingEvent < ActiveRecord::Base
       :recurring => true,
       :repetition_type => self.repetition_type,
       :color => self.color.nil? ? "green" : self.color,
+      :location => self.location,
+      :notes => self.notes,
+      :on_sunday     => self.on_sunday    ,
+      :on_monday     => self.on_monday    ,
+      :on_tuesday    => self.on_tuesday   ,
+      :on_wednesday  => self.on_wednesday ,
+      :on_thursday   => self.on_thursday  ,
+      :on_friday     => self.on_friday    ,
+      :on_saturday   => self.on_saturday  ,
       :url => self.edit_url ##Rails.application.routes.url_helpers.event_path(id)
     }
   end
@@ -135,5 +144,7 @@ end
 #  created_at           :datetime        not null
 #  updated_at           :datetime        not null
 #  color                :string(255)
+#  location             :string(255)
+#  notes                :string(255)
 #
 
