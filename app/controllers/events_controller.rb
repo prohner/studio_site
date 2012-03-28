@@ -89,6 +89,8 @@ class EventsController < ApplicationController
       event.description = params[:event][:description]
       event.all_day     = params[:event][:all_day]
       event.color       = params[:event][:color]
+      event.location    = params[:event][:location]
+      event.notes       = params[:event][:notes]
 
       event              = dates_from_form(event)
 
@@ -107,6 +109,8 @@ class EventsController < ApplicationController
     @event.description  = params[:event][:description]
     @event.color        = params[:event][:color]
     @event.all_day      = params[:event][:all_day]
+    @event.location     = params[:event][:location]
+    @event.notes        = params[:event][:notes]
 
     @event              = dates_from_form(@event)
 

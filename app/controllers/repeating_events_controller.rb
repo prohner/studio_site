@@ -50,6 +50,8 @@ class RepeatingEventsController < ApplicationController
       event.description = params[:repeating_event][:description]
       event.all_day     = params[:repeating_event][:all_day]
       event.color       = params[:repeating_event][:color]
+      event.location    = params[:repeating_event][:location]
+      event.notes       = params[:repeating_event][:notes]
       
       if params[:repeating_event][:repetition_type].nil?
         event.repetition_type = "weekly"
@@ -101,7 +103,9 @@ class RepeatingEventsController < ApplicationController
     event.title       = params[:repeating_event][:title]
 
     event.description = params[:repeating_event][:description]
-    event.color         = params[:repeating_event][:color]
+    event.color       = params[:repeating_event][:color]
+    event.location    = params[:repeating_event][:location]
+    event.notes       = params[:repeating_event][:notes]
 
     if params[:event_start].nil?
       event.starts_at = params[:starts_at]

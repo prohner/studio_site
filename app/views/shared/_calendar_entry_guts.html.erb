@@ -12,8 +12,12 @@
       <%= f.label  "Edit the class" %>
    <% end %>
    <br />
+   <%= f.label "Title"%><br />
    <%= f.text_field :title, {:size => 32, :placeholder => 'Class title'} %>
+   <%= f.label "Description"%><br />
    <%= f.text_area :description, {:class => "class_description"} %>
+   <%= f.label "Location"%><br />
+   <%= f.text_field :location, {:size => 32, :placeholder => 'Class location'} %>
 
 
 <% if @event.class == Event %>
