@@ -20,7 +20,7 @@ class WebServicesController < ApplicationController
     @studio = Studio.find(params[:id])
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @studio.events, :except => [:created_at, :updated_at, :studio_id] }
+      format.json  { render :json => @studio.events.where('starts_at > ?', DateTime.now), :except => [:created_at, :updated_at, :studio_id] }
     end
   end
 
@@ -28,7 +28,7 @@ class WebServicesController < ApplicationController
     @studio = Studio.find(params[:id])
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @studio.repeating_events, :except => [:created_at, :updated_at, :studio_id] }
+      format.json  { render :json => @studio.repeating_events.where('ends_at > ?', DateTime.now), :except => [:created_at, :updated_at, :studio_id] }
     end
   end
 
