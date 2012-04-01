@@ -12,7 +12,6 @@ class Term < ActiveRecord::Base
   default_scope :order => 'terms.term'
 
   def as_json(options={ })
-    puts "TERM IS BEING CHECKED NOW"
     super({ :except => [:data, :updated_at, :created_at] }.merge(options))
   end
     
@@ -25,7 +24,7 @@ class Term < ActiveRecord::Base
   end
 
   def filename=(new_filename)
-      write_attribute("filename", sanitize_filename("#{self.id}#{new_filename}"))
+      write_attribute("filename", sanitize_filename("#{self.id}_#{new_filename}"))
   end
 
   private
