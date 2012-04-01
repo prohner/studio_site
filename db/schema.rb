@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401012134) do
+ActiveRecord::Schema.define(:version => 20120401031313) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -97,6 +97,9 @@ ActiveRecord::Schema.define(:version => 20120401012134) do
     t.string   "salt"
     t.boolean  "admin",              :default => false
     t.string   "time_zone"
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "data"
   end
 
   add_index "studios", ["email"], :name => "index_studios_on_email", :unique => true

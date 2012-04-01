@@ -17,6 +17,11 @@ class TermsController < ApplicationController
     @selected_term_group_id = @term.term_group.id
   end
   
+  def image
+    term = Term.find(params[:id])
+    send_data term.data, :type => term.content_type,:disposition => 'inline'
+  end
+  
   def update
     term = Term.find(params[:id])
     puts term.inspect

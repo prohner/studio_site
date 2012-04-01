@@ -55,6 +55,9 @@ StudioSite::Application.routes.draw do
   match '/help',    :to => 'pages#help'
   
   resources :studios
+  match '/studio_images/:id', :to => 'studios#image', :as => :studio_image
+  match '/term_images/:id', :to => 'terms#image', :as => :term_image
+  
   resources :sessions,    :only => [:new, :create, :destroy]
   resources :styles#,      :only => [:create, :destroy, :get]
   resources :term_groups#, :only => [:create, :destroy, :get]

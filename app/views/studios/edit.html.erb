@@ -46,6 +46,18 @@
      </div>
   <% end %>
 
+  <% if not @studio.filename.nil? %>
+   <div class="label">
+      Current image: <br />
+      <%= image_tag(studio_image_path(@studio.id)) %>
+   </div>
+  <% end %>
+  <div class="label">
+   Upload an image for term:
+  </div>
+  <div class="field">
+   <%= f.file_field :image %>
+  </div>
   
   <div class="field">
     <%= f.label :time_zone %><br />

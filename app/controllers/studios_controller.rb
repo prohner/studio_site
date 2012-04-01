@@ -53,12 +53,35 @@ class StudiosController < ApplicationController
     @title = "Edit Studio"
   end
   
+  def image
+    studio = Studio.find(params[:id])
+    send_data studio.data, :type => studio.content_type,:disposition => 'inline'
+  end
+  
   def update
     @studio = Studio.find(params[:id])
-    if @studio.update_attributes(params[:studio])
+    
+    @studio.uploaded_file = params[:studio][:image]
+    
+    @studio.name        = params[:studio][:name]
+    @studio.password    = params[:studio][:password]
+    @studio.email       = params[:studio][:email]
+    @studio.address     = params[:studio][:address]
+    @studio.address2    = params[:studio][:address2]
+    @studio.city        = params[:studio][:city]
+    @studio.state       = params[:studio][:state]
+    @studio.postal_code = params[:studio][:postal_code]
+    @studio.telephone   = params[:studio][:telephone]
+    @studio.fax         = params[:studio][:fax]
+
+    
+    @studio.name = "ali baba"
+    
+    if @studio.save
       flash[:success] = "Profile updated."
       redirect_to @studio
     else
+      flash[:error] = "Profile could not be updated."
       @title = "Edit studio"
       render 'edit'
     end

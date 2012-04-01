@@ -43,7 +43,26 @@ class Studio < ActiveRecord::Base
     (studio && studio.salt == cookie_salt) ? studio : nil
    end
 
+
+   def uploaded_file=(incoming_file)
+     if not incoming_file.nil?
+       self.filename = incoming_file.original_filename
+       self.content_type = incoming_file.content_type
+       self.data = incoming_file.read
+     end
+   end
+
+   def filename=(new_filename)
+       write_attribute("filename", sanitize_filename("#{new_filename}"))
+   end
+
    private
+     def sanitize_filename(filename)
+         #get only the filename, not the whole path (from IE)
+         just_filename = File.basename(filename)
+         #replace all non-alphanumeric, underscore or periods with underscores
+         just_filename.gsub(/[^\w\.\-]/, '_')
+     end
 
      def encrypt_password
        self.salt = make_salt unless has_password?(password)
