@@ -20,7 +20,7 @@ class Term < ActiveRecord::Base
   end
 
   def filename=(new_filename)
-      write_attribute("filename", sanitize_filename(new_filename))
+      write_attribute("filename", sanitize_filename("#{self.id}#{new_filename}"))
   end
 
   private

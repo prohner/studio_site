@@ -34,7 +34,7 @@
      <% if not @term.filename.nil? %>
       <div class="label">
          Current image: <br />
-         <%= image_tag(@term.filename) %>
+         <%= image_tag(term_image_path(@term.id)) %>
       </div>
      <% end %>
      <div class="label">

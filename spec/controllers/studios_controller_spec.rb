@@ -136,15 +136,39 @@ describe StudiosController do
     end
     
     describe "success" do
-      before(:each) do
-        @attr = { :email => "abc@def.com", :name => "ali baba", :password => "foobar", :password_confirmation => "foobar" }
-      end
       
       it "should change the studio's attributes" do
+        @attr = { 
+          :id                     => @studio.id,
+          :email                  => "abc@def.com", 
+          :name                   => "ali baba", 
+          :password               => "foobar", 
+          :password_confirmation  => "foobar",
+          :address                => "address #1",
+          :address2               => "address #2",
+          :city                   => "Tarzana",
+          :state                  => "CA",
+          :postal_code            => "91367",
+          :telephone              => "818-123-1234",
+          :fax                    => "818-321-4321"
+           }
+
         put :update, :id => @studio, :studio => @attr
+        
+        #put :update, :studio => {:id => @studio.id, :name => "abc"}
+
         @studio.reload
         @studio.name.should   == @attr[:name]
         @studio.email.should  == @attr[:email]
+        @studio.address.should  == @attr[:address    ]
+        @studio.address2.should  == @attr[:address2   ]
+        @studio.city.should  == @attr[:city       ]
+        @studio.state.should  == @attr[:state      ]
+        @studio.postal_code.should  == @attr[:postal_code]
+        @studio.telephone.should  == @attr[:telephone  ]
+        @studio.fax.should  == @attr[:fax        ]
+        
+        
       end
     end
   end
