@@ -12,7 +12,7 @@ class WebServicesController < ApplicationController
     @studio = Studio.find(params[:id])
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @studio, :include => :styles, :except => [:salt, :encrypted_password, :updated_at, :created_at, :admin, :time_zone] }
+      format.json  { render :json => @studio, :include => :styles, :except => [:salt, :encrypted_password, :updated_at, :created_at, :admin, :time_zone, :data] }
     end
   end
   
@@ -38,7 +38,10 @@ class WebServicesController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json  { render :json => @term_groups, :include => :terms, :except => [:updated_at, :created_at ] }
+      format.json  { 
+        render :json => @term_groups, 
+        :include => [ :terms => { :except => [:updated_at, :created_at, :data] } ],
+        :except => [:updated_at, :created_at] }
     end
   end
 end

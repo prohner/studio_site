@@ -11,6 +11,11 @@ class Term < ActiveRecord::Base
 
   default_scope :order => 'terms.term'
 
+  def as_json(options={ })
+    puts "TERM IS BEING CHECKED NOW"
+    super({ :except => [:data, :updated_at, :created_at] }.merge(options))
+  end
+    
   def uploaded_file=(incoming_file)
     if not incoming_file.nil?
       self.filename = incoming_file.original_filename

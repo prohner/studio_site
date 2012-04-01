@@ -8,6 +8,11 @@ class TermGroup < ActiveRecord::Base
   validates :style_id,  :presence => true
 
   default_scope :order => 'term_groups.name'
+  
+  def as_json(options={ })
+    puts "TERM GROUP IS BEING CHECKED NOW"
+    super({ :include => [:terms] }.merge(options))
+  end  
 end
 # == Schema Information
 #
