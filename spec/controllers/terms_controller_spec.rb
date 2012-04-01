@@ -109,10 +109,19 @@ describe TermsController do
     end
     
     it "should save the changed term" do
-      new_term    = "another term"
-      put :update, :id => @term.id, :term => { :term => new_term }
+      @attr = {
+        :term               => "another term",
+        :term_translated    => "other language",
+        :description        => "desc of term",
+        :phonetic_spelling  => "alalalala"
+      }
+      
+      put :update, :id => @term.id, :term => @attr
       @term.reload
-      @term.term.should == new_term
+      @term.term.should == @attr[:term]
+      @term.term_translated.should == @attr[:term_translated]
+      @term.description.should == @attr[:description]
+      @term.phonetic_spelling.should == @attr[:phonetic_spelling]
 
     end
   end

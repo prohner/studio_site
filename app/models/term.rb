@@ -1,4 +1,5 @@
 class Term < ActiveRecord::Base
+  attr_accessor :image
   attr_accessible :term, :term_translated, :description, :phonetic_spelling, :term_group_id
 
   belongs_to :term_group
@@ -9,6 +10,27 @@ class Term < ActiveRecord::Base
   validates :term_group_id,     :presence => true
 
   default_scope :order => 'terms.term'
+
+  def uploaded_file=(incoming_file)
+    if not incoming_file.nil?
+      self.filename = incoming_file.original_filename
+      self.content_type = incoming_file.content_type
+      self.data = incoming_file.read
+    end
+  end
+
+  def filename=(new_filename)
+      write_attribute("filename", sanitize_filename(new_filename))
+  end
+
+  private
+  def sanitize_filename(filename)
+      #get only the filename, not the whole path (from IE)
+      just_filename = File.basename(filename)
+      #replace all non-alphanumeric, underscore or periods with underscores
+      just_filename.gsub(/[^\w\.\-]/, '_')
+  end
+    
 end
 # == Schema Information
 #
@@ -22,5 +44,6 @@ end
 #  term_group_id     :integer
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
+#  image_name        :string(255)
 #
 

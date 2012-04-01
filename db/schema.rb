@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327061956) do
+ActiveRecord::Schema.define(:version => 20120401012134) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -127,6 +127,9 @@ ActiveRecord::Schema.define(:version => 20120327061956) do
     t.integer  "term_group_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "data"
   end
 
 end
