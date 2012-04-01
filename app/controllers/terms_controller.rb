@@ -19,8 +19,19 @@ class TermsController < ApplicationController
   
   def update
     term = Term.find(params[:id])
-    if term.update_attributes(params[:term])
+    puts term.inspect
+    term.uploaded_file = params[:term][:image]
+    
+    term.term               = params[:term][:term]
+    term.term_translated    = params[:term][:term_translated]
+    term.description        = params[:term][:description]
+    term.phonetic_spelling  = params[:term][:phonetic_spelling]
+    
+    if term.save
       flash[:success] = "Term saved"
+      redirect_to :controller => :studios, :action => :show, :id => term.term_group.style.studio.id, :style_id => term.term_group.style.id
+    else
+      flash[:error] = "Term NOT saved"
       redirect_to :controller => :studios, :action => :show, :id => term.term_group.style.studio.id, :style_id => term.term_group.style.id
     end
   end

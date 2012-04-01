@@ -1,5 +1,5 @@
 <% unless @term_groups.nil? %>
-   <%= form_for @term do |f| %>
+   <%= form_for @term, :multipart => true do |f| %>
      <%= render 'shared/error_messages', :object => f.object %>
      <div class="label">
       Original Term :
@@ -25,11 +25,23 @@
       Description :
      </div>
      <div class="field">
-       <% if Rails.env.development? %>
+       <% if Rails.env.development? and @term.description.blank? %>
          <%= f.text_area :description, :value => Faker::Lorem.sentences(3), :rows => 3 %>
        <% else %>
          <%= f.text_area :description, :rows => 3 %>
        <% end %>
+     </div>
+     <% if not @term.filename.nil? %>
+      <div class="label">
+         Current image: <br />
+         <%= image_tag(@term.filename) %>
+      </div>
+     <% end %>
+     <div class="label">
+      Upload an image for term:
+     </div>
+     <div class="field">
+      <%= f.file_field :image %>
      </div>
      <div class="label">
       Put this into category :
@@ -40,5 +52,6 @@
      <div class="actions">
        <%= f.submit "Submit" %>
      </div>
+     
   <% end %>
 <% end %>

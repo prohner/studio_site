@@ -73,5 +73,6 @@ end
 #  term_group_id     :integer
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
+#  image_name        :string(255)
 #
 
