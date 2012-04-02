@@ -73,9 +73,6 @@ class StudiosController < ApplicationController
     @studio.postal_code = params[:studio][:postal_code]
     @studio.telephone   = params[:studio][:telephone]
     @studio.fax         = params[:studio][:fax]
-
-    
-    @studio.name = "ali baba"
     
     if @studio.save
       flash[:success] = "Profile updated."
