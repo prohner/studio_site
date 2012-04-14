@@ -1,0 +1,9 @@
+<li>
+   <%= link_to style.name, term_library_show_federations_path(:master_style_id => style.id) %>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+  <% if style.id == @master_style_id.to_i %>
+     <ul class="federations">
+        <%= render :partial => 'term_library/federation', :collection => @federations, :as => :federation %>
+     </ul>
+  <% end %>
+</li>
