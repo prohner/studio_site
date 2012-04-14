@@ -1,0 +1,10 @@
+<li>
+   <%= link_to term_group.name, term_library_show_terms_path(:master_term_group_id => term_group.id) %>
+   
+   <% if term_group.id.to_i == @master_term_group_id.to_i %>
+      <ul class="terms">
+         <%= render :partial => 'term_library/term', :collection => @terms, :as => :term %>
+      </ul>
+   <% end %>
+
+</li>

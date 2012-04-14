@@ -1,4 +1,12 @@
 StudioSite::Application.routes.draw do
+  get "term_library/show_styles"
+
+  get "term_library/show_federations"
+
+  get "term_library/show_term_groups"
+
+  get "term_library/show_terms"
+
   get "web_services/studios"
   get "web_services/studio"
   get "web_services/events"

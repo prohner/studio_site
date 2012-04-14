@@ -13,6 +13,18 @@ Factory.sequence :email do |n|
   "Person-#{n}@example.com"
 end
 
+Factory.sequence :federation_name do |n|
+  "Federation #{n}"
+end
+
+Factory.sequence :term_group_name do |n|
+  "Term #{n}"
+end
+
+Factory.sequence :term do |n|
+  "Term #{n}"
+end
+
 Factory.define :style do |style|
   style.name "style name"
   style.association :studio

@@ -1,0 +1,9 @@
+<li>
+<%= term.term %>   
+<% unless term.term_translated.nil? %>
+   <span style="color:#a0a0a0;">translates to </span>
+   <%= term.term_translated %>   
+   
+<% end %>
+
+</li>
