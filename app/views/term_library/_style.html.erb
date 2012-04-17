@@ -1,9 +1,9 @@
 <li>
-   <%= link_to style.name, term_library_show_federations_path(:master_style_id => style.id) %>
+   <%= link_to style.name, term_library_show_federations_path(:master_style_id => style.id), :remote => true %>
    &nbsp;&nbsp;&nbsp;&nbsp;
-  <% if style.id == @master_style_id.to_i %>
-     <ul class="federations">
-        <%= render :partial => 'term_library/federation', :collection => @federations, :as => :federation %>
-     </ul>
-  <% end %>
+   <span id="style_<%= style.id %>">
+     <% if style.id == @master_style_id.to_i %>
+         <%= render :partial => 'term_library/federations' %>
+     <% end %>
+   </span>
 </li>

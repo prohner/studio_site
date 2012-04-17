@@ -1,9 +1,9 @@
 <li>
-   <%= link_to federation.name, term_library_show_term_groups_path(:master_federation_id => federation.id) %>
-   <% if federation.id.to_i == @master_federation_id.to_i %>
-      <ul class="term_groups">
-         <%= render :partial => 'term_library/term_group', :collection => @term_groups, :as => :term_group %>
-      </ul>
-   <% end %>
+   <%= link_to federation.name, term_library_show_term_groups_path(:master_federation_id => federation.id), :remote => true %>
+   <span id="federation_<%= federation.id %>">
+      <% if federation.id.to_i == @master_federation_id.to_i %>
+         <%= render :partial => 'term_library/term_groups' %>
+      <% end %>
+   </span>
 </li>
 
