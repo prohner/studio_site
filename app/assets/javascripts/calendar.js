@@ -9,7 +9,7 @@ var lastDayBackgroundColor = null;
 var remoteServerName;
 remoteServerName = "http://studio-site.herokuapp.com";
 remoteServerName = "http://0.0.0.0:3000";
-remoteServerName = "";
+//remoteServerName = "";
 
 
 $(document).ready(function() {

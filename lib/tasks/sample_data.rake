@@ -99,6 +99,19 @@ namespace :db do
       Event.create!(:title => "34th Dan Testing West Coast at HRWTSDF  HQ", :starts_at => make_time(2012, 12, 1, 17),       :ends_at => make_time(2012, 12, 1, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "Gup Testing", :starts_at => make_time(2012, 12, 13, 19),       :ends_at => make_time(2012, 12, 13, 20),  :all_day => false, :description => "Tarzana, California", :studio_id => 1, :color => "darkgoldenrod")
       Event.create!(:title => "Promotions & Banquet", :starts_at => make_time(2012, 12, 20, 17),       :ends_at => make_time(2012, 12, 20, 20, 0),  :all_day => false, :description => "Delicious pot luck buffet", :studio_id => 1, :color => "darkgoldenrod")
+
+      Event.create!(:title => "DM Sales Flyer (40% RPI & 60% off TTL Order)", :starts_at => make_time(2013, 5, 20, 0), :ends_at => make_time(2013, 6, 9, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "blue")
+      Event.create!(:title => "DM Sales Flyer (40% RPI & 50% + $200 off TTL)", :starts_at => make_time(2013, 6, 10, 0), :ends_at => make_time(2013, 6, 23, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "blue")
+
+      Event.create!(:title => "NPI BS (40% RPI & 60% off TTL Order)", :starts_at => make_time(2013, 5, 27, 0), :ends_at => make_time(2013, 6, 2, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "darkgoldenrod")
+      Event.create!(:title => "NPI Baby Event (50% RPI & 60% off TTL Order)", :starts_at => make_time(2013, 6, 3, 0), :ends_at => make_time(2013, 6, 9, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "darkgoldenrod")
+
+      Event.create!(:title => "SMS (50% RPI)", :starts_at => make_time(2013, 6, 10, 0), :ends_at => make_time(2013, 6, 16, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "green")
+
+      Event.create!(:title => "Email Firefly Frenzy (50% RPI)", :starts_at => make_time(2013, 6, 10, 0), :ends_at => make_time(2013, 6, 23, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "darkorchid")
+      Event.create!(:title => "Email Celebrate Savings (40% off ES Scrapbook)", :starts_at => make_time(2013, 6, 24, 0), :ends_at => make_time(2013, 6, 30, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "darkorchid")
+
+      Event.create!(:title => "Postcard July 4th & Military", :starts_at => make_time(2013, 6, 24, 0), :ends_at => make_time(2013, 7, 3, 0),  :all_day => true, :description => "40% RPI & 60% off TTL Order", :studio_id => 1, :color => "fuchsia")
     end
 
 
