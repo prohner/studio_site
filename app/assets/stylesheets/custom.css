@@ -1,5 +1,5 @@
 .container {
-xwidth: 710px;
+	width: 1210px;
 }
 
 body {
@@ -322,7 +322,7 @@ div.calendar {
 	float:left;
 	display:inline;
 	//background-color:#f00;
-	width:650px;
+	width:900px;
 }
 div.calendar_entry {
 	background-color:#f0f0f0;

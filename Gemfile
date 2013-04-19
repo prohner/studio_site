@@ -20,7 +20,8 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
+  gem 'mysql2'
 end
 
 gem 'faker', '0.3.1'
