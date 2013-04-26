@@ -14,16 +14,16 @@ ss_group=10 Key Concepts
 10. Uei Rhee=Best Friendship
 
 ss_group=Articles of Faith
-01. Be loyal to one’s country 
-02. Be obedient to ones parents & elders 
-03. Be loving to one’s husband or wife 
-04. Be cooperative to your brothers 
-05. Be respectful to elders 
-06. Be faithful to your teacher 
-07. Be faithful to friends 
-08. Kill only in justice and with honor 
-09. Never retreat in battle 
-10. Always finish what you start
+01. =Be loyal to one’s country 
+02. =Be obedient to ones parents & elders 
+03. =Be loving to one’s husband or wife 
+04. =Be cooperative to your brothers 
+05. =Be respectful to elders 
+06. =Be faithful to your teacher 
+07. =Be faithful to friends 
+08. =Kill only in justice and with honor 
+09. =Never retreat in battle 
+10. =Always finish what you start
 
 ss_group=Mahk kee=Blocks
 Ha Dan Mahk kee=Low Block
@@ -267,7 +267,7 @@ Cho Bo Ja=Beginner
 ss_group=HISTORICAL TERMS
 Tang Soo Do=Historical Name of Our Art
 Ho Sin Sul=Art of Self-defense 
-Moogi Sul-Art of Weapons 
+Moogi Sul=Art of Weapons 
 Kuk Pa Sul=Art of Breaking 
 Jua Sun Bop=Art of Meditation 
 Song Cho Ki=American Flag 

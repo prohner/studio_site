@@ -123,6 +123,10 @@ namespace :db do
     Rake::Task['db:master_data'].invoke
 
     admin_studio = Studio.create!(:name => "Admin Stud", :password => "123456", :email => "abc@def.com")
+    #admin_studio = Studio.find_by_name("Admin Stud")
+    
+    
+    
     admin_studio.address = Faker::Address.street_address
     admin_studio.city = Faker::Address.city
     admin_studio.state = Faker::Address.us_state_abbr
@@ -132,12 +136,43 @@ namespace :db do
     admin_studio.save!
     
 
-    Rake::Task['db:cal'].invoke
+#    Rake::Task['db:cal'].invoke
 
     admin_studio.toggle!(:admin)
-    tsd     = admin_studio.styles.create!(:name => "Tang soo do")
-    karate  = admin_studio.styles.create!(:name => "Shotokan")
-    jj      = admin_studio.styles.create!(:name => "Jiu Jitsu")
+    #tsd     = admin_studio.styles.create!(:name => "Tang soo do")
+    #karate  = admin_studio.styles.create!(:name => "Shotokan")
+    #jj      = admin_studio.styles.create!(:name => "Jiu Jitsu")
+    
+    master_style = MasterStyle.find_by_name("Tang Soo Do")
+    style = Style.new
+    style.studio = admin_studio
+    style.name = master_style.name
+    style.save!
+    
+    master_style.master_federations.each do |fed|
+      puts "  #{fed.name}"
+      
+      fed.master_term_groups.each do |master_term_group|
+        term_group = TermGroup.new
+        term_group.style = style
+        term_group.name = master_term_group.name
+        term_group.save!
+        puts "    #{master_term_group.name}"
+        
+        master_term_group.master_terms.each do |master_term|
+          puts "      #{master_term.term}"
+          term = Term.new
+          term.term_group = term_group
+          term.term = master_term.term
+          term.term_translated = master_term.term_translated
+          term.save!
+        end
+        
+      end
+    end
+    #@new_term_group = TermGroup.new
+    #@new_term = Term.new
+
 
     #keys = tsd.term_groups.create!(:name => "10 Key Concepts", :name_translated => "")
     #keys.terms.create!(:term => "1. Yong Gi           ", :term_translated => "1. Courage             ")
@@ -164,56 +199,56 @@ namespace :db do
     #articles.terms.create!(:term => "10.", :term_translated => "Always finish what you start         ")
 
 
-    general = tsd.term_groups.create!(:name => "General", :name_translated => "")
-    general.terms.create!(:term => "Moo", :term_translated => "Martial")
-    general.terms.create!(:term => "Duk", :term_translated => "Virtue")
-    general.terms.create!(:term => "Kwon", :term_translated => "Organization")
-    general.terms.create!(:term => "Tang", :term_translated => "Chinese")
-    general.terms.create!(:term => "Soo", :term_translated => "Open hand")
-    general.terms.create!(:term => "Do", :term_translated => "Way")
-    general.terms.create!(:term => "Hwa Rang", :term_translated => "Flower Knights")
-
-
-    
-    tg = tsd.term_groups.create!(:name => "Mahk kee", :name_translated => "Blocks")
-    tg.terms.create!(:term => "Ha dan mahk kee", :term_translated => "Low block")
-    tg.terms.create!(:term => "Sang dan mahk kee", :term_translated => "High block")
-    tg.terms.create!(:term => "Ahneso phakuro mahk kee", :term_translated => "Inside-to-outside block", :description => "Hand comes across the body in a sweeping motion")
-    tg.terms.create!(:term => "Phakeso ahnuro mahk kee", :term_translated => "Outside-to-inside block")
-    
-    tg = tsd.term_groups.create!(:name => "Bahl Gi Sool", :name_translated => "Foot Techniques")
-    tg.terms.create!(:term => "Ahp podo oll ri ki cha gi", :term_translated => "Front stretch kick")
-    tg.terms.create!(:term => "Ahneso phakuro cha gi", :term_translated => "Inside-to-outside kick")
-    tg.terms.create!(:term => "Phakeso ahnuro cha gi", :term_translated => "Outside-to-inside kick")
-
-    tg = jj.term_groups.create!(:name => "Terminology")
-    tg.terms.create!(:term => "Atemi", :term_translated => "striking")
-    tg.terms.create!(:term => "Bushido", :term_translated => "way of the warrior")
-    tg.terms.create!(:term => "Eri", :term_translated => "jacket collar")
-    tg.terms.create!(:term => "Gatame", :term_translated => "arm bar (lock)")
-    tg.terms.create!(:term => "Hadaka Jime", :term_translated => "naked strangle or choke")
-
-    tg = karate.term_groups.create!(:name => "General Terms")
-    tg.terms.create!(:term => "karate do", :term_translated => "empty handed way")
-    tg.terms.create!(:term => "shihan", :term_translated => "master")
-    tg.terms.create!(:term => "sensei", :term_translated => "teacher")
-    tg.terms.create!(:term => "sempai", :term_translated => "senior student")
-    tg.terms.create!(:term => "kohai", :term_translated => "junior student")
-    
-    tg = karate.term_groups.create!(:name => "STANCES")
-    tg.terms.create!(:term => "zenkutsu dachi", :term_translated => "front stance")
-    tg.terms.create!(:term => "kokutsu dachi", :term_translated => "back stance")
-    tg.terms.create!(:term => "kiba dachi", :term_translated => "horse stance")
-    
-    make_studios
-    
-    3.times do
-      Studio.all(:limit => 10).each do |studio|
-        if admin_studio != studio 
-          studio.styles.create!(:name => Faker::Lorem.words(1).first)
-        end
-      end
-    end
+    # general = tsd.term_groups.create!(:name => "General", :name_translated => "")
+    # general.terms.create!(:term => "Moo", :term_translated => "Martial")
+    # general.terms.create!(:term => "Duk", :term_translated => "Virtue")
+    # general.terms.create!(:term => "Kwon", :term_translated => "Organization")
+    # general.terms.create!(:term => "Tang", :term_translated => "Chinese")
+    # general.terms.create!(:term => "Soo", :term_translated => "Open hand")
+    # general.terms.create!(:term => "Do", :term_translated => "Way")
+    # general.terms.create!(:term => "Hwa Rang", :term_translated => "Flower Knights")
+    #
+    #
+    #
+    # tg = tsd.term_groups.create!(:name => "Mahk kee", :name_translated => "Blocks")
+    # tg.terms.create!(:term => "Ha dan mahk kee", :term_translated => "Low block")
+    # tg.terms.create!(:term => "Sang dan mahk kee", :term_translated => "High block")
+    # tg.terms.create!(:term => "Ahneso phakuro mahk kee", :term_translated => "Inside-to-outside block", :description => "Hand comes across the body in a sweeping motion")
+    # tg.terms.create!(:term => "Phakeso ahnuro mahk kee", :term_translated => "Outside-to-inside block")
+    #
+    # tg = tsd.term_groups.create!(:name => "Bahl Gi Sool", :name_translated => "Foot Techniques")
+    # tg.terms.create!(:term => "Ahp podo oll ri ki cha gi", :term_translated => "Front stretch kick")
+    # tg.terms.create!(:term => "Ahneso phakuro cha gi", :term_translated => "Inside-to-outside kick")
+    # tg.terms.create!(:term => "Phakeso ahnuro cha gi", :term_translated => "Outside-to-inside kick")
+    #
+    # tg = jj.term_groups.create!(:name => "Terminology")
+    # tg.terms.create!(:term => "Atemi", :term_translated => "striking")
+    # tg.terms.create!(:term => "Bushido", :term_translated => "way of the warrior")
+    # tg.terms.create!(:term => "Eri", :term_translated => "jacket collar")
+    # tg.terms.create!(:term => "Gatame", :term_translated => "arm bar (lock)")
+    # tg.terms.create!(:term => "Hadaka Jime", :term_translated => "naked strangle or choke")
+    #
+    # tg = karate.term_groups.create!(:name => "General Terms")
+    # tg.terms.create!(:term => "karate do", :term_translated => "empty handed way")
+    # tg.terms.create!(:term => "shihan", :term_translated => "master")
+    # tg.terms.create!(:term => "sensei", :term_translated => "teacher")
+    # tg.terms.create!(:term => "sempai", :term_translated => "senior student")
+    # tg.terms.create!(:term => "kohai", :term_translated => "junior student")
+    #
+    # tg = karate.term_groups.create!(:name => "STANCES")
+    # tg.terms.create!(:term => "zenkutsu dachi", :term_translated => "front stance")
+    # tg.terms.create!(:term => "kokutsu dachi", :term_translated => "back stance")
+    # tg.terms.create!(:term => "kiba dachi", :term_translated => "horse stance")
+    #
+    # make_studios
+    #
+    # 3.times do
+    #   Studio.all(:limit => 10).each do |studio|
+    #     if admin_studio != studio 
+    #       studio.styles.create!(:name => Faker::Lorem.words(1).first)
+    #     end
+    #   end
+    # end
   end
 end
 
