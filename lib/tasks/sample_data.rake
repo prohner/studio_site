@@ -138,6 +138,42 @@ namespace :db do
     tsd     = admin_studio.styles.create!(:name => "Tang soo do")
     karate  = admin_studio.styles.create!(:name => "Shotokan")
     jj      = admin_studio.styles.create!(:name => "Jiu Jitsu")
+
+    #keys = tsd.term_groups.create!(:name => "10 Key Concepts", :name_translated => "")
+    #keys.terms.create!(:term => "1. Yong Gi           ", :term_translated => "1. Courage             ")
+    #keys.terms.create!(:term => "2. In Neh            ", :term_translated => "2. Endurance           ")
+    #keys.terms.create!(:term => "3. Chung Shin Tong Il", :term_translated => "3. Concentration       ")
+    #keys.terms.create!(:term => "4. Chung Jik         ", :term_translated => "4. Honesty             ")
+    #keys.terms.create!(:term => "5. Kyum Son          ", :term_translated => "5. Humility            ")
+    #keys.terms.create!(:term => "6. Him Cho Chung     ", :term_translated => "6. Control of Power    ")
+    #keys.terms.create!(:term => "7. Shin Chook        ", :term_translated => "7. Tension & Relaxation")
+    #keys.terms.create!(:term => "8. Wan Gup           ", :term_translated => "8. Speed Control       ")
+    #keys.terms.create!(:term => "9. Jung Uei          ", :term_translated => "9. Justice             ")
+    #keys.terms.create!(:term => "10. Uei Rhee         ", :term_translated => "10.Best Friendship     ")
+    #
+    #articles = tsd.term_groups.create!(:name => "Articles of Faith", :name_translated => "")
+    #articles.terms.create!(:term => "1. ", :term_translated => "Be loyal to one’s country            ")
+    #articles.terms.create!(:term => "2. ", :term_translated => "Be obedient to one’s parents & elders")
+    #articles.terms.create!(:term => "3. ", :term_translated => "Be loving to one’s husband or wife   ")
+    #articles.terms.create!(:term => "4. ", :term_translated => "Be cooperative to your brothers      ")
+    #articles.terms.create!(:term => "5. ", :term_translated => "Be respectful to elders              ")
+    #articles.terms.create!(:term => "6. ", :term_translated => "Be faithful to your teacher          ")
+    #articles.terms.create!(:term => "7. ", :term_translated => "Be faithful to friends               ")
+    #articles.terms.create!(:term => "8. ", :term_translated => "Kill only in justice and with honor  ")
+    #articles.terms.create!(:term => "9. ", :term_translated => "Never retreat in battle              ")
+    #articles.terms.create!(:term => "10.", :term_translated => "Always finish what you start         ")
+
+
+    general = tsd.term_groups.create!(:name => "General", :name_translated => "")
+    general.terms.create!(:term => "Moo", :term_translated => "Martial")
+    general.terms.create!(:term => "Duk", :term_translated => "Virtue")
+    general.terms.create!(:term => "Kwon", :term_translated => "Organization")
+    general.terms.create!(:term => "Tang", :term_translated => "Chinese")
+    general.terms.create!(:term => "Soo", :term_translated => "Open hand")
+    general.terms.create!(:term => "Do", :term_translated => "Way")
+    general.terms.create!(:term => "Hwa Rang", :term_translated => "Flower Knights")
+
+
     
     tg = tsd.term_groups.create!(:name => "Mahk kee", :name_translated => "Blocks")
     tg.terms.create!(:term => "Ha dan mahk kee", :term_translated => "Low block")
