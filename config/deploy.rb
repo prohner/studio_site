@@ -15,7 +15,7 @@ role :db,  "192.168.1.38", :primary => true # This is where Rails migrations wil
 
 default_run_options[:pty] = true  # Must be set for the password prompt
 
-set :deploy_to, "/home/preston/Sites"                                  # from git to work
+set :deploy_to, "/home/preston/Sites/studio-site"                                  # from git to work
 set :scm, "git"
 set :user, "preston"  # The server's user for deploys
 set :scm_passphrase, "YourPassword"  # The deploy user's password
